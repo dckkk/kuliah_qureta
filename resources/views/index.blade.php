@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Curabitur ac massa vulputate</title>
+	<title>Kuliah Qureta</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -42,7 +42,7 @@
 				<li class="menu-item"><a href="#">menu 6</a></li>
 				<li class="menu-item"><a href="#">menu 7</a></li>
 			</ul>
-			<ul class="menu-list col-sm-4 col-xs-12">
+			<ul class="menu-list col-sm -4 col-xs-12">
 				<li class="menu-header">header 3</li>
 				<li class="menu-item"><a href="#">menu 1</a></li>
 				<li class="menu-item"><a href="#">menu 2</a></li>
@@ -56,14 +56,14 @@
 	</div>
 	<div class="container-fluid header navbar navbar-default navbar-fixed-top">
 		<div class="row row-margin">
-			<div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 logo">
-				<a href="#">
-					<img class="logo" src="img/logo.png">
+			<div class="col-lg-2 col-md-3 col-sm-12 col-xs-4 logo">
+				<a href="/">
+					<img class="logo" src="img/logo.png" style="width:80%">
 				</a>
 					<!-- ul.menu-list*3>li.menu-header{header $}r+li.menu-item*7>a[href=#]{menu $} -->
 				
 			</div>
-			<div class="col-lg-8 col-md-7 col-sm-10 col-xs-10 search-bar">
+			<div class="col-lg-8 col-md-7 col-sm-10 col-xs-6 search-bar">
 				<a href="#" class="menu-icon" id="toggle"><img src="img/menu.svg"></a>
 
 				<div class="search">
@@ -73,7 +73,7 @@
 				</div>
 			</div>
 			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 user text-center">
-				<a href="#" class="wrap-user">
+				<a href="http://www.qureta.com/login" class="wrap-user">
 					<span class="fa fa-user-o user-icon"></span>
 					<span class="user-logo">Sign in</span>
 				</a>
@@ -106,61 +106,20 @@
 						<h3 class="title-teacher">Para Pengajar</h3>
 					</div>
 					<div class="row-fluid">
+					    @foreach ($teachers as $key=>$value)
+					    <!-- {{ $value }} -->
 					    <div class="col-md-5ths">
 						    <div class="col-md-12 col-xs-6 frame-pengajar">
 								<div class="col-xs-4 no-padding">
-									<img src="img/pic.jpg" class="img">
+									<img src="img/{{ $value->url_foto }}" class="img avatar-teacher">
 								</div>
 								<div class="col-xs-8">
-									<h4>Jhon Doe</h4>
-									<h6>Worker</h6>
+									<h5><strong>{{ $value->name }}</strong></h5>
+									<h6>{{ $value->job }}</h6>
 								</div>
 							</div>
 						</div>
-					    <div class="col-md-5ths">
-							<div class="col-md-12 col-xs-6 frame-pengajar">
-								<div class="col-xs-4 no-padding">
-									<img src="img/pic.jpg" class="img">
-								</div>
-								<div class="col-xs-8">
-									<h4>Jhon Doe</h4>
-									<h6>Worker</h6>
-								</div>
-							</div>
-					    </div>
-					    <div class="col-md-5ths">
-							<div class="col-md-12 col-xs-6 frame-pengajar">
-								<div class="col-xs-4 no-padding">
-									<img src="img/pic.jpg" class="img">
-								</div>
-								<div class="col-xs-8">
-									<h4>Jhon Doe</h4>
-									<h6>Worker</h6>
-								</div>
-							</div>
-					    </div>
-					    <div class="col-md-5ths">
-							<div class="col-md-12 col-xs-6 frame-pengajar">
-								<div class="col-xs-4 no-padding">
-									<img src="img/pic.jpg" class="img">
-								</div>
-								<div class="col-xs-8">
-									<h4>Jhon Doe</h4>
-									<h6>Worker</h6>
-								</div>
-							</div>
-					    </div>
-					    <div class="col-md-5ths">
-							<div class="col-md-12 col-md-offset-0 col-xs-6 col-xs-offset-3 frame-pengajar">
-								<div class="col-xs-4 no-padding">
-									<img src="img/pic.jpg" class="img">
-								</div>
-								<div class="col-xs-8">
-									<h4>Jhon Doe</h4>
-									<h6>Worker</h6>
-								</div>
-							</div>
-					    </div>
+						@endforeach
 					</div>
 				</div>
 			</div>

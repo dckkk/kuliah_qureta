@@ -20,11 +20,11 @@ $("#toggle").click( function(event){
 });
 
 $(window).click(function(event){
-	event.preventDefault();
+	// event.preventDefault();
 	// console.log('a');
 	if($("#toggle").hasClass("showMenu")===true){
         $( "#menu-wrapper" ).animate({left:$( window ).width()}, "fast");
     	$("#toggle").removeClass("showMenu");
     }
-    return false;
+    // return false;
 });

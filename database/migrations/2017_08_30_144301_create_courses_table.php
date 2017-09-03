@@ -22,7 +22,6 @@ class CreateCoursesTable extends Migration
             $table->string('announcement');
             $table->timestamp('course_url');
             $table->string('course_teacher')->unique();
-            $table->rememberToken();
             $table->timestamps();
         });
     }

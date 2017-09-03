@@ -17,6 +17,8 @@ class CreateTeachersTable extends Migration
             $table->increments('id');
             $table->string('name', 50);
             $table->string('introduction');
+            $table->string('job');
+            $table->string('url_foto');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateTeachersTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('teachers');
     }
 }

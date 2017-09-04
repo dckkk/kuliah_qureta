@@ -17,6 +17,7 @@ class CreateChaptersTable extends Migration
             $table->increments('id');
             $table->string('course_id')->unique();
             $table->string('name', 50);
+            $table->string('slug');
             $table->timestamps();
         });
     }

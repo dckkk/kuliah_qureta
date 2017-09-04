@@ -18,6 +18,8 @@ class CreateLecturesTable extends Migration
             $table->string('chapter_id')->unique();
             $table->string('name', 50);
             $table->string('description');
+            $table->string('video_url');
+            $table->string('slug');
             $table->integer('duration');
             $table->timestamps();
         });

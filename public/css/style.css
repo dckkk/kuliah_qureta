@@ -33,14 +33,14 @@ ul.menu-list li.menu-item a:hover {color: #0084bf; background-color: #f3f6f8; }
 .banner{margin:20px 0;}
 div.teacher-wrapper{background: #f2f5f7;padding: 30px 0;}
 .frame-pengajar {background: #fff; padding: 10px 10px 15px 10px !important; box-shadow: 0px 0px 5px #888888; }
-.frame-materi {background: #fff; box-shadow: 0px 0px 5px #888888; }
+.frame-materi {background: #fff; box-shadow: 0px 0px 5px #888888; margin-bottom: 30px; height: 320px;}
 .title-teacher{margin: 0 0 15px 0; font-size: 16pt;}
 .frame-pengajar{padding: 0 15px;}
 .row.content{margin: 40px 0 0 0;}
 .frame-pengajar h4 {margin: 15px 0 0px 0; color:#000; font-family: 'Roboto Condensed', sans-serif; font-weight: 600; }
 .frame-pengajar h6 {margin: 0px 0 0 0; font-style: italic; }
 .title {margin: 0 0 15px 0; font-family: 'Roboto Condensed', sans-serif; font-weight: 600; color: #535353; }
-.text-pengajar {padding: 10px 15px; font-family: 'Roboto Condensed', sans-serif; }
+.text-pengajar {padding: 10px 15px; font-family: 'Roboto Condensed', sans-serif; height: 95px;}
 .text-pengajar h4:first-child {margin: 0; color: #9f9f9f; font-weight: 300; }
 .text-pengajar h4:not(:first-child) {margin: 0; color: #9f9f9f; font-weight: 300; }
 .text-pengajar h4:not(:first-child) {margin: 5px 0; color: #000; font-weight: 600; }

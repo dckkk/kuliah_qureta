@@ -6,17 +6,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- load css -->
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="css/animate.css">
-	<link rel="stylesheet" type="text/css" href="css/owl.carousel.min.css">
-	<link rel="stylesheet" type="text/css" href="css/owl.theme.default.min.css">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="{{ URL::asset('/css/bootstrap.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ URL::asset('/css/font-awesome.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ URL::asset('/css/animate.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ URL::asset('/css/owl.carousel.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ URL::asset('/css/owl.theme.default.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ URL::asset('/css/style.css') }}">
 	<!-- load cdn google font -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed" rel="stylesheet">
 	<!-- load script -->
-	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<script src="{{ URL::asset('/js/jquery.min.js') }}"></script>
+	<script src="{{ URL::asset('/js/bootstrap.min.js') }}"></script>
 </head>
 <body>
 	<!-- navigation -->
@@ -58,13 +58,13 @@
 		<div class="row row-margin">
 			<div class="col-lg-2 col-md-3 col-sm-12 col-xs-4 logo">
 				<a href="/">
-					<img class="logo" src="img/logo.png" style="width:80%">
+					<img class="logo" src="{{ URL::asset('/img/logo.png') }}" style="width:80%">
 				</a>
 					<!-- ul.menu-list*3>li.menu-header{header $}r+li.menu-item*7>a[href=#]{menu $} -->
 				
 			</div>
 			<div class="col-lg-8 col-md-7 col-sm-10 col-xs-6 search-bar">
-				<a href="#" class="menu-icon" id="toggle"><img src="img/menu.svg"></a>
+				<a href="#" class="menu-icon" id="toggle"><img src="{{ URL::asset('/img/menu.svg') }}"></a>
 
 				<div class="search">
 					<form>
@@ -87,12 +87,9 @@
 			<div class="row">
 				<div class="col-lg-12 text-center banner">
 					<div class="owl-carousel">
-					 	<div><img src="img/1.png"></div>
-					 	<div><img src="img/2.png"></div>
-					 	<div><img src="img/3.png"></div>
-					 	<div><img src="img/4.png"></div>
-					 	<div><img src="img/5.png"></div>
-					 	<div><img src="img/6.png"></div>
+						@foreach ($slider as $key => $value)
+					 	<div><img src="{{ URL::asset('/img/'.$value->url) }}"></div>
+					 	@endforeach
 					</div>
 					<!-- <img src="img/banner.jpg" class="img"> -->
 				</div>
@@ -111,7 +108,7 @@
 					    <div class="col-md-5ths">
 						    <div class="col-md-12 col-xs-6 frame-pengajar">
 								<div class="col-xs-4 no-padding">
-									<img src="img/{{ $value->url_foto }}" class="img avatar-teacher">
+									<img src="{{ URL::asset('img/'.$value->url_foto) }}" class="img avatar-teacher">
 								</div>
 								<div class="col-xs-8">
 									<h5><strong>{{ $value->name }}</strong></h5>
@@ -128,22 +125,23 @@
 		<div class="container no-padding">
 			<div class="row content">
 				<div class="col-xs-12"><h3 class="title">Mata Kuliah Terbaru</h3></div>
+				<?php
+					$shows = empty($show)?2:$show;
+				?>
+				@foreach($courseLast as $key => $value)
 				<div class="col-md-3 col-xs-6">
 					<div class="frame-materi" data-target="button-frame-1-1">
-						<a class="remove-icon hide" id="button-frame-1-1" href="#">
-							<span class="fa fa-times" aria-hidden="true"></span>
-						</a>
-						<img src="img/pic2.jpg" class="img full-width">
+						<img src="{{ URL::asset('/img/'.$value->url_foto) }}" class="img full-width">
 						<div class="text-pengajar">
-							<h4>SB</h4>
-							<h4>Dasar-Dasar Penulisan Esai</h4>
-							<span>Pengajar: Jhon Doe</span>
+							<h4>{{ $value->topics->code }}</h4>
+							<h4>{{ $value->name }}</h4>
+							<span>Pengajar: {{ $value->teachers->name }}</span>
 						</div>
 						<div class="row footer-pengajar">
-							<div class="col-sm-9 col-xs-8">
+							<div class="col-sm-10 col-xs-10">
 								<span class="text">67,349 Peserta</span>
 							</div>
-							<div class="col-sm-3 col-xs-4">
+							<div class="col-sm-2 col-xs-2">
 								<a href="#">
 									<span class="fa fa-bookmark-o" aria-hidden="true"></span>
 								</a>
@@ -151,94 +149,38 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-3 col-xs-6">
-					<div class="frame-materi" data-target="button-frame-1-2">
-						<a class="remove-icon hide" id="button-frame-1-2" href="#">
-							<span class="fa fa-times" aria-hidden="true"></span>
-						</a>
-						<img src="img/pic2.jpg" class="img full-width">
-						<div class="text-pengajar">
-							<h4>SB</h4>
-							<h4>Dasar-Dasar Penulisan Esai</h4>
-							<span>Pengajar: Jhon Doe</span>
-						</div>
-						<div class="row footer-pengajar">
-							<div class="col-sm-9 col-xs-8">
-								<span class="text">67,349 Peserta</span>
-							</div>
-							<div class="col-sm-3 col-xs-4">
-								<a href="#">
-									<span class="fa fa-bookmark-o" aria-hidden="true"></span>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 col-xs-6">
-					<div class="frame-materi" data-target="button-frame-1-3">
-						<a class="remove-icon hide" id="button-frame-1-3" href="#">
-							<span class="fa fa-times" aria-hidden="true"></span>
-						</a>
-						<img src="img/pic2.jpg" class="img full-width">
-						<div class="text-pengajar">
-							<h4>SB</h4>
-							<h4>Dasar-Dasar Penulisan Esai</h4>
-							<span>Pengajar: Jhon Doe</span>
-						</div>
-						<div class="row footer-pengajar">
-							<div class="col-sm-9 col-xs-8">
-								<span class="text">67,349 Peserta</span>
-							</div>
-							<div class="col-sm-3 col-xs-4">
-								<a href="#">
-									<span class="fa fa-bookmark-o" aria-hidden="true"></span>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 col-xs-6">
-					<div class="frame-materi" data-target="button-frame-1-4">
-						<a class="remove-icon hide" id="button-frame-1-4" href="#">
-							<span class="fa fa-times" aria-hidden="true"></span>
-						</a>
-						<img src="img/pic2.jpg" class="img full-width">
-						<div class="text-pengajar">
-							<h4>SB</h4>
-							<h4>Dasar-Dasar Penulisan Esai</h4>
-							<span>Pengajar: Jhon Doe</span>
-						</div>
-						<div class="row footer-pengajar">
-							<div class="col-sm-9 col-xs-8">
-								<span class="text">67,349 Peserta</span>
-							</div>
-							<div class="col-sm-3 col-xs-4">
-								<a href="#">
-									<span class="fa fa-bookmark-o" aria-hidden="true"></span>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
+				@endforeach
 				<div class="text-center frame-materi-more col-lg-12">
-					<a href="#">Show more <i class="fa fa-chevron-down" aria-hidden="true"></i></a>
+					<a href="/home/more/{{$shows}}">Show more <i class="fa fa-chevron-down" aria-hidden="true"></i></a>
 				</div>
 			</div>
 		</div>
 
+		@foreach ($topics as $key => $value)
 		<div class="container no-padding">
 			<div class="row content">
-				<div class="col-xs-12"><h3 class="title">Mata Kuliah Terbaru</h3></div>
+				<div class="col-xs-12"><h3 class="title">{{ $value->topic }} ({{ $value->code }})</h3></div>
+				@if ($value->id == 1)
+					<?php $course = $courseIs; ?>
+				@elseif ($value->id == 2)
+					<?php $course = $courseEb; ?>
+				@elseif ($value->id == 3)
+					<?php $course = $courseSt; ?>
+				@elseif ($value->id == 4)
+					<?php $course = $courseIk; ?>
+				@elseif ($value->id == 5)
+					<?php $course = $courseSb; ?>
+				@endif
+
+				@foreach($course as $keys => $values)
+				<!-- {{$values}} -->
 				<div class="col-md-3 col-xs-6">
 					<div class="frame-materi" data-target="button-frame-2-1">
-						<a class="remove-icon hide" id="button-frame-2-1" href="#">
-							<span class="fa fa-times" aria-hidden="true"></span>
-						</a>
-						<img src="img/pic2.jpg" class="img full-width">
+						<img src="{{ URL::asset('/img/'.$values->url_foto) }}" class="img full-width">
 						<div class="text-pengajar">
-							<h4>SB</h4>
-							<h4>Dasar-Dasar Penulisan Esai</h4>
-							<span>Pengajar: Jhon Doe</span>
+							<h4>{{ $values->topics->code }}</h4>
+							<h4>{{ $values->name }}</h4>
+							<span>Pengajar: {{ $values->teachers->name }}</span>
 						</div>
 						<div class="row footer-pengajar">
 							<div class="col-sm-9 col-xs-8">
@@ -252,297 +194,25 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-3 col-xs-6">
-					<div class="frame-materi" data-target="button-frame-2-2">
-						<a class="remove-icon hide" id="button-frame-2-2" href="#">
-							<span class="fa fa-times" aria-hidden="true"></span>
-						</a>
-						<img src="img/pic2.jpg" class="img full-width">
-						<div class="text-pengajar">
-							<h4>SB</h4>
-							<h4>Dasar-Dasar Penulisan Esai</h4>
-							<span>Pengajar: Jhon Doe</span>
-						</div>
-						<div class="row footer-pengajar">
-							<div class="col-sm-9 col-xs-8">
-								<span class="text">67,349 Peserta</span>
-							</div>
-							<div class="col-sm-3 col-xs-4">
-								<a href="#">
-									<span class="fa fa-bookmark-o" aria-hidden="true"></span>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 col-xs-6">
-					<div class="frame-materi" data-target="button-frame-2-3">
-						<a class="remove-icon hide" id="button-frame-2-3" href="#">
-							<span class="fa fa-times" aria-hidden="true"></span>
-						</a>
-						<img src="img/pic2.jpg" class="img full-width">
-						<div class="text-pengajar">
-							<h4>SB</h4>
-							<h4>Dasar-Dasar Penulisan Esai</h4>
-							<span>Pengajar: Jhon Doe</span>
-						</div>
-						<div class="row footer-pengajar">
-							<div class="col-sm-9 col-xs-8">
-								<span class="text">67,349 Peserta</span>
-							</div>
-							<div class="col-sm-3 col-xs-4">
-								<a href="#">
-									<span class="fa fa-bookmark-o" aria-hidden="true"></span>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 col-xs-6">
-					<div class="frame-materi" data-target="button-frame-2-4">
-						<a class="remove-icon hide" id="button-frame-2-4" href="#">
-							<span class="fa fa-times" aria-hidden="true"></span>
-						</a>
-						<img src="img/pic2.jpg" class="img full-width">
-						<div class="text-pengajar">
-							<h4>SB</h4>
-							<h4>Dasar-Dasar Penulisan Esai</h4>
-							<span>Pengajar: Jhon Doe</span>
-						</div>
-						<div class="row footer-pengajar">
-							<div class="col-sm-9 col-xs-8">
-								<span class="text">67,349 Peserta</span>
-							</div>
-							<div class="col-sm-3 col-xs-4">
-								<a href="#">
-									<span class="fa fa-bookmark-o" aria-hidden="true"></span>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
+				@endforeach
 				<div class="text-center frame-materi-more col-lg-12">
-					<a href="#">Show more <i class="fa fa-chevron-down" aria-hidden="true"></i></a>
-				</div>
-			</div>
-		</div>
-
-		<div class="container no-padding">
-			<div class="row content">
-				<div class="col-xs-12"><h3 class="title">Mata Kuliah Terbaru</h3></div>
-				<div class="col-md-3 col-xs-6">
-					<div class="frame-materi" data-target="button-frame-3-1">
-						<a class="remove-icon hide" id="button-frame-3-1" href="#">
-							<span class="fa fa-times" aria-hidden="true"></span>
-						</a>
-						<img src="img/pic2.jpg" class="img full-width">
-						<div class="text-pengajar">
-							<h4>SB</h4>
-							<h4>Dasar-Dasar Penulisan Esai</h4>
-							<span>Pengajar: Jhon Doe</span>
-						</div>
-						<div class="row footer-pengajar">
-							<div class="col-sm-9 col-xs-8">
-								<span class="text">67,349 Peserta</span>
-							</div>
-							<div class="col-sm-3 col-xs-4">
-								<a href="#">
-									<span class="fa fa-bookmark-o" aria-hidden="true"></span>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 col-xs-6">
-					<div class="frame-materi" data-target="button-frame-3-2">
-						<a class="remove-icon hide" id="button-frame-3-2" href="#">
-							<span class="fa fa-times" aria-hidden="true"></span>
-						</a>
-						<img src="img/pic2.jpg" class="img full-width">
-						<div class="text-pengajar">
-							<h4>SB</h4>
-							<h4>Dasar-Dasar Penulisan Esai</h4>
-							<span>Pengajar: Jhon Doe</span>
-						</div>
-						<div class="row footer-pengajar">
-							<div class="col-sm-9 col-xs-8">
-								<span class="text">67,349 Peserta</span>
-							</div>
-							<div class="col-sm-3 col-xs-4">
-								<a href="#">
-									<span class="fa fa-bookmark-o" aria-hidden="true"></span>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 col-xs-6">
-					<div class="frame-materi" data-target="button-frame-3-3">
-						<a class="remove-icon hide" id="button-frame-3-3" href="#">
-							<span class="fa fa-times" aria-hidden="true"></span>
-						</a>
-						<img src="img/pic2.jpg" class="img full-width">
-						<div class="text-pengajar">
-							<h4>SB</h4>
-							<h4>Dasar-Dasar Penulisan Esai</h4>
-							<span>Pengajar: Jhon Doe</span>
-						</div>
-						<div class="row footer-pengajar">
-							<div class="col-sm-9 col-xs-8">
-								<span class="text">67,349 Peserta</span>
-							</div>
-							<div class="col-sm-3 col-xs-4">
-								<a href="#">
-									<span class="fa fa-bookmark-o" aria-hidden="true"></span>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 col-xs-6">
-					<div class="frame-materi" data-target="button-frame-3-4">
-						<a class="remove-icon hide" id="button-frame-3-4" href="#">
-							<span class="fa fa-times" aria-hidden="true"></span>
-						</a>
-						<img src="img/pic2.jpg" class="img full-width">
-						<div class="text-pengajar">
-							<h4>SB</h4>
-							<h4>Dasar-Dasar Penulisan Esai</h4>
-							<span>Pengajar: Jhon Doe</span>
-						</div>
-						<div class="row footer-pengajar">
-							<div class="col-sm-9 col-xs-8">
-								<span class="text">67,349 Peserta</span>
-							</div>
-							<div class="col-sm-3 col-xs-4">
-								<a href="#">
-									<span class="fa fa-bookmark-o" aria-hidden="true"></span>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="text-center frame-materi-more col-lg-12">
-					<a href="#">Show more <i class="fa fa-chevron-down" aria-hidden="true"></i></a>
-				</div>
-			</div>
-		</div>
-
-		<div class="container no-padding">
-			<div class="row content">
-				<div class="col-xs-12"><h3 class="title">Mata Kuliah Terbaru</h3></div>
-				<div class="col-md-3 col-xs-6">
-					<div class="frame-materi" data-target="button-frame-4-1">
-						<a class="remove-icon hide" id="button-frame-4-1" href="#">
-							<span class="fa fa-times" aria-hidden="true"></span>
-						</a>
-						<img src="img/pic2.jpg" class="img full-width">
-						<div class="text-pengajar">
-							<h4>SB</h4>
-							<h4>Dasar-Dasar Penulisan Esai</h4>
-							<span>Pengajar: Jhon Doe</span>
-						</div>
-						<div class="row footer-pengajar">
-							<div class="col-sm-9 col-xs-8">
-								<span class="text">67,349 Peserta</span>
-							</div>
-							<div class="col-sm-3 col-xs-4">
-								<a href="#">
-									<span class="fa fa-bookmark-o" aria-hidden="true"></span>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 col-xs-6">
-					<div class="frame-materi" data-target="button-frame-4-2">
-						<a class="remove-icon hide" id="button-frame-4-2" href="#">
-							<span class="fa fa-times" aria-hidden="true"></span>
-						</a>
-						<img src="img/pic2.jpg" class="img full-width">
-						<div class="text-pengajar">
-							<h4>SB</h4>
-							<h4>Dasar-Dasar Penulisan Esai</h4>
-							<span>Pengajar: Jhon Doe</span>
-						</div>
-						<div class="row footer-pengajar">
-							<div class="col-sm-9 col-xs-8">
-								<span class="text">67,349 Peserta</span>
-							</div>
-							<div class="col-sm-3 col-xs-4">
-								<a href="#">
-									<span class="fa fa-bookmark-o" aria-hidden="true"></span>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 col-xs-6">
-					<div class="frame-materi" data-target="button-frame-4-3">
-						<a class="remove-icon hide" id="button-frame-4-3" href="#">
-							<span class="fa fa-times" aria-hidden="true"></span>
-						</a>
-						<img src="img/pic2.jpg" class="img full-width">
-						<div class="text-pengajar">
-							<h4>SB</h4>
-							<h4>Dasar-Dasar Penulisan Esai</h4>
-							<span>Pengajar: Jhon Doe</span>
-						</div>
-						<div class="row footer-pengajar">
-							<div class="col-sm-9 col-xs-8">
-								<span class="text">67,349 Peserta</span>
-							</div>
-							<div class="col-sm-3 col-xs-4">
-								<a href="#">
-									<span class="fa fa-bookmark-o" aria-hidden="true"></span>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 col-xs-6">
-					<div class="frame-materi" data-target="button-frame-4-4">
-						<a class="remove-icon hide" id="button-frame-4-4" href="#">
-							<span class="fa fa-times" aria-hidden="true"></span>
-						</a>
-						<img src="img/pic2.jpg" class="img full-width">
-						<div class="text-pengajar">
-							<h4>SB</h4>
-							<h4>Dasar-Dasar Penulisan Esai</h4>
-							<span>Pengajar: Jhon Doe</span>
-						</div>
-						<div class="row footer-pengajar">
-							<div class="col-sm-9 col-xs-8">
-								<span class="text">67,349 Peserta</span>
-							</div>
-							<div class="col-sm-3 col-xs-4">
-								<a href="#">
-									<span class="fa fa-bookmark-o" aria-hidden="true"></span>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="text-center frame-materi-more col-lg-12">
-					<a href="#">Show more <i class="fa fa-chevron-down" aria-hidden="true"></i></a>
+					<a href="/home/{{$values->topics->id}}">Show more <i class="fa fa-chevron-down" aria-hidden="true"></i></a>
 				</div>
 			</div>
 		</div>	
+		@endforeach
 	</div>
 
 	<!-- footer -->
 	<div class="footer-bottom container-fluid">
 			<div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
 				<div class="footer-menu">
-					<a href="#">Tentang</a>
-					<a href="#">Kontak</a>
-					<a href="#">Bantuan</a>
-					<a href="#">Karir</a>
-					<a href="#">Penggunaan</a>
-					<a href="#">Privasi</a>
+				@foreach ($pages as $key => $value)
+					<a href="{{ $value->content }}">{{ $value->title }}</a>
+				@endforeach
 				</div>
 				<div class="footer-logo">
-					<img src="img/logo.png" width="120">
+					<img src="{{ URL::asset('img/logo.png') }}" width="120">
 				</div>
 				<span class="copyright">
 					&copy; Qureta 2017
@@ -550,16 +220,16 @@
 			</div>
 			<div class="col-lg-4 col-md-4 col-sm-5 col-xs-12 playstore-logo">
 					<a href="#" class="footer-icon-store">
-						<img src="img/appstore.png">
+						<img src="{{ URL::asset('img/appstore.png') }}">
 					</a>
 					<a href="#" class="footer-icon-store">
-						<img src="img/playstore.png">
+						<img src="{{ URL::asset('img/playstore.png') }}">
 					</a>
 			</div>
 	</div>
 
-	<script type="text/javascript" src="js/mjs.js"></script>
-	<script type="text/javascript" src="js/owl.carousel.min.js"></script>
+	<script type="text/javascript" src="{{ URL::asset('/js/mjs.js') }}"></script>
+	<script type="text/javascript" src="{{ URL::asset('/js/owl.carousel.min.js') }}"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 		  $(".owl-carousel").owlCarousel();

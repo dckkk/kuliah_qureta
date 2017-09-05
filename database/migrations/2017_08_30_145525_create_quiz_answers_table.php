@@ -15,7 +15,7 @@ class CreateQuizAnswersTable extends Migration
     {
         Schema::create('quiz_answers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('quiz_question_id')->unique();
+            $table->string('quiz_question_id');
             $table->string('order');
             $table->string('answe');
             $table->timestamps();

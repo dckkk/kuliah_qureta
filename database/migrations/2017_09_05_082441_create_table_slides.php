@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCourseTeachersTable extends Migration
+class CreateTableSlides extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,7 @@ class CreateCourseTeachersTable extends Migration
      */
     public function up()
     {
-        Schema::create('course_teachers', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('course_id');
-            $table->string('teacher_id');
-            $table->timestamps();
-        });
+        //
     }
 
     /**

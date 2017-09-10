@@ -39,6 +39,7 @@ class HomeController extends Controller
     	} else {
     		$courseLast = Course::with('topics', 'teachers')->orderBy('id', 'desc')->take(4)->get();
     	}
+        
     	if ($topic == 1) {
 	    	$courseIs = Course::with('topics', 'teachers')->whereHas('topics', function($query) {
 	    		$query->where('id', 1);

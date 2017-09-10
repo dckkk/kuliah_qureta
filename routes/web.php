@@ -13,5 +13,11 @@
 
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
+Route::get('/home/{a}', 'HomeController@index');
 Route::get('/home/{a}/{b}', 'HomeController@index');
+
+
+Route::get('/course/{a}', 'CourseController@index');
+
+
 

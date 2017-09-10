@@ -129,12 +129,13 @@
 					$shows = empty($show)?2:$show;
 				?>
 				@foreach($courseLast as $key => $value)
+				<!-- {{ $value }} -->
 				<div class="col-md-3 col-xs-6">
 					<div class="frame-materi" data-target="button-frame-1-1">
 						<img src="{{ URL::asset('/img/'.$value->url_foto) }}" class="img full-width">
 						<div class="text-pengajar">
 							<h4>{{ $value->topics->code }}</h4>
-							<h4>{{ $value->name }}</h4>
+							<h4><a href="/course/{{ $value->slug }}">{{ $value->name }}</a></h4>
 							<span>Pengajar: {{ $value->teachers->name }}</span>
 						</div>
 						<div class="row footer-pengajar">

@@ -132,7 +132,7 @@
 				<!-- {{ $value }} -->
 				<div class="col-md-3 col-xs-6">
 					<div class="frame-materi" data-target="button-frame-1-1">
-						<img src="{{ URL::asset('/img/'.$value->url_foto) }}" class="img full-width">
+						<img src="{{ URL::asset('/img/'.$value->url_foto) }}" class="img">
 						<div class="text-pengajar">
 							<h4>{{ $value->topics->code }}</h4>
 							<h4><a href="/course/{{ $value->slug }}">{{ $value->name }}</a></h4>
@@ -177,10 +177,10 @@
 				<!-- {{$values}} -->
 				<div class="col-md-3 col-xs-6">
 					<div class="frame-materi" data-target="button-frame-2-1">
-						<img src="{{ URL::asset('/img/'.$values->url_foto) }}" class="img full-width">
+						<img src="{{ URL::asset('/img/'.$values->url_foto) }}" class="img">
 						<div class="text-pengajar">
 							<h4>{{ $values->topics->code }}</h4>
-							<h4>{{ $values->name }}</h4>
+							<h4><a href="/course/{{ $values->slug }}">{{ $values->name }}</a></h4>
 							<span>Pengajar: {{ $values->teachers->name }}</span>
 						</div>
 						<div class="row footer-pengajar">

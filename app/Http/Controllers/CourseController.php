@@ -19,7 +19,10 @@ class CourseController extends Controller
     public function index($slug) {
     	$course = Course::with('topics', 'teachers')->where('slug', $slug)->get();
 
-    	return view('course.index', compact('course'));
+    	//get data pages
+    	$pages = Pages::all();
+ 
+    	return view('course.index', compact('course', 'pages'));
     }
 
 }

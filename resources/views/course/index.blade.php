@@ -242,17 +242,19 @@
 
 						<div class="row" style="margin:0">
 							<h3 class="title-materi no-margin">Mata kuliah Terkait</h3>
-							<div class="row materi-terkait">
-								<div class="col-xs-3"><img src="" class="img"></div>
-								<div class="col-xs-9">
-									<a href="#"><h5 class="no-margin">Course</h5></a>
-									<a href="http://google.com"><h4 style="font-weight: 600">Writing a Business Report</h4></a>
-									<div class="materi-terkait-footer">
-										<span class="duration">1h 58m</span>
-										<a href="#"><span class="fa fa-bookmark-o" aria-hidden="true"></span></a>
+							@foreach($materi as $key => $value)
+								<div class="row materi-terkait">
+									<div class="col-xs-3"><img src="{{ URL::asset('img/'.$value->url_foto) }}" class="img"></div>
+									<div class="col-xs-9">
+										<h5 class="no-margin">Course</h5>
+										<a href="/course/{{ $value->slug }}"><h4 style="font-weight: 600">{{ $value->name }}</h4></a>
+										<div class="materi-terkait-footer">
+											<span class="duration">1h 58m</span>
+											<a href="#"><span class="fa fa-bookmark-o" aria-hidden="true"></span></a>
+										</div>
 									</div>
 								</div>
-							</div>
+							@endforeach
 						</div>
 
 					</div>

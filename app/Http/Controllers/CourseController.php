@@ -14,22 +14,52 @@ use App\Slider;
 
 use App\Pages;
 
+use App\Chapters;
+
+use App\Lectures;
+
 class CourseController extends Controller
 {
-    public function index($slug) {
+    public function index($slug,$slug_chapter="",$slug_lecture="") {
+        //get data course
     	$course = Course::with('topics', 'teachers')->where('slug', $slug)->get();
 
-    	$topic_id = $course[0]['topic_id'];
-    	//get data pages
-    	$pages = Pages::all();
+        //set topic id
+        $topic_id = $course[0]['topic_id'];
 
-    	//get materi terkait
-    	$materi = Course::with('topics', 'teachers')->whereHas('topics', function($query) use ($topic_id) {
-    		// $topic_id = '1';
-	    		$query->where('id', $topic_id);
-	    	})->where('topic_id', $topic_id)->get();
+    	//set course id
+        $course_id = $course[0]['id'];
+
+        
+        //get data pages
+        $pages = Pages::all();
+
+        //get materi terkait
+        $materi = Course::with('topics', 'teachers')->whereHas('topics', function($query) use ($topic_id) {
+            // $topic_id = '1';
+                $query->where('id', $topic_id);
+            })->where('topic_id', $topic_id)->get();
+
+        //get data chapters
+        $chapters = Chapters::where('course_id', $course_id)->get();
+        
+        //set default video
+        $url_video = $chapters[0]['url_video'];
+
+        //get data lecture
+        $lectures = Lectures::all();
+
+        if($slug_chapter !== "" && $slug_lecture == "") {
+            $url_videos = Chapters::select('url_video')->where('slug', $slug_chapter)->get();
+            $url_video = $url_videos[0]['url_video'];
+        } elseif($slug_lecture !== "") {
+            $url_videos = Lectures::select('url_video')->where('slug', $slug_lecture)->get();
+            $url_video = $url_videos[0]['url_video'];
+        }
+
+
  
-    	return view('course.index', compact('course', 'pages', 'materi'));
+    	return view('course.index', compact('course', 'pages', 'materi', 'chapters', 'lectures', 'url_video'));
     }
 
 }

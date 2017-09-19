@@ -19,4 +19,8 @@ class Course extends Model
     	return $this->belongsTo('App\Teachers', 'teacher_id');
     }
 
+    public function chapters() {
+    	return $this->hasMany('App\Chapters');
+    }
+
 }

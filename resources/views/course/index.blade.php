@@ -41,13 +41,16 @@
 						    var firstScriptTag = document.getElementsByTagName('script')[0];
 						    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 						    
+						    var urlVideo = '{{ $url_video }}';
+
 						    var player;
+
 						    function onYouTubeIframeAPIReady() {
 						      player = new YT.Player('player', {
 						        width: '75%',
-						        videoId: '-D14dMMyahM',
+						        videoId: urlVideo,
 						        events: {
-						          'onReady': onPlayerReady,
+						          // 'onReady': onPlayerReady,
 						          'onStateChange': onPlayerStateChange
 						        }
 						      });
@@ -83,91 +86,42 @@
 						<div class="tab-content">
 							<div id="materi" class="overflow-tag tab-pane fade in active">
 								<ul class="nav-materi">
-									<li class="chapter">
-										<ul class="chapter-inner">
-											<li class="duration-now">
-												<a href="#">
-													<span class="chapter-title">Welcome</span>
-													<span class="chapter-duration">56s</span>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<span class="chapter-title">What you should know</span>
-													<span class="chapter-duration">58s</span>
-												</a>
-											</li>
-										</ul>
-									</li>
-									<li class="chapter">
-										<a data-toggle="collapse" href="javascript:void(0)" data-target="#chapter-part-1">
-											1. Prepare <span class="fa fa-chevron-down" aria-hidden="true"></span>
-										</a>
-										<div id="chapter-part-1" class="collapse in">
+									@foreach($chapters as $keys => $values)
+										@if($values->parent == 2)
+										<li class="chapter">
 											<ul class="chapter-inner">
-											<li>
-												<a href="#">
-													<span class="fa fa-lock" aria-hidden="true"></span>
-													<span class="chapter-title">Welcome</span>
-													<span class="chapter-duration">56s</span>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<span class="fa fa-lock" aria-hidden="true"></span>
-													<span class="chapter-title">What you should know</span>
-													<span class="chapter-duration">58s</span>
-												</a>
-											</li>
-										</ul>
-										</div>
-									</li>
-									<li class="chapter">
-										<a data-toggle="collapse" href="javascript:void(0)" data-target="#chapter-part-2">
-											2. Prepare <span class="fa fa-chevron-down" aria-hidden="true"></span>
-										</a>
-										<div id="chapter-part-2" class="collapse in">
-											<ul class="chapter-inner">
-											<li>
-												<a href="#">
-													<span class="fa fa-lock" aria-hidden="true"></span>
-													<span class="chapter-title">Welcome</span>	
-													<span class="chapter-duration">56s</span>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<span class="fa fa-lock" aria-hidden="true"></span>
-													<span class="chapter-title">What you should know</span>
-													<span class="chapter-duration">58s</span>
-												</a>
-											</li>
-										</ul>
-										</div>
-									</li>
-									<li class="chapter">
-										<a data-toggle="collapse" href="javascript:void(0)" data-target="#chapter-part-3">
-											3. Prepare <span class="fa fa-chevron-down" aria-hidden="true"></span>
-										</a>
-										<div id="chapter-part-3" class="collapse in">
-											<ul class="chapter-inner">
-											<li>
-												<a href="#">
-													<span class="fa fa-lock" aria-hidden="true"></span>
-													<span class="chapter-title">Welcome</span>
-													<span class="chapter-duration">56s</span>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<span class="fa fa-lock" aria-hidden="true"></span>
-													<span class="chapter-title">What you should know</span>
-													<span class="chapter-duration">58s</span>
-												</a>
-											</li>
-										</ul>
-										</div>
-									</li>
+												<li class="duration-now">
+													<a href="/course/{{$value->slug}}/{{ $values->slug }}">
+														<span class="chapter-title">{{ $values->name }}</span>
+														<span class="chapter-duration">{{ $values->duration }}s</span>
+													</a>
+												</li>
+											</ul>
+										</li>
+										@else
+										<li class="chapter">
+											<a data-toggle="collapse" href="javascript:void(0)" data-target="#{{ $values->slug }}"> {{ $values->name }} <span class="fa fa-chevron-down" aria-hidden="true"></span>
+											</a>
+											<div id="{{ $values->slug }}" class="collapse in">
+												<ul class="chapter-inner">
+												@foreach($lectures as $keyz => $valuez)
+													@if($values->id == $valuez->chapter_id)
+
+													<li>
+														<a href="/course/{{ $value->slug }}/{{ $values->slug }}/{{ $valuez->slug }}">
+															<span class="fa fa-lock" aria-hidden="true"></span>
+															<span class="chapter-title">{{ $valuez->name }}</span>
+															<span class="chapter-duration">{{ $values->duration }}</span>
+														</a>
+													</li>
+													@endif
+												@endforeach
+											</ul>
+											</div>
+										</li>
+										@endif
+									@endforeach
+									
 								</ul>
 							</div>
 						</div>

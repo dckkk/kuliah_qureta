@@ -18,6 +18,8 @@ Route::get('/home/{a}/{b}', 'HomeController@index');
 
 
 Route::get('/course/{a}', 'CourseController@index');
+Route::get('/course/{a}/{b}', 'CourseController@index');
+Route::get('/course/{a}/{b}/{c}', 'CourseController@index');
 
 
 

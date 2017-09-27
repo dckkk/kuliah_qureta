@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.template')
 
 @section('content')
 	<!-- start content -->
@@ -23,6 +23,7 @@
 						<h3 class="title-teacher">Para Pengajar</h3>
 					</div>
 					<div class="row-fluid">
+					<!-- {{ Auth::user() }} -->
 					    @foreach ($teachers as $key=>$value)
 					    <!-- {{ $value }} -->
 					    <div class="col-md-5ths">

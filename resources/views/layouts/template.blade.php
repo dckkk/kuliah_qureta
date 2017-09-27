@@ -86,15 +86,66 @@
                     </form>
                 </div>
             </div>
+            @if(Auth::user() == null)
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 user text-center">
                 <a href="/login" class="wrap-user">
                     <span class="fa fa-user-o user-icon"></span>
                     <span class="user-logo">Sign in</span>
                 </a>
             </div>
+            @else
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 user text-center">
+                <a href="/logout" class="wrap-user">
+                    <span class="fa fa-user-o user-icon"></span>
+                    <span class="user-logo">Sign out</span>
+                </a>
+            </div>
+            @endif
         </div>
     </div>
 
     @yield('content')
     
     <!-- footer -->
+    <div class="footer-bottom container-fluid">
+            <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
+                <div class="footer-menu">
+                @foreach ($pages as $key => $value)
+                    <a href="{{ $value->content }}">{{ $value->title }}</a>
+                @endforeach
+                </div>
+                <div class="footer-logo">
+                    <img src="{{ URL::asset('img/logo.png') }}" width="120">
+                </div>
+                <span class="copyright">
+                    &copy; Qureta 2017
+                </span>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12 playstore-logo">
+                    <a href="#" class="footer-icon-store">
+                        <img src="{{ URL::asset('img/appstore.png') }}">
+                    </a>
+                    <a href="#" class="footer-icon-store">
+                        <img src="{{ URL::asset('img/playstore.png') }}">
+                    </a>
+            </div>
+    </div>
+
+    <script type="text/javascript" src="{{ URL::asset('/js/mjs.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('/js/owl.carousel.min.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $(".owl-carousel").owlCarousel();
+        });
+        var owl = $('.owl-carousel');
+        owl.owlCarousel({
+            items:1,
+            loop:true,
+            margin:10,
+            autoplay:true,
+            autoplayTimeout:5000,
+            autoplayHoverPause:true
+        });
+    </script>
+</body>
+</html>

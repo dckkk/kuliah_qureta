@@ -12,6 +12,13 @@
 */
 
 Route::get('/', 'HomeController@index');
+
+Route::get('/login', 'Auth\LoginController@showLoginForm');
+Route::get('/register', 'Auth\RegisterController@showRegistrationForm');
+Route::post('/register', 'Auth\RegisterController@register');
+Route::post('/logout', 'Auth\LoginController@logout');
+Route::get('/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
+
 Route::get('/home', 'HomeController@index');
 Route::get('/home/{a}', 'HomeController@index');
 Route::get('/home/{a}/{b}', 'HomeController@index');
@@ -23,3 +30,5 @@ Route::get('/course/{a}/{b}/{c}', 'CourseController@index');
 
 
 
+
+Route::get('/home', 'HomeController@index');

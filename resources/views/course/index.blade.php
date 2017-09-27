@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.template')
 
 @section('content')
 
@@ -50,7 +50,7 @@
 						        width: '75%',
 						        videoId: urlVideo,
 						        events: {
-						          // 'onReady': onPlayerReady,
+						          'onReady': onPlayerReady,
 						          'onStateChange': onPlayerStateChange
 						        }
 						      });

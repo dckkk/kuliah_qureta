@@ -88,17 +88,23 @@
             </div>
             @if(Auth::user() == null)
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 user text-center">
-                <a href="/login" class="wrap-user">
+                <a href="{{ url('/login') }}" class="wrap-user">
                     <span class="fa fa-user-o user-icon"></span>
                     <span class="user-logo">Sign in</span>
                 </a>
             </div>
             @else
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 user text-center">
-                <a href="/logout" class="wrap-user">
+                <a href="{{ url('/logout') }}"
+                    onclick="event.preventDefault();
+                             document.getElementById('logout-form').submit();">
                     <span class="fa fa-user-o user-icon"></span>
                     <span class="user-logo">Sign out</span>
                 </a>
+
+                <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
             </div>
             @endif
         </div>

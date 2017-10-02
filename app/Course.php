@@ -20,7 +20,11 @@ class Course extends Model
     }
 
     public function chapters() {
-    	return $this->hasMany('App\Chapters');
+        return $this->hasMany('App\Chapters');
+    }
+
+    public function enrolls() {
+    	return $this->hasMany('App\Enrolls');
     }
 
 }

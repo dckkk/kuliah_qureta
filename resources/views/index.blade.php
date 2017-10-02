@@ -1,6 +1,20 @@
 @extends('layouts.template')
 
 @section('content')
+	<!-- modal enroll -->
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-body">
+					<H2>Oops Sorry!</H2>
+					<h4>Maaf anda harus login terlebih dahulu sebelum enroll course</h4>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="button-modal" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- start content -->
 	<div class="wrapper">
 		<div class="container">
@@ -15,7 +29,7 @@
 				</div>
 			</div>
 		</div>
-
+		{{$auth}}
 		<div class="container-fluid teacher-wrapper">
 			<div class="container">
 				<div class="row">
@@ -64,9 +78,21 @@
 								<span class="text">67,349 Peserta</span>
 							</div>
 							<div class="col-sm-2 col-xs-2">
-								<a href="#">
+								@if(empty(Auth::user()->id))
+									@if(enrolled($value->id, $auth->email))
+									<a href="javascript:void(0)">
+										<span class="fa fa-bookmark-o" aria-hidden="true" data-toggle="modal" data-target=".bs-example-modal-lg"></span>
+									</a>
+									@else
+									<a href="javascript:void(0)">
+										<span class="fa fa-bookmark-o" aria-hidden="true" data-toggle="modal" data-target=".bs-example-modal-lg"></span>
+									</a>
+									@endif
+								@else
+								<a href="javascript:void(0)">
 									<span class="fa fa-bookmark-o" aria-hidden="true"></span>
 								</a>
+								@endif
 							</div>
 						</div>
 					</div>
@@ -109,7 +135,7 @@
 								<span class="text">67,349 Peserta</span>
 							</div>
 							<div class="col-sm-3 col-xs-4">
-								<a href="#">
+								<a href="javascript:void(0)">
 									<span class="fa fa-bookmark-o" aria-hidden="true"></span>
 								</a>
 							</div>

@@ -14,11 +14,15 @@ use App\Slider;
 
 use App\Pages;
 
+use App\Enrolls;
+
+use Auth;
+
 class HomeController extends Controller
 {
     public function index($topic="", $show="") {
     	//get data teacher
-    	$teachers = Teachers::take(5)->get();
+    	$teachers = Teachers::inRandomOrder()->take(5)->get();
     	
     	//get data topic
     	$topics = Topics::all();
@@ -31,6 +35,8 @@ class HomeController extends Controller
 
     	//get image slider
     	$slider = Slider::all();
+
+        $auth = Auth::user();
 
     	//show all data
     	if(!empty($show)) {
@@ -90,6 +96,6 @@ class HomeController extends Controller
 	    	})->where('topic_id', 5)->take(4)->get();
     	}
 
-    	return view('index', compact('teachers', 'topics', 'courseLast', 'courseIs', 'courseEb', 'courseSt', 'courseIk', 'courseSb', 'show', 'slider', 'pages'));
+    	return view('index', compact('teachers', 'topics', 'courseLast', 'courseIs', 'courseEb', 'courseSt', 'courseIk', 'courseSb', 'show', 'slider', 'pages', 'auth'));
     }
 }

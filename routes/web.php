@@ -14,6 +14,7 @@
 Route::get('/', 'HomeController@index');
 
 Route::get('/login', 'Auth\LoginController@showLoginForm');
+Route::post('/login', 'Auth\LoginController@login');
 Route::get('/register', 'Auth\RegisterController@showRegistrationForm');
 Route::post('/register', 'Auth\RegisterController@register');
 Route::post('/logout', 'Auth\LoginController@logout');

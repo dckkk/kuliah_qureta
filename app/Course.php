@@ -24,7 +24,11 @@ class Course extends Model
     }
 
     public function enrolls() {
-    	return $this->hasMany('App\Enrolls');
+        return $this->hasMany('App\Enrolls');
+    }
+
+    public function quiz() {
+    	return $this->hasMany('App\Quiz');
     }
 
 }

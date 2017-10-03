@@ -18,6 +18,12 @@ use App\Chapters;
 
 use App\Lectures;
 
+use App\Quiz;
+
+use App\QuizQuestion;
+
+use App\QuizAnswer;
+
 class CourseController extends Controller
 {
     public function index($slug,$slug_chapter="",$slug_lecture="") {
@@ -57,9 +63,13 @@ class CourseController extends Controller
             $url_video = $url_videos[0]['url_video'];
         }
 
+        //get data quiz
+        $quiz = Quiz::with('course')->whereHas('course', function($query) use($course_id){
+            $query->where('id', $course_id);
+        })->where('course_id', $course_id)->get();
 
  
-    	return view('course.index', compact('course', 'pages', 'materi', 'chapters', 'lectures', 'url_video'));
+    	return view('course.index', compact('course', 'pages', 'materi', 'chapters', 'lectures', 'url_video', 'quiz'));
     }
 
 }

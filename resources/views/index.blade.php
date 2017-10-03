@@ -78,19 +78,19 @@
 								<span class="text">67,349 Peserta</span>
 							</div>
 							<div class="col-sm-2 col-xs-2">
-								@if(empty(Auth::user()->id))
-									@if(enrolled($value->id, $auth->email))
+								@if(!empty(Auth::user()->id))
+									@if(enrolled($value->id))
 									<a href="javascript:void(0)">
-										<span class="fa fa-bookmark-o" aria-hidden="true" data-toggle="modal" data-target=".bs-example-modal-lg"></span>
+										<span class="fa fa-bookmark" aria-hidden="true"></span>
 									</a>
 									@else
 									<a href="javascript:void(0)">
-										<span class="fa fa-bookmark-o" aria-hidden="true" data-toggle="modal" data-target=".bs-example-modal-lg"></span>
+										<span class="fa fa-bookmark-o" aria-hidden="true"></span>
 									</a>
 									@endif
 								@else
 								<a href="javascript:void(0)">
-									<span class="fa fa-bookmark-o" aria-hidden="true"></span>
+									<span class="fa fa-bookmark-o" aria-hidden="true" data-toggle="modal" data-target=".bs-example-modal-lg"></span>
 								</a>
 								@endif
 							</div>

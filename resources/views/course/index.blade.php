@@ -122,6 +122,18 @@
 										@endif
 									@endforeach
 									
+									@foreach($quiz as $keys => $values)
+									<li class="chapter">
+										<ul class="chapter-inner">
+											<li class="duration-now">
+												<a href="javascript:void(0)">
+													<span class="chapter-title">{{ $values->name }}</span>
+												</a>
+											</li>
+										</ul>
+									</li>
+									@endforeach
+									
 								</ul>
 							</div>
 						</div>

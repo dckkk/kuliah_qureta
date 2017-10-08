@@ -53,6 +53,7 @@ class RegisterController extends Controller
             'password' => 'required|min:6|confirmed',
             'name' => 'required',
             'profession' => 'required',
+            'image_url' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
     }
 
@@ -64,12 +65,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $fileName = 'null';
+        if ($data['image_url']->isValid()) {
+            $destinationPath = public_path('uploads/profile/');
+            $extension = $data['image_url']->getClientOriginalExtension();
+            $fileName = uniqid().'.'.$extension;
+
+            $data['image_url']->move($destinationPath, $fileName);
+        }
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'name' => $data['name'],
+            'image_url' => $fileName,
             'profession' => $data['profession'],
+            'status' => 'active',
+            'role' => 'user',
         ]);
     }
 }

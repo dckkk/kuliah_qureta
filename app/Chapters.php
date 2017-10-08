@@ -10,6 +10,8 @@ class Chapters extends Model
 
     protected $primaryKey = 'id';
 
+    protected $fillable = ['course_id', 'name', 'parent', 'slug', 'duration', 'url_video'];
+
     public function course() {
     	return $this->belongsTo('App\Course', 'course_id');
     }

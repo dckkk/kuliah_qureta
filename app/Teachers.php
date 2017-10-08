@@ -11,6 +11,8 @@ class Teachers extends Model
 
     protected $primaryKey = 'id';
 
+    protected $fillable = ['qureta_id', 'name', 'introduction', 'job', 'url_foto'];
+
     public function course() {
     	return $this->hasMany('App\Course');
     }

@@ -21,6 +21,11 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'AuthAdmin'), function()
 //        return View::make('admin.index');        
 //    });
     Route::get('/', 'Admin\\TeacherController@index');
+    Route::resource('/teacher', 'Admin\\TeacherController');
+    Route::resource('/course', 'Admin\\CourseController');
+    Route::resource('/chapter', 'Admin\\ChapterController');
+    Route::resource('/lecture', 'Admin\\LectureController');
+    Route::resource('/pages', 'Admin\\PagesController');
 });
 
 Route::get('/login', 'Auth\LoginController@showLoginForm');
@@ -39,7 +44,7 @@ Route::get('/course/{a}', 'CourseController@index');
 Route::get('/course/{a}/{b}', 'CourseController@index');
 Route::get('/course/{a}/{b}/{c}', 'CourseController@index');
 
-Route::get('/page/{a}', 'PagesController@index');
+Route::get('/page/{a}', 'PageController@index');
 
 
 

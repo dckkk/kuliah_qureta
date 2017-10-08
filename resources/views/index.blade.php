@@ -29,7 +29,6 @@
 				</div>
 			</div>
 		</div>
-		{{$auth}}
 		<div class="container-fluid teacher-wrapper">
 			<div class="container">
 				<div class="row">

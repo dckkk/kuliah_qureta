@@ -1,5 +1,7 @@
 <?php 
 $pages = \App\Pages::all();
+$topics = \App\Topics::all();
+$course = \App\Course::all();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,36 +41,16 @@ $pages = \App\Pages::all();
     <!-- navigation -->
     <div class="menu" id="menu-wrapper" style="visibility: hidden;">
         <div class="container">
-            <ul class="menu-list col-sm-4 col-xs-12">
-                <li class="menu-header">header 1</li>
-                <li class="menu-item"><a href="#">menu 1</a></li>
-                <li class="menu-item"><a href="#">menu 2</a></li>
-                <li class="menu-item"><a href="#">menu 3</a></li>
-                <li class="menu-item"><a href="#">menu 4</a></li>
-                <li class="menu-item"><a href="#">menu 5</a></li>
-                <li class="menu-item"><a href="#">menu 6</a></li>
-                <li class="menu-item"><a href="#">menu 7</a></li>
-            </ul>
-            <ul class="menu-list col-sm-4 col-xs-12">
-                <li class="menu-header">header 2</li>
-                <li class="menu-item"><a href="#">menu 1</a></li>
-                <li class="menu-item"><a href="#">menu 2</a></li>
-                <li class="menu-item"><a href="#">menu 3</a></li>
-                <li class="menu-item"><a href="#">menu 4</a></li>
-                <li class="menu-item"><a href="#">menu 5</a></li>
-                <li class="menu-item"><a href="#">menu 6</a></li>
-                <li class="menu-item"><a href="#">menu 7</a></li>
-            </ul>
-            <ul class="menu-list col-sm -4 col-xs-12">
-                <li class="menu-header">header 3</li>
-                <li class="menu-item"><a href="#">menu 1</a></li>
-                <li class="menu-item"><a href="#">menu 2</a></li>
-                <li class="menu-item"><a href="#">menu 3</a></li>
-                <li class="menu-item"><a href="#">menu 4</a></li>
-                <li class="menu-item"><a href="#">menu 5</a></li>
-                <li class="menu-item"><a href="#">menu 6</a></li>
-                <li class="menu-item"><a href="#">menu 7</a></li>
-            </ul>
+            @foreach($topics as $key => $value)
+                <ul class="menu-list col-sm-4 col-xs-12">
+                    <li class="menu-header">{{ $value->topic }}</li>
+                    @foreach($course as $keys=> $val)
+                        @if($value->id == $val->topic_id)
+                        <li class="menu-item"><a href="/course/{{ $val->slug }}">{{ $val->name }}</a></li>
+                        @endif
+                    @endforeach
+                </ul>
+            @endforeach
         </div>
     </div>
     <div class="container-fluid header navbar navbar-default navbar-fixed-top">
@@ -141,7 +123,7 @@ $pages = \App\Pages::all();
                     <img src="{{ URL::asset('img/logo.png') }}" width="120">
                 </div>
                 <span class="copyright">
-                    &copy;<a href="https://www.qureta.com">Qureta</a> 2017
+                    &copy;<a href="https://www.qureta.com">Qureta</a>  2017
                 </span>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12 playstore-logo">

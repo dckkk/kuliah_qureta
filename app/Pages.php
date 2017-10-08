@@ -11,4 +11,6 @@ class Pages extends Model
 
     protected $primaryKey = 'id';
 
+    protected $fillable = ['title', 'slug', 'content'];
+
 }

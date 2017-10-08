@@ -1,3 +1,6 @@
+<?php 
+$pages = \App\Pages::all();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,25 +89,39 @@
                     </form>
                 </div>
             </div>
-            @if(Auth::user() == null)
+            @if(Auth::check())
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 user text-center">
-                <a href="{{ url('/login') }}" class="wrap-user">
-                    <span class="fa fa-user-o user-icon"></span>
-                    <span class="user-logo">Sign in</span>
-                </a>
-            </div>
-            @else
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 user text-center">
-                <a href="{{ url('/logout') }}"
-                    onclick="event.preventDefault();
-                             document.getElementById('logout-form').submit();">
-                    <span class="fa fa-user-o user-icon"></span>
-                    <span class="user-logo">Sign out</span>
+                <a data-toggle="popover" data-container="body" data-placement="bottom" type="button" data-html="true" href="javascript:void(0)" id="login">
+                    @if(Auth::user()->image_url !== null)
+                    <span class="user-icon-profile"><img src="{{ URL::asset('uploads/profile/'.Auth::user()->image_url) }}" width="50px" height="50px" class="img-circle"></span>
+                    @else
+                    <span class="user-icon fa fa-user-o"></span>
+                    @endif
+                    <span class="user-logo">{{ Auth::user()->name }}</span>
                 </a>
 
                 <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                     {{ csrf_field() }}
                 </form>
+            </div>
+            <div id="popover-content-login" class="hide">
+                <ul class="list-group">
+                    @if(Auth::user()->role == 'admin')
+                    <a href="/admin" class="list-group-item">Administrator</a>
+                    @endif
+                    <a href="{{ url('/logout') }}" onclick="event.preventDefault();
+                         document.getElementById('logout-form').submit();" class="list-group-item">Log out</a>
+                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
+                </ul>
+            </div>
+            @else
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 user text-center">
+                <a href="{{ url('/login') }}" class="wrap-user">
+                    <span class="fa fa-user-o user-icon"></span>
+                    <span class="user-logo">Sign in</span>
+                </a>
             </div>
             @endif
         </div>
@@ -117,14 +134,14 @@
             <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
                 <div class="footer-menu">
                 @foreach ($pages as $key => $value)
-                    <a href="{{ $value->content }}">{{ $value->title }}</a>
+                    <a href="/page/{{ $value->slug }}">{{ $value->title }}</a>
                 @endforeach
                 </div>
                 <div class="footer-logo">
                     <img src="{{ URL::asset('img/logo.png') }}" width="120">
                 </div>
                 <span class="copyright">
-                    &copy; Qureta 2017
+                    &copy;<a href="https://www.qureta.com">Qureta</a>  2017
                 </span>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12 playstore-logo">
@@ -151,6 +168,16 @@
             autoplay:true,
             autoplayTimeout:5000,
             autoplayHoverPause:true
+        });
+
+        $("[data-toggle=popover]").each(function(i, obj) {
+            $(this).popover({
+              html: true,
+              content: function() {
+                var id = $(this).attr('id')
+                return $('#popover-content-' + id).html();
+              }
+            });
         });
     </script>
 </body>

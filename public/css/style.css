@@ -20,6 +20,7 @@ a{transition: ease-out 0.5s}
 .search button {width: 50px; border: 1px solid #cbcdcf; background: #fff; font-size: 14px; padding: 5px 15px; font-weight: 600;}
 .search button span{-webkit-text-stroke: 1px white; }
 .user-icon {background: #94979c; padding: 11px; border-radius: 50%; color: #cecfd1; display: block; margin: 0 auto; width: 37px; }
+.user-icon-profile {color: #cecfd1; display: block; margin: 0 auto; }
 a.wrap-user:hover{text-decoration: none; opacity: 0.5; }
 a .user-logo {color: #94978c; font-size: 12px; }
 .menu-icon{max-width: 20px;}

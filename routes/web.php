@@ -13,6 +13,16 @@
 
 Route::get('/', 'HomeController@index');
 
+Auth::routes();
+
+Route::group(array('prefix' => 'admin', 'middleware' => 'AuthAdmin'), function() {
+    // main page for the admin section (app/views/admin/dashboard.blade.php)
+//    Route::get('/', function() {
+//        return View::make('admin.index');        
+//    });
+    Route::get('/', 'Admin\\TeacherController@index');
+});
+
 Route::get('/login', 'Auth\LoginController@showLoginForm');
 Route::post('/login', 'Auth\LoginController@login');
 Route::get('/register', 'Auth\RegisterController@showRegistrationForm');
@@ -28,6 +38,8 @@ Route::get('/home/{a}/{b}', 'HomeController@index');
 Route::get('/course/{a}', 'CourseController@index');
 Route::get('/course/{a}/{b}', 'CourseController@index');
 Route::get('/course/{a}/{b}/{c}', 'CourseController@index');
+
+Route::get('/page/{a}', 'PagesController@index');
 
 
 

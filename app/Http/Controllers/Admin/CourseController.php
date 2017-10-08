@@ -50,6 +50,16 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         
+        $request['slug'] = strtolower(preg_replace("/ /", "-", $request['name']));
+        if ($request['image']->isValid()) {
+            $destinationPath = public_path('uploads/course/');
+            $extension = $request['image']->getClientOriginalExtension();
+            $fileName = uniqid().'.'.$extension;
+
+            $request['image']->move($destinationPath, $fileName);
+        }
+        $request['url_foto'] = $fileName;
+
         $requestData = $request->all();
         
         Course::create($requestData);

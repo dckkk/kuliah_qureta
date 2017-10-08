@@ -1,13 +1,27 @@
+<?php 
+    $topics = \App\Topics::all(); 
+    $teacher = \App\Teachers::all(); 
+?>
 <div class="form-group {{ $errors->has('topic_id') ? 'has-error' : ''}}">
-    {!! Form::label('topic_id', 'Topic Id', ['class' => 'col-md-4 control-label']) !!}
+    {!! Form::label('topic_id', 'Topic', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('topic_id', null, ['class' => 'form-control']) !!}
+        <!-- {!! Form::text('topic_id', null, ['class' => 'form-control']) !!} -->
+        <select class="form-control" name='topic_id'>
+            @foreach($topics as $key => $value)
+                <option value="{{ $value->id }}">{{ $value->topic }} ({{ $value->code }})</option>
+            @endforeach
+        </select>
         {!! $errors->first('topic_id', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('teacher_id') ? 'has-error' : ''}}">
-    {!! Form::label('teacher_id', 'Teacher Id', ['class' => 'col-md-4 control-label']) !!}
+    {!! Form::label('teacher_id', 'Teacher', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('teacher_id', null, ['class' => 'form-control']) !!}
+        <!-- {!! Form::text('teacher_id', null, ['class' => 'form-control']) !!} -->
+        <select class="form-control" name='teacher_id'>
+            @foreach($teacher as $key => $value)
+                <option value="{{ $value->id }}">{{ $value->name }}</option>
+            @endforeach
+        </select>
         {!! $errors->first('teacher_id', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
@@ -28,17 +42,17 @@
         {!! Form::textarea('announcement', null, ['class' => 'form-control']) !!}
         {!! $errors->first('announcement', '<p class="help-block">:message</p>') !!}
     </div>
-</div><div class="form-group {{ $errors->has('slug') ? 'has-error' : ''}}">
+</div><!-- <div class="form-group {{ $errors->has('slug') ? 'has-error' : ''}}">
     {!! Form::label('slug', 'Slug', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         {!! Form::text('slug', null, ['class' => 'form-control']) !!}
         {!! $errors->first('slug', '<p class="help-block">:message</p>') !!}
     </div>
-</div><div class="form-group {{ $errors->has('url_foto') ? 'has-error' : ''}}">
-    {!! Form::label('url_foto', 'Url Foto', ['class' => 'col-md-4 control-label']) !!}
+</div> --><div class="form-group {{ $errors->has('url_foto') ? 'has-error' : ''}}">
+    {!! Form::label('image', 'Image', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('url_foto', null, ['class' => 'form-control']) !!}
-        {!! $errors->first('url_foto', '<p class="help-block">:message</p>') !!}
+        {!! Form::file('image', null, ['class' => 'form-control']) !!}
+        {!! $errors->first('image', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 

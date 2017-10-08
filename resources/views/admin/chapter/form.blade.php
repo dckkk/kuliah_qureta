@@ -1,7 +1,16 @@
+<?php 
+    $course = \App\Course::all();
+?>
+
 <div class="form-group {{ $errors->has('course_id') ? 'has-error' : ''}}">
-    {!! Form::label('course_id', 'Course Id', ['class' => 'col-md-4 control-label']) !!}
+    {!! Form::label('course_id', 'Course', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('course_id', null, ['class' => 'form-control']) !!}
+        <!-- {!! Form::text('course_id', null, ['class' => 'form-control']) !!} -->
+        <select name="course_id" class="form-control">
+            @foreach($course as $key => $value)
+            <option value="{{ $value->id }}">{{ $value->name }}</option>
+            @endforeach
+        </select>
         {!! $errors->first('course_id', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
@@ -13,16 +22,17 @@
 </div><div class="form-group {{ $errors->has('parent') ? 'has-error' : ''}}">
     {!! Form::label('parent', 'Parent', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('parent', null, ['class' => 'form-control']) !!}
+        <input type="radio" name="parent" value="1"> Ya
+        <input type="radio" name="parent" value="2"> Tidak
         {!! $errors->first('parent', '<p class="help-block">:message</p>') !!}
     </div>
-</div><div class="form-group {{ $errors->has('slug') ? 'has-error' : ''}}">
+</div><!-- <div class="form-group {{ $errors->has('slug') ? 'has-error' : ''}}">
     {!! Form::label('slug', 'Slug', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         {!! Form::text('slug', null, ['class' => 'form-control']) !!}
         {!! $errors->first('slug', '<p class="help-block">:message</p>') !!}
     </div>
-</div><div class="form-group {{ $errors->has('duration') ? 'has-error' : ''}}">
+</div> --><div class="form-group {{ $errors->has('duration') ? 'has-error' : ''}}">
     {!! Form::label('duration', 'Duration', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         {!! Form::text('duration', null, ['class' => 'form-control']) !!}
@@ -41,3 +51,4 @@
         {!! Form::submit(isset($submitButtonText) ? $submitButtonText : 'Create', ['class' => 'btn btn-primary']) !!}
     </div>
 </div>
+

@@ -138,6 +138,11 @@ $course = \App\Course::all();
 
     <script type="text/javascript" src="{{ URL::asset('/js/mjs.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('/js/owl.carousel.min.js') }}"></script>
+    <script>
+        function parent(val) {
+            console.log(val)
+        }
+    </script>
     <script type="text/javascript">
         $(document).ready(function(){
           $(".owl-carousel").owlCarousel();

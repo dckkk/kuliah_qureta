@@ -30,14 +30,15 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>ID</th><th>Topic Id</th><th>Teacher Id</th><th>Name</th><th>Actions</th>
+                                        <th>ID</th><th>Topic</th><th>Teacher Id</th><th>Name</th><th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($course as $item)
+                                    <!-- {{ $item }} -->
                                     <tr>
                                         <td>{{ $item->id }}</td>
-                                        <td>{{ $item->topic_id }}</td><td>{{ $item->teacher_id }}</td><td>{{ $item->name }}</td>
+                                        <td>{{ $item->topics->topic }} ({{ $item->topics->code }})</td><td>{{ $item->teachers->name }}</td><td>{{ $item->name }}</td>
                                         <td>
                                             <a href="{{ url('/admin/course/' . $item->id) }}" title="View course"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/admin/course/' . $item->id . '/edit') }}" title="Edit course"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>

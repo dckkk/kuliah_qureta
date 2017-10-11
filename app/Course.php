@@ -25,6 +25,10 @@ class Course extends Model
         return $this->hasMany('App\Chapters');
     }
 
+    public function lectures() {
+        return $this->hasMany('App\Lectures');
+    }
+
     public function enrolls() {
         return $this->hasMany('App\Enrolls');
     }

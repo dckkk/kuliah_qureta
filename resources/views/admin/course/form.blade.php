@@ -8,7 +8,12 @@
         <!-- {!! Form::text('topic_id', null, ['class' => 'form-control']) !!} -->
         <select class="form-control" name='topic_id'>
             @foreach($topics as $key => $value)
-                <option value="{{ $value->id }}">{{ $value->topic }} ({{ $value->code }})</option>
+                @if($value->id == $course['topic_id'])
+                <?php $selected = "selected"; ?>
+                @else
+                <?php $selected = ""; ?>
+                @endif
+                <option value="{{ $value->id }}" {{ $selected }}>{{ $value->topic }} ({{ $value->code }})</option>
             @endforeach
         </select>
         {!! $errors->first('topic_id', '<p class="help-block">:message</p>') !!}
@@ -19,7 +24,12 @@
         <!-- {!! Form::text('teacher_id', null, ['class' => 'form-control']) !!} -->
         <select class="form-control" name='teacher_id'>
             @foreach($teacher as $key => $value)
-                <option value="{{ $value->id }}">{{ $value->name }}</option>
+                @if($value->id == $course['teacher_id'])
+                <?php $selected = "selected"; ?>
+                @else
+                <?php $selected = ""; ?>
+                @endif
+                <option value="{{ $value->id }}" {{ $selected }}>{{ $value->name }}</option>
             @endforeach
         </select>
         {!! $errors->first('teacher_id', '<p class="help-block">:message</p>') !!}

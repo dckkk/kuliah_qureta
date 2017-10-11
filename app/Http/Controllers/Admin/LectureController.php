@@ -22,7 +22,7 @@ class LectureController extends Controller
         $perPage = 10;
 
         if (!empty($keyword)) {
-            $lecture = Lectures::where('name','like', '%'.$keyword.'%')->paginate($perPage);
+            $lecture = Lectures::with('chapters', 'course')->where('name','like', '%'.$keyword.'%')->paginate($perPage);
         } else {
             $lecture = Lectures::paginate($perPage);
         }
@@ -69,7 +69,7 @@ class LectureController extends Controller
      */
     public function show($id)
     {
-        $lecture = Lectures::findOrFail($id);
+        $lecture = Lectures::with('chapters', 'course')->findOrFail($id);
 
         return view('admin.lecture.show', compact('lecture'));
     }

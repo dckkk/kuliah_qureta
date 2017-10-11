@@ -30,14 +30,15 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>ID</th><th>Course Id</th><th>Name</th><th>Parent</th><th>Actions</th>
+                                        <th>ID</th><th>Course</th><th>Name</th><th>Parent</th><th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($chapter as $item)
+                                    <?php $item->parent = ($item->parent == 1)?"Ya":"Tidak"; ?>
                                     <tr>
                                         <td>{{ $item->id }}</td>
-                                        <td>{{ $item->course_id }}</td><td>{{ $item->name }}</td><td>{{ $item->parent }}</td>
+                                        <td>{{ $item->course->name }}</td><td>{{ $item->name }}</td><td>{{ $item->parent }}</td>
                                         <td>
                                             <a href="{{ url('/admin/chapter/' . $item->id) }}" title="View chapter"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/admin/chapter/' . $item->id . '/edit') }}" title="Edit chapter"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>

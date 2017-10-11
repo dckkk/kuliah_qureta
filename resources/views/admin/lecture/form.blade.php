@@ -7,9 +7,13 @@
     <div class="col-md-6">
         <!-- {!! Form::text('course_id', null, ['class' => 'form-control']) !!} -->
         <select name="course_id" class="form-control">
-            <option></option>
             @foreach($course as $key => $value)
-            <option value="{{ $value->id }}">{{ $value->name }}</option>
+                @if($value->id == $lecture['course_id'])
+                <?php $selected = "selected"; ?>
+                @else
+                <?php $selected = ""; ?>
+                @endif
+            <option value="{{ $value->id }}" {{ $selected }}>{{ $value->name }}</option>
             @endforeach
         </select>
         {!! $errors->first('course_id', '<p class="help-block">:message</p>') !!}
@@ -19,9 +23,13 @@
     <div class="col-md-6">
         <!-- {!! Form::text('chapter_id', null, ['class' => 'form-control']) !!} -->
         <select name="chapter_id" class="form-control">
-            <option></option>
             @foreach($chapter as $key => $value)
-            <option value="{{ $value->id }}">{{ $value->name }}</option>
+                @if($value->id == $lecture['chapter_id'])
+                <?php $selected = "selected"; ?>
+                @else
+                <?php $selected = ""; ?>
+                @endif
+            <option value="{{ $value->id }}" {{ $selected }}>{{ $value->name }}</option>
             @endforeach
         </select>
         {!! $errors->first('chapter_id', '<p class="help-block">:message</p>') !!}

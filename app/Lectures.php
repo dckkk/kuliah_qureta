@@ -16,4 +16,8 @@ class Lectures extends Model
     	return $this->belongsTo('App\Chapters', 'chapter_id');
     }
 
+    public function course() {
+    	return $this->belongsTo('App\Course', 'course_id');
+    }
+
 }

@@ -50,7 +50,12 @@ class CourseController extends Controller
         $chapters = Chapters::where('course_id', $course_id)->get();
         
         //set default video
-        $url_video = $chapters[0]['url_video'];
+        if($chapters->isEmpty()) {
+            $url_video="/";
+        } else {
+            $url_video = $chapters[0]['url_video'];
+            
+        }
 
         //get data lecture
         $lectures = Lectures::all();

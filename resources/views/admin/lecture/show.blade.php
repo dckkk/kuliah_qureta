@@ -7,7 +7,7 @@
 
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">lecture {{ $lecture->id }}</div>
+                    <div class="panel-heading">Lecture #{{ $lecture->id }}</div>
                     <div class="panel-body">
 
                         <a href="{{ url('/admin/lecture') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
@@ -33,7 +33,7 @@
                                     <tr>
                                         <th>ID</th><td>{{ $lecture->id }}</td>
                                     </tr>
-                                    <tr><th> Course Id </th><td> {{ $lecture->course_id }} </td></tr><tr><th> Chapter Id </th><td> {{ $lecture->chapter_id }} </td></tr><tr><th> Name </th><td> {{ $lecture->name }} </td></tr>
+                                    <tr><th> Course </th><td> {{ $lecture->course->name }} </td></tr><tr><th> Chapter </th><td> {{ $lecture->chapters->name }} </td></tr><tr><th> Name </th><td> {{ $lecture->name }} </td></tr>
                                 </tbody>
                             </table>
                         </div>

@@ -22,7 +22,7 @@ class ChapterController extends Controller
         $perPage = 10;
 
         if (!empty($keyword)) {
-            $chapter = Chapters::where('name','like', '%'.$keyword.'%')->paginate($perPage);;
+            $chapter = Chapters::with('course')->where('name','like', '%'.$keyword.'%')->paginate($perPage);;
         } else {
             $chapter = Chapters::paginate($perPage);
         }
@@ -71,7 +71,7 @@ class ChapterController extends Controller
      */
     public function show($id)
     {
-        $chapter = Chapters::findOrFail($id);
+        $chapter = Chapters::with('course')->findOrFail($id);
 
         return view('admin.chapter.show', compact('chapter'));
     }

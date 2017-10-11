@@ -7,7 +7,7 @@
 
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">chapter {{ $chapter->id }}</div>
+                    <div class="panel-heading">Chapter #{{ $chapter->id }}</div>
                     <div class="panel-body">
 
                         <a href="{{ url('/admin/chapter') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
@@ -27,13 +27,14 @@
                         <br/>
                         <br/>
 
+                        <?php $chapter->parent = ($chapter->parent == 1)?"Ya":"Tidak"; ?>
                         <div class="table-responsive">
                             <table class="table table-borderless">
                                 <tbody>
                                     <tr>
                                         <th>ID</th><td>{{ $chapter->id }}</td>
                                     </tr>
-                                    <tr><th> Course Id </th><td> {{ $chapter->course_id }} </td></tr><tr><th> Name </th><td> {{ $chapter->name }} </td></tr><tr><th> Parent </th><td> {{ $chapter->parent }} </td></tr>
+                                    <tr><th> Course Id </th><td> {{ $chapter->course->name }} </td></tr><tr><th> Name </th><td> {{ $chapter->name }} </td></tr><tr><th> Parent </th><td> {{ $chapter->parent }} </td></tr>
                                 </tbody>
                             </table>
                         </div>

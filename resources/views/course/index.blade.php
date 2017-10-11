@@ -1,4 +1,4 @@
-@extends('layouts.template')
+@extends('layouts.app')
 
 @section('content')
 
@@ -82,7 +82,6 @@
 						<ul class="nav nav-tabs">
 							<li class="active"><a data-toggle="tab" href="#materi">Materi</a></li>
 						</ul>
-
 						<div class="tab-content">
 							<div id="materi" class="overflow-tag tab-pane fade in active">
 								<ul class="nav-materi">

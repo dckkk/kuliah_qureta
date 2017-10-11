@@ -2,7 +2,7 @@
 
 <!-- Main Content -->
 @section('content')
-<div class="container" style='margin-top:100px'>
+<div class="container" style='margin-top:100px; margin-bottom: 300px'>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">

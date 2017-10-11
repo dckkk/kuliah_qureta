@@ -75,7 +75,7 @@ $course = \App\Course::all();
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 user text-center">
                 <a data-toggle="popover" data-container="body" data-placement="bottom" type="button" data-html="true" href="javascript:void(0)" id="login">
                     @if(Auth::user()->image_url !== null)
-                    <span class="user-icon-profile"><img src="{{ URL::asset('uploads/profile/'.Auth::user()->image_url) }}" width="50px" height="50px" class="img-circle"></span>
+                    <span class="user-icon-profile"><img src="{{ URL::asset('uploads/profile/'.Auth::user()->image_url) }}" width="42px" height="42px" class="img-circle" style="border: 2px solid #635b5b;"></span>
                     @else
                     <span class="user-icon fa fa-user-o"></span>
                     @endif

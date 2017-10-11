@@ -6,6 +6,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Course;
+use App\Topics;
+use App\Teacher;
+
 use Illuminate\Http\Request;
 use Session;
 
@@ -22,9 +25,9 @@ class CourseController extends Controller
         $perPage = 10;
 
         if (!empty($keyword)) {
-            $course = Course::where('name','like', '%'.$keyword.'%')->paginate($perPage);
+            $course = Course::with('topics', 'teachers')->where('name','like', '%'.$keyword.'%')->paginate($perPage);
         } else {
-            $course = Course::paginate($perPage);
+            $course = Course::with('topics', 'teachers')->paginate($perPage);
         }
 
         return view('admin.course.index', compact('course'));
@@ -78,7 +81,7 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        $course = Course::findOrFail($id);
+        $course = Course::with('topics', 'teachers')->findOrFail($id);
 
         return view('admin.course.show', compact('course'));
     }

@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container" style='margin-top:100px; margin-bottom: 200px'>
+    <div class="container">
         <div class="row">
             @include('admin.sidebar')
 
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Create New course</div>
+                    <div class="panel-heading">Create New user</div>
                     <div class="panel-body">
-                        <a href="{{ url('/admin/course') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/admin/user') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
                         <br />
 
@@ -21,9 +21,9 @@
                             </ul>
                         @endif
 
-                        {!! Form::open(['url' => '/admin/course', 'class' => 'form-horizontal', 'files' => true, 'enctype' => 'multipart/form-data']) !!}
+                        {!! Form::open(['url' => '/admin/user', 'class' => 'form-horizontal', 'files' => true]) !!}
 
-                        @include ('admin.course.form')
+                        @include ('directory.user.form')
 
                         {!! Form::close() !!}
 

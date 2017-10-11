@@ -23,12 +23,14 @@ $course = \App\Course::all();
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('/css/animate.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('/css/owl.carousel.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('/css/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('/css/bootstrap-switch.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('/css/style.css'). '?v=' . filemtime('./css/style.css') }}">
     <!-- load cdn google font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed" rel="stylesheet">
     <!-- load script -->
     <script src="{{ URL::asset('/js/jquery.min.js') }}"></script>
     <script src="{{ URL::asset('/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('/js/bootstrap-switch.min.js') }}"></script>
 
     <!-- Scripts -->
     <script>

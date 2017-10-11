@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container" style="margin-top: 100px;">
+    <div class="container" style='margin-top:100px; margin-bottom: 200px'>
         <div class="row">
             @include('admin.sidebar')
 

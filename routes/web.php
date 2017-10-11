@@ -20,7 +20,8 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'AuthAdmin'), function()
 //    Route::get('/', function() {
 //        return View::make('admin.index');        
 //    });
-    Route::get('/', 'Admin\\TeacherController@index');
+    Route::get('/', 'Admin\\UserController@index');
+    Route::resource('/user', 'Admin\\UserController');
     Route::resource('/teacher', 'Admin\\TeacherController');
     Route::resource('/course', 'Admin\\CourseController');
     Route::resource('/chapter', 'Admin\\ChapterController');

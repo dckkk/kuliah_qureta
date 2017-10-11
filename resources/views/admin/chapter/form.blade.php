@@ -8,12 +8,14 @@
         <!-- {!! Form::text('course_id', null, ['class' => 'form-control']) !!} -->
         <select name="course_id" class="form-control">
             @foreach($course as $key => $value)
-                @if($value->id == $chapter['course_id'])
-                <?php $selected = "selected"; ?>
-                @else
-                <?php $selected = ""; ?>
+                @if(isset($chapter))
+                    @if($value->id == $chapter['course_id'])
+                    <?php $selected = "selected"; ?>
+                    @else
+                    <?php $selected = ""; ?>
+                    @endif
                 @endif
-            <option value="{{ $value->id }}" {{ $selected }}>{{ $value->name }}</option>
+            <option value="{{ $value->id }}" @if(isset($chapter)){{ $selected }}@endif>{{ $value->name }}</option>
             @endforeach
         </select>
         {!! $errors->first('course_id', '<p class="help-block">:message</p>') !!}
@@ -27,8 +29,8 @@
 </div><div class="form-group {{ $errors->has('parent') ? 'has-error' : ''}}">
     {!! Form::label('parent', 'Parent', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        <input type="radio" name="parent" value="1" <?= ($chapter->parent == 1)?"checked":""; ?>> Ya
-        <input type="radio" name="parent" value="2" <?= ($chapter->parent == 2)?"checked":""; ?>> Tidak
+        <input type="radio" name="parent" value="1" @if(isset($chapter))<?= ($chapter->parent == 1)?"checked":""; ?>@endif> Ya
+        <input type="radio" name="parent" value="2" @if(isset($chapter))<?= ($chapter->parent == 2)?"checked":""; ?>@endif> Tidak
         {!! $errors->first('parent', '<p class="help-block">:message</p>') !!}
     </div>
 </div><!-- <div class="form-group {{ $errors->has('slug') ? 'has-error' : ''}}">

@@ -44,11 +44,11 @@ class HomeController extends Controller
     
 		$courseIs = Course::with('topics', 'teachers')->whereHas('topics', function($query) {
     		$query->where('id', 1);
-    	})->where('topic_id', 1)->inRandomOrder()->take(4)->get();
+    	})->where('topic_id', 1)->take(4)->get();
     	
 		$courseEb = Course::with('topics', 'teachers')->whereHas('topics', function($query) {
     		$query->where('id', 2);
-    	})->where('topic_id', 2)->inRandomOrder()->take(4)->get();
+    	})->where('topic_id', 2)->take(4)->get();
     	
 	    $courseSt = Course::with('topics', 'teachers')->whereHas('topics', function($query) {
 	    		$query->where('id', 3);
@@ -56,11 +56,11 @@ class HomeController extends Controller
     	
 	    $courseIk = Course::with('topics', 'teachers')->whereHas('topics', function($query) {
 	    		$query->where('id', 4);
-	    	})->where('topic_id', 4)->inRandomOrder()->take(4)->get(); 
+	    	})->where('topic_id', 4)->take(4)->get(); 
     	
 	    $courseSb = Course::with('topics', 'teachers')->whereHas('topics', function($query) {
 	    		$query->where('id', 5);
-	    	})->where('topic_id', 5)->inRandomOrder()->take(4)->get(); 
+	    	})->where('topic_id', 5)->take(4)->get(); 
     	
     	return view('index', compact('teachers', 'topics', 'courseLast', 'courseIs', 'courseEb', 'courseSt', 'courseIk', 'courseSb', 'show', 'slider', 'pages', 'auth'));
     }

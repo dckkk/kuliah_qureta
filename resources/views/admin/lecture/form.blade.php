@@ -8,12 +8,14 @@
         <!-- {!! Form::text('course_id', null, ['class' => 'form-control']) !!} -->
         <select name="course_id" class="form-control">
             @foreach($course as $key => $value)
-                @if($value->id == $lecture['course_id'])
-                <?php $selected = "selected"; ?>
-                @else
-                <?php $selected = ""; ?>
+                @if(isset($lecture))
+                    @if($value->id == $lecture['course_id'])
+                    <?php $selected = "selected"; ?>
+                    @else
+                    <?php $selected = ""; ?>
+                    @endif
                 @endif
-            <option value="{{ $value->id }}" {{ $selected }}>{{ $value->name }}</option>
+            <option value="{{ $value->id }}" @if(isset($lecture)){{ $selected }}@endif>{{ $value->name }}</option>
             @endforeach
         </select>
         {!! $errors->first('course_id', '<p class="help-block">:message</p>') !!}
@@ -24,12 +26,14 @@
         <!-- {!! Form::text('chapter_id', null, ['class' => 'form-control']) !!} -->
         <select name="chapter_id" class="form-control">
             @foreach($chapter as $key => $value)
-                @if($value->id == $lecture['chapter_id'])
-                <?php $selected = "selected"; ?>
-                @else
-                <?php $selected = ""; ?>
+                @if(isset($lecture))
+                    @if($value->id == $lecture['chapter_id'])
+                    <?php $selected = "selected"; ?>
+                    @else
+                    <?php $selected = ""; ?>
+                    @endif
                 @endif
-            <option value="{{ $value->id }}" {{ $selected }}>{{ $value->name }}</option>
+            <option value="{{ $value->id }}" @if(isset($lecture)){{ $selected }}@endif>{{ $value->name }}</option>
             @endforeach
         </select>
         {!! $errors->first('chapter_id', '<p class="help-block">:message</p>') !!}

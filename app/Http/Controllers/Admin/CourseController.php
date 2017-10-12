@@ -110,7 +110,18 @@ class CourseController extends Controller
      */
     public function update($id, Request $request)
     {
-        
+        $request['slug'] = strtolower(preg_replace("/ /", "-", $request['name']));
+        if($request['image'] !== NULL) {
+            if ($request['image']->isValid()) {
+                $destinationPath = public_path('uploads/course/');
+                $extension = $request['image']->getClientOriginalExtension();
+                $fileName = uniqid().'.'.$extension;
+
+                $request['image']->move($destinationPath, $fileName);
+            }
+            $request['url_foto'] = $fileName;
+        }
+
         $requestData = $request->all();
         
         $course = Course::findOrFail($id);

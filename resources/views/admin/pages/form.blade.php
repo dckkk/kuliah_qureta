@@ -7,7 +7,7 @@
 </div><div class="form-group {{ $errors->has('content') ? 'has-error' : ''}}">
     {!! Form::label('content', 'Content', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::textarea('content', null, ['class' => 'form-control']) !!}
+        {!! Form::textarea('content', null, ['class' => 'form-control wysiwygeditor', 'column' => '50']) !!}
         {!! $errors->first('content', '<p class="help-block">:message</p>') !!}
     </div>
 </div>

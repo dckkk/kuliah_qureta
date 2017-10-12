@@ -49,7 +49,15 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        
+        if ($request['image']->isValid()) {
+            $destinationPath = public_path('uploads/teacher/');
+            $extension = $request['image']->getClientOriginalExtension();
+            $fileName = uniqid().'.'.$extension;
+
+            $request['image']->move($destinationPath, $fileName);
+        }
+        $request['url_foto'] = $fileName;
+
         $requestData = $request->all();
         
         Teachers::create($requestData);
@@ -81,7 +89,8 @@ class TeacherController extends Controller
      * @return \Illuminate\View\View
      */
     public function edit($id)
-    {
+    {   
+
         $teacher = Teachers::findOrFail($id);
 
         return view('admin.teacher.edit', compact('teacher'));
@@ -97,7 +106,15 @@ class TeacherController extends Controller
      */
     public function update($id, Request $request)
     {
-        
+        if ($request['image']->isValid()) {
+            $destinationPath = public_path('uploads/teacher/');
+            $extension = $request['image']->getClientOriginalExtension();
+            $fileName = uniqid().'.'.$extension;
+
+            $request['image']->move($destinationPath, $fileName);
+        }
+        $request['url_foto'] = $fileName;
+
         $requestData = $request->all();
         
         $teacher = Teachers::findOrFail($id);

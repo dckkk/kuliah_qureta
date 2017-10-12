@@ -11,7 +11,7 @@ class Course extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['topic_id', 'teacher_id', 'name', 'description', 'announcement', 'slug', 'url_foto'];
+    protected $fillable = ['topic_id', 'teacher_id', 'name', 'description', 'announcement', 'slug', 'url_foto', 'enrolls_start', 'enrolls_end'];
 
     public function topics() {
     	return $this->belongsTo('App\Topics', 'topic_id');

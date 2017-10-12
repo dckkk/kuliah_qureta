@@ -68,6 +68,18 @@
         {!! Form::file('image', null, ['class' => 'form-control']) !!}
         {!! $errors->first('image', '<p class="help-block">:message</p>') !!}
     </div>
+</div><div class="form-group {{ $errors->has('url_foto') ? 'has-error' : ''}}">
+    {!! Form::label('enrolls_start', 'Start Enroll Date', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-6">
+        {!! Form::date('enrolls_start', null, ['class' => 'form-control']) !!}
+        {!! $errors->first('enrolls_start', '<p class="help-block">:message</p>') !!}
+    </div>
+</div><div class="form-group {{ $errors->has('url_foto') ? 'has-error' : ''}}">
+    {!! Form::label('enrolls_end', 'End Enroll Date', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-6">
+        {!! Form::date('enrolls_end', null, ['class' => 'form-control']) !!}
+        {!! $errors->first('enrolls_end', '<p class="help-block">:message</p>') !!}
+    </div>
 </div>
 
 <div class="form-group">

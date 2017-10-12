@@ -57,15 +57,16 @@
         {!! $errors->first('slug', '<p class="help-block">:message</p>') !!}
     </div>
 </div> --><div class="form-group {{ $errors->has('url_video') ? 'has-error' : ''}}">
-    {!! Form::label('url_video', 'Url Video', ['class' => 'col-md-4 control-label']) !!}
+    {!! Form::label('url_video', 'Video', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         {!! Form::text('url_video', null, ['class' => 'form-control']) !!}
         {!! $errors->first('url_video', '<p class="help-block">:message</p>') !!}
+        <small>(https://www.youtube.com/watch?v=)</small>
     </div>
 </div><div class="form-group {{ $errors->has('duration') ? 'has-error' : ''}}">
     {!! Form::label('duration', 'Duration', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('duration', null, ['class' => 'form-control']) !!}
+        {!! Form::number('duration', null, ['class' => 'form-control']) !!}
         {!! $errors->first('duration', '<p class="help-block">:message</p>') !!}
     </div>
 </div>

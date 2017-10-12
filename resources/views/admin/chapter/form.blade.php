@@ -27,10 +27,10 @@
         {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('parent') ? 'has-error' : ''}}">
-    {!! Form::label('parent', 'Parent', ['class' => 'col-md-4 control-label']) !!}
+    {!! Form::label('parent', 'Has Lectures ?', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        <input type="radio" name="parent" value="1" @if(isset($chapter))<?= ($chapter->parent == 1)?"checked":""; ?>@endif> Ya
-        <input type="radio" name="parent" value="2" @if(isset($chapter))<?= ($chapter->parent == 2)?"checked":""; ?>@endif> Tidak
+        <input type="radio" name="parent" onclick="hasLectures(this.value);" value="1" @if(isset($chapter))<?= ($chapter->parent == 1)?"checked":""; ?>@endif> Ya
+        <input type="radio" name="parent" value="2" onclick="hasLectures(this.value);" @if(isset($chapter))<?= ($chapter->parent == 2)?"checked":""; ?>@endif> Tidak
         {!! $errors->first('parent', '<p class="help-block">:message</p>') !!}
     </div>
 </div><!-- <div class="form-group {{ $errors->has('slug') ? 'has-error' : ''}}">
@@ -39,17 +39,18 @@
         {!! Form::text('slug', null, ['class' => 'form-control']) !!}
         {!! $errors->first('slug', '<p class="help-block">:message</p>') !!}
     </div>
-</div> --><div class="form-group {{ $errors->has('duration') ? 'has-error' : ''}}">
+</div> --><div id="duration_blok" class="form-group {{ $errors->has('duration') ? 'has-error' : ''}}">
     {!! Form::label('duration', 'Duration', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('duration', null, ['class' => 'form-control']) !!}
+        {!! Form::number('duration', null, ['class' => 'form-control']) !!}
         {!! $errors->first('duration', '<p class="help-block">:message</p>') !!}
     </div>
-</div><div class="form-group {{ $errors->has('url_video') ? 'has-error' : ''}}">
-    {!! Form::label('url_video', 'Url Video', ['class' => 'col-md-4 control-label']) !!}
+</div><div id="url_video_blok" class="form-group {{ $errors->has('url_video') ? 'has-error' : ''}}">
+    {!! Form::label('url_video', 'Video', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         {!! Form::text('url_video', null, ['class' => 'form-control']) !!}
         {!! $errors->first('url_video', '<p class="help-block">:message</p>') !!}
+        <small>(https://www.youtube.com/watch?v=)</small>
     </div>
 </div>
 

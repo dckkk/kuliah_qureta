@@ -98,6 +98,7 @@ class LectureController extends Controller
      */
     public function update($id, Request $request)
     {
+        $request['slug'] = strtolower(preg_replace("/ /", "-", $request['name']));
         
         $requestData = $request->all();
         

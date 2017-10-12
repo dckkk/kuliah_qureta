@@ -100,6 +100,9 @@ class ChapterController extends Controller
      */
     public function update($id, Request $request)
     {
+        $request['slug'] = strtolower(preg_replace("/ /", "-", $request['name']));
+        $request['duration'] = (empty($request['duration']))?0:$request['duration'];
+        $request['url_video'] = (empty($request['url_video']))?"null":$request['url_video'];
         
         $requestData = $request->all();
         

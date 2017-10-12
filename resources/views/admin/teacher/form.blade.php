@@ -23,9 +23,9 @@
         {!! $errors->first('job', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('url_foto') ? 'has-error' : ''}}">
-    {!! Form::label('url_foto', 'Url Foto', ['class' => 'col-md-4 control-label']) !!}
+    {!! Form::label('url_foto', 'Foto Profile', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('url_foto', null, ['class' => 'form-control']) !!}
+        {!! Form::file('image', null, ['class' => 'form-control']) !!}
         {!! $errors->first('url_foto', '<p class="help-block">:message</p>') !!}
     </div>
 </div>

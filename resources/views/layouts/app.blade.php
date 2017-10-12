@@ -25,6 +25,22 @@ $course = \App\Course::all();
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('/css/owl.theme.default.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('/css/bootstrap-switch.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('/css/style.css'). '?v=' . filemtime('./css/style.css') }}">
+    <!-- froalaplugin -->
+    <link rel="stylesheet" href="{{ URL::asset('froala/css/froala_editor.min.css') }}" />
+    <link rel="stylesheet" href="{{ URL::asset('froala/css/froala_style.min.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
+    <link rel="stylesheet" href="{{ URL::asset('froala/css/plugins/char_counter.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('froala/css/plugins/code_view.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('froala/css/plugins/colors.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('froala/css/plugins/emoticons.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('froala/css/plugins/file.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('froala/css/plugins/fullscreen.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('froala/css/plugins/image.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('froala/css/plugins/image_manager.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('froala/css/plugins/line_breaker.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('froala/css/plugins/quick_insert.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('froala/css/plugins/table.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('froala/css/plugins/video.css') }}">
     <!-- load cdn google font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed" rel="stylesheet">
     <!-- load script -->
@@ -37,6 +53,17 @@ $course = \App\Course::all();
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
         ]) !!};
+    </script>
+    <script type="text/javascript">
+        function hasLectures(e){
+            if (e == 1) {
+                document.getElementById('duration_blok').style.display = 'none';
+                document.getElementById('url_video_blok').style.display = 'none';
+            } else if (e == 2) {
+                document.getElementById('duration_blok').style.display = '';
+                document.getElementById('url_video_blok').style.display = '';
+            }
+        }
     </script>
 </head>
 <body>
@@ -65,7 +92,7 @@ $course = \App\Course::all();
                 
             </div>
             <div class="col-lg-8 col-md-7 col-sm-10 col-xs-6 search-bar">
-                <a href="#" class="menu-icon" id="toggle"><img src="{{ URL::asset('/img/menu.svg') }}"></a>
+                <!-- <a href="#" class="menu-icon" id="toggle"><img src="{{ URL::asset('/img/menu.svg') }}"></a> -->
 
                 <div class="search">
                     <form>
@@ -138,6 +165,35 @@ $course = \App\Course::all();
             </div>
     </div>
 
+    <!-- forala js plugin -->
+    <script type="text/javascript" src="{{ URL::asset('froala/js/froala_editor.min.js') }}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js"></script>
+    <script type="text/javascript" src="{{ URL::asset('froala/js/plugins/align.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('froala/js/plugins/char_counter.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('froala/js/plugins/code_beautifier.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('froala/js/plugins/code_view.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('froala/js/plugins/colors.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('froala/js/plugins/emoticons.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('froala/js/plugins/entities.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('froala/js/plugins/file.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('froala/js/plugins/font_size.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('froala/js/plugins/fullscreen.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('froala/js/plugins/image.min.js') }}"></script>
+    <!--script type="text/javascript" src="{{ URL::asset('froala/js/plugins/image_manager.min.js') }}"></script-->
+    <script type="text/javascript" src="{{ URL::asset('froala/js/plugins/inline_style.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('froala/js/plugins/line_breaker.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('froala/js/plugins/link.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('froala/js/plugins/lists.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('froala/js/plugins/paragraph_format.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('froala/js/plugins/paragraph_style.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('froala/js/plugins/quick_insert.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('froala/js/plugins/quote.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('froala/js/plugins/table.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('froala/js/plugins/save.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('froala/js/plugins/url.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('froala/js/plugins/video.min.js') }}"></script>
+    <!-- end -->
     <script type="text/javascript" src="{{ URL::asset('/js/mjs.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('/js/owl.carousel.min.js') }}"></script>
     <script>

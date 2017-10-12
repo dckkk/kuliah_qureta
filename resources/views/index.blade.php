@@ -42,7 +42,7 @@
 					    <div class="col-md-5ths">
 						    <div class="col-md-12 col-xs-6 frame-pengajar">
 								<div class="col-xs-4 no-padding">
-									<img src="{{ URL::asset('img/'.$value->url_foto) }}" class="img avatar-teacher">
+									<img src="{{ URL::asset('uploads/teacher/'.$value->url_foto) }}" class="img avatar-teacher">
 								</div>
 								<div class="col-xs-8">
 									<h5><strong>{{ $value->name }}</strong></h5>

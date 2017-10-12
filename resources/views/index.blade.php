@@ -79,12 +79,12 @@
 							<div class="col-sm-2 col-xs-2">
 								@if(!empty(Auth::user()->id))
 									@if(enrolled($value->id))
-									<a href="javascript:void(0)">
-										<span class="fa fa-bookmark" aria-hidden="true"></span>
+									<a href="javascript:void(0)" onclick="unenroll({{ $value->id }}, '{{ Auth::user()->email }}')">
+										<span id="enrolls-{{ $value->id }}" class="fa fa-bookmark" aria-hidden="true"></span>
 									</a>
 									@else
-									<a href="javascript:void(0)">
-										<span class="fa fa-bookmark-o" aria-hidden="true"></span>
+									<a href="javascript:void(0)" onclick="enrolling({{ $value->id }}, '{{ Auth::user()->email }}')">
+										<span id="enrolls-{{ $value->id }}" class="fa fa-bookmark-o" aria-hidden="true"></span>
 									</a>
 									@endif
 								@else

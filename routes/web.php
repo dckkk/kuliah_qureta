@@ -47,7 +47,6 @@ Route::get('/course/{a}/{b}/{c}', 'CourseController@index');
 
 Route::get('/page/{a}', 'PageController@index');
 
-
-
-
-Route::get('/home', 'HomeController@index');
+//api 
+Route::post('/api/enrolls', 'EnrollsController@enrolls');
+Route::post('/api/unenrolls', 'EnrollsController@unenrolls');

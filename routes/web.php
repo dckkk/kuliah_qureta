@@ -39,6 +39,7 @@ Route::get('/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm
 Route::get('/home', 'HomeController@index');
 Route::get('/home/{a}', 'HomeController@index');
 Route::get('/home/{a}/{b}', 'HomeController@index');
+Route::get('/profile/{a}', 'ProfileController@index');
 
 
 Route::get('/course/{a}', 'CourseController@index');

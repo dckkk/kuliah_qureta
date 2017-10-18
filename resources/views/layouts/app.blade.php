@@ -108,6 +108,7 @@ $course = \App\Course::all();
             </div>
             <div id="popover-content-login" class="hide">
                 <ul class="list-group">
+                    <a href="{{ url('/profile/'.Auth::user()->id) }}" class="list-group-item">User Profile</a>
                     @if(Auth::user()->role == 'admin')
                     <a href="/admin" class="list-group-item">Administrator</a>
                     @endif

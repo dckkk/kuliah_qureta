@@ -252,3 +252,13 @@ span.copyright {font-size: 85%; color:#636363}
             transform: scale3D(0, 0, 1);
   } 
 }
+
+.container-profile {
+  width: 1200px;
+  height: 100px;
+  margin-top: 200px;
+  background-color: #fff;
+  border-radius: 3px;
+  padding-left: 10px;
+  padding-top: 17px;
+}

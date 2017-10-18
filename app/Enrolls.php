@@ -16,4 +16,8 @@ class Enrolls extends Model
     	return $this->belongsTo('App\Course', 'course_id');
     }
 
+    public function user() {
+    	return $this->belongsTo('App\User', 'email');
+    }
+
 }

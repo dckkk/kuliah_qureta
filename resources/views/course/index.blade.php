@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('content')
@@ -15,7 +16,7 @@
 						<ul class="wrap-icon">
 							<li>
 								<a href="#"><span class="fa fa-bookmark-o icon-video" aria-hidden="true"></span>
-								218 peserta</a>
+								{{ courseUser($value->id) }} peserta</a>
 							</li>
 							<li>
 								<a href="#"><span class="fa fa-thumbs-o-up icon-video" aria-hidden="true"></span>
@@ -181,24 +182,20 @@
 						
 						<hr class="seperator">
 						
-						<h3 class="title-materi">218 Orang terdaftar dalam mata kuliah ini</h3>
+						<h3 class="title-materi">{{ courseUser($value->id) }} Orang terdaftar dalam mata kuliah ini</h3>
 						<div class="row" style="margin:0;">
 							<div class="col-xs-12">
 								<h3 class="title-materi no-margin">Profesi Mereka</h3>
 								<div class="col-xs-3 no-padding">
 								<ul class="profesi">
-									<li>Mahasiswa</li>
-									<li>Karyawan</li>
-									<li>Pedagang</li>
-									<li>Pengusaha</li>
-									<li>Guru</li>
+								<?php $user = courseEmail($value->id);?>
+								@foreach($user as $key => $email)
+									<?php $job = courseJob($email->email);?>
+									@foreach($job as $keys => $jobs)
+										<li>{{ $jobs->profession }}</li>
+									@endforeach
+								@endforeach
 								</ul>
-								</div>
-								<div class="col-xs-3 no-padding">
-								<ul class="profesi">
-									<li>Pelajar</li>
-									<li>Mekanik</li>
-								</ul>			
 								</div>
 							</div>
 						</div>

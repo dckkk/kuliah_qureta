@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Session;
+
 class LoginController extends Controller
 {
     /*
@@ -35,5 +39,25 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'logout']);
+    }
+
+    public function authenticate(Request $request) {
+        $email = $request->email;
+        $password = $request->password;
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            if(Auth::user()->status == 'active') {
+                return redirect()->intended('/'); 
+            } else {
+                Auth::logout(); 
+                Session::flash('alert-type','alert-danger');
+                Session::flash('flash_message','Login gagal. Akses Anda diblokir.');               
+                return redirect('login');
+            }
+        } else {
+                Session::flash('alert-type','alert-danger');
+                Session::flash('flash_message','Username atau password salah'); 
+                return redirect('login');
+        }
+
     }
 }

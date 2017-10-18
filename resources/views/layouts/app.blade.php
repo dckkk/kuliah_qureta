@@ -50,96 +50,11 @@ $course = \App\Course::all();
     <script type="text/javascript" src="{{ URL::asset('/js/bootstrap-switch.min.js') }}"></script>
 
     <!-- Scripts -->
+    <script type="text/javascript" src="{{ URL::asset('/js/global.js') }}"></script>
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
         ]) !!};
-    </script>
-    <script type="text/javascript">
-        function hasLectures(e) {
-            if (e == 1) {
-                document.getElementById('duration_blok').style.display = 'none';
-                document.getElementById('url_video_blok').style.display = 'none';
-            } else if (e == 2) {
-                document.getElementById('duration_blok').style.display = '';
-                document.getElementById('url_video_blok').style.display = '';
-            }
-        }
-
-        function enrolling(course, user) {
-            // console.log(course);
-            // var data = [];
-            // data['course_id'] = course;
-            // data['email'] = user;
-            // console.log(JSON.parse(data));
-            // $.ajaxSetup({
-            //     headers: {
-            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //     }
-            // });
-            
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            $.ajax({
-                url: "/api/enrolls",
-                type: "POST",
-                data: {course_id: course, email: user},
-                dateType: 'json',
-                // contentType: "application/json",
-                sucess: function (res) {
-                    console.log(res)
-                }, 
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(textStatus, errorThrown);
-                },
-                complete: function () {
-                    // Handle the complete event
-                    $("#enrolls-"+course).removeClass("fa fa-bookmark-o").addClass("fa fa-bookmark");
-                    // console.log('aaaaaaaaaaaaaaaaaaaaaaa');
-                }
-            })
-        }
-        function unenroll(course, user) {
-            // console.log(course);
-            // var data = [];
-            // data['course_id'] = course;
-            // data['email'] = user;
-            // console.log(JSON.parse(data));
-            // $.ajaxSetup({
-            //     headers: {
-            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //     }
-            // });
-            
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            $.ajax({
-                url: "/api/unenrolls",
-                type: "POST",
-                data: {course_id: course, email: user},
-                dateType: 'json',
-                // contentType: "application/json",
-                sucess: function (res) {
-                    console.log(res)
-                }, 
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(textStatus, errorThrown);
-                },
-                complete: function () {
-                    // Handle the complete event
-                    $("#enrolls-"+course).removeClass("fa fa-bookmark").addClass("fa fa-bookmark-o");
-                    // console.log('aaaaaaaaaaaaaaaaaaaaaaa');
-                }
-            })
-        }
     </script>
 </head>
 <body>

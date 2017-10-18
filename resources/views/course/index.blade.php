@@ -140,7 +140,7 @@
 					<div class="col-md-9" id="video-bottom-text">
 						<ul class="nav nav-tabs">
 							<li class="active"><a data-toggle="tab" href="#silabus">Silabus</a></li>
-							<li><a data-toggle="tab" href="#diskusi">Diskusi</a></li>
+							<!-- <li><a data-toggle="tab" href="#diskusi">Diskusi</a></li> -->
 							<li><a data-toggle="tab" href="#pengumuman">Pengumuman</a></li>
 							<li><a data-toggle="tab" href="#sertifikat">Sertifikat</a></li>
 						</ul>
@@ -148,7 +148,7 @@
 						<div class="tab-content">
 							<div id="silabus" class="tab-pane fade in active">
 								<h3 class="title-materi font-roboto-condensed">Tentang mata kuliah</h3>
-								<span class="tag-materi">33m 38s - General - Release : {{ $value->created_at }}</span>
+								<span class="tag-materi">Release : {{ $value->created_at }}</span>
 								<p>{{ $value->description }}</p>
 							</div>
 							<div id="diskusi" class="tab-pane fade">
@@ -209,7 +209,7 @@
 							<h3 class="title-materi no-margin">Mata kuliah Terkait</h3>
 							@foreach($materi as $key => $value)
 								<div class="row materi-terkait">
-									<div class="col-xs-3"><img src="{{ URL::asset('img/'.$value->url_foto) }}" class="img"></div>
+									<div class="col-xs-3"><img src="{{ URL::asset('uploads/course/'.$value->url_foto) }}" class="img"></div>
 									<div class="col-xs-9">
 										<h5 class="no-margin">Course</h5>
 										<a href="/course/{{ $value->slug }}"><h4 style="font-weight: 600">{{ $value->name }}</h4></a>

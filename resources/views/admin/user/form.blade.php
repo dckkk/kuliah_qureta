@@ -10,23 +10,23 @@
         {!! Form::text('email', null, ['class' => 'form-control']) !!}
         {!! $errors->first('email', '<p class="help-block">:message</p>') !!}
     </div>
+</div><div class="form-group {{ $errors->has('password') ? 'has-error' : ''}}">
+    {!! Form::label('password', 'Password', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-6">
+        {!! Form::password('password', ['class' => 'form-control']) !!}
+        {!! $errors->first('password', '<p class="help-block">:message</p>') !!}
+    </div>
 </div><div class="form-group {{ $errors->has('profession') ? 'has-error' : ''}}">
     {!! Form::label('profession', 'Profession', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         {!! Form::text('profession', null, ['class' => 'form-control']) !!}
         {!! $errors->first('profession', '<p class="help-block">:message</p>') !!}
     </div>
-</div><div class="form-group {{ $errors->has('role') ? 'has-error' : ''}}">
-    {!! Form::label('role', 'Role', ['class' => 'col-md-4 control-label']) !!}
+</div><div class="form-group {{ $errors->has('image_url') ? 'has-error' : ''}}">
+    {!! Form::label('image_url', 'Image Url', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('role', null, ['class' => 'form-control']) !!}
-        {!! $errors->first('role', '<p class="help-block">:message</p>') !!}
-    </div>
-</div><div class="form-group {{ $errors->has('status') ? 'has-error' : ''}}">
-    {!! Form::label('status', 'Status', ['class' => 'col-md-4 control-label']) !!}
-    <div class="col-md-6">
-        {!! Form::text('status', null, ['class' => 'form-control']) !!}
-        {!! $errors->first('status', '<p class="help-block">:message</p>') !!}
+        {!! Form::file('image_url', null, ['class' => 'form-control']) !!}
+        {!! $errors->first('image_url', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 

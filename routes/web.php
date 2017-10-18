@@ -30,7 +30,7 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'AuthAdmin'), function()
 });
 
 Route::get('/login', 'Auth\LoginController@showLoginForm');
-Route::post('/login', 'Auth\LoginController@login');
+Route::post('/login', 'Auth\LoginController@authenticate');
 Route::get('/register', 'Auth\RegisterController@showRegistrationForm');
 Route::post('/register', 'Auth\RegisterController@register');
 Route::post('/logout', 'Auth\LoginController@logout');
@@ -50,3 +50,9 @@ Route::get('/page/{a}', 'PageController@index');
 //api 
 Route::post('/api/enrolls', 'EnrollsController@enrolls');
 Route::post('/api/unenrolls', 'EnrollsController@unenrolls');
+Route::get('/api/showmore/{a}/{b}', 'EnrollsController@showmore');
+Route::get('/api/showlast/{a}/{b}', 'EnrollsController@showlast');
+Route::get('/api/countuser/{a}', 'EnrollsController@countUser');
+Route::get('/api/enrolled/{a}/{b}', 'EnrollsController@enrolled');
+Route::post('/api/banned', 'EnrollsController@banned');
+Route::post('/api/unbanned', 'EnrollsController@unbanned');

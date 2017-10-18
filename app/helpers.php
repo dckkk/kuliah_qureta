@@ -7,6 +7,11 @@
 	    } else {
 	        return false;
 	    }
+	}
+
+	function courseUser($courseId) {
+	    $enrolls = App\Enrolls::where('course_id', $courseId)->count();
+	    return $enrolls;
 	} 
 	
 ?>

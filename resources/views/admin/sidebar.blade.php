@@ -36,6 +36,21 @@
                         Pages
                     </a>
                 </li>
+                <li role="presentation">
+                    <a href="{{ url('/admin/quiz') }}">
+                        Quiz
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="{{ url('/admin/quizQuestions') }}">
+                        Quiz Questions
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="{{ url('/admin/quizAnswers') }}">
+                        Quiz Answers
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

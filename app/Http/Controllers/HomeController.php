@@ -67,4 +67,13 @@ class HomeController extends Controller
     	
     	return view('index', compact('teachers', 'topics', 'courseLast', 'courseIs', 'courseEb', 'courseSt', 'courseIk', 'courseSb', 'show', 'slider', 'pages', 'auth'));
     }
+
+    public function show(Request $request) {
+        $keyword = $request->search;
+
+        $teachers = Teachers::where('name', 'like', '%'.$keyword.'%')->get();
+        $course = Course::with('topics', 'teachers')->where('name', 'like', '%'.$keyword.'%')->get();
+
+        return view('result', compact('teachers', 'course', 'keyword'));
+    }
 }

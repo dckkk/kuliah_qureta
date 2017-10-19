@@ -44,3 +44,37 @@ $('#change-layout').click(function() {
         $('#video-bottom-text').removeClass("col-md-12");
     }
 });
+
+$(function(){
+    var loading = $('#loadbar').hide();
+    $(document)
+    .ajaxStart(function () {
+        loading.show();
+    }).ajaxStop(function () {
+        loading.hide();
+    });
+    $('#tab-quiz-1').addClass('in active');
+    
+}); 
+
+function quizAnswer(a) {
+        // var choice = $(this).find('input:radio').val();
+        var order = $('#order-'+a).val();
+        var next = parseInt(order) + 1; 
+        $('#loadbar').show();
+        $('#quiz').fadeOut();
+        setTimeout(function(){      
+            $('#quiz').show();
+            $('#loadbar').fadeOut();
+            $('#tab-quiz-'+order).removeClass('in active');
+            console.log(document.getElementById('tab-quiz-'+next))
+            if(document.getElementById('tab-quiz-'+next) !== 'null'){
+                $('#tab-quiz-'+next).addClass('in active');
+            } else {
+                console.log('aaa')
+                $('.modal').fadeOut();
+            }
+           /* something else */
+        }, 1500);
+    }
+

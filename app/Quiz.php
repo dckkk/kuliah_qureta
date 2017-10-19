@@ -11,6 +11,8 @@ class Quiz extends Model
 
     protected $primaryKey = 'id';
 
+    protected $fillable = ['course_id', 'name'];
+
     public function course() {
     	return $this->belongsTo('App\Course', 'course_id');
     }

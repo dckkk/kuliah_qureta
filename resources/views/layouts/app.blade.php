@@ -9,7 +9,6 @@ $course = \App\Course::all();
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -86,8 +85,9 @@ $course = \App\Course::all();
                 <!-- <a href="#" class="menu-icon" id="toggle"><img src="{{ URL::asset('/img/menu.svg') }}"></a> -->
 
                 <div class="search">
-                    <form>
-                        <input class="search-input" type="text" placeholder="Cari topik, mata kuliah, atau pengajar"><button type="submit"><span class="fa fa-search"></span></button>
+                    <form method="POST" action="{{ url('/search') }}">
+                        {{ csrf_field() }}
+                        <input name="search" class="search-input" type="text" placeholder="Cari mata kuliah atau pengajar"><button type="submit"><span class="fa fa-search"></span></button>
                     </form>
                 </div>
             </div>

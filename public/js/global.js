@@ -160,7 +160,7 @@ if(topic == 'last') {
 $.get('/api/'+url+'/'+topic+'/'+row, function(data, status){
     // console.log(data)
     for(var i in data) {
-        console.log(data[i])
+        // console.log(data[i])
         var course_id = data[i].id
         var user_enroll = ""
         $.get('/api/enrolled/'+course_id+'/'+email, function(res){

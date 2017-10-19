@@ -20,7 +20,7 @@ use App\Lectures;
 
 use App\Quiz;
 
-use App\QuizQuestion;
+use App\QuizQuestions;
 
 use App\QuizAnswer;
 
@@ -73,8 +73,13 @@ class CourseController extends Controller
             $query->where('id', $course_id);
         })->where('course_id', $course_id)->get();
 
+        //get data questions
+        foreach($quiz as $key => $value) {
+            $quiz_content = QuizQuestions::with('quiz_answer')->where('quiz_id', $value->id)->get();
+        }
+
  
-    	return view('course.index', compact('course', 'pages', 'materi', 'chapters', 'lectures', 'url_video', 'quiz'));
+    	return view('course.index', compact('course', 'pages', 'materi', 'chapters', 'lectures', 'url_video', 'quiz', 'quiz_content'));
     }
 
 }

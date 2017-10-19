@@ -16,7 +16,7 @@
 		                    <span class="user-icon fa fa-user-o"></span>
 		                    @endif
 						</td>
-						<td><h3 style="margin-left: 8px">{{ $users->name }},</h3></td>
+						<td><h3 style="margin-left: 8px">{{ $users->name }}</h3></td>
 					</tr>
 					<tr>
 						<td><p style="margin-top: -11px; margin-left: 10px">{{ $users->profession }}</p></td>

@@ -18,10 +18,10 @@
 								<a href="#"><span class="fa fa-bookmark-o icon-video" aria-hidden="true"></span>
 								{{ courseUser($value->id) }} peserta</a>
 							</li>
-							<li>
+							<!-- <li>
 								<a href="#"><span class="fa fa-thumbs-o-up icon-video" aria-hidden="true"></span>
 								126 Likes</a>
-							</li>
+							</li> -->
 							<li>
 								<a href="javascript:void(0)" id="change-layout"><span class="fa fa-columns icon-video" aria-hidden="true"></span>
 								Layout</a>
@@ -127,7 +127,7 @@
 										<ul class="chapter-inner">
 											<li class="duration-now">
 												<a href="javascript:void(0)">
-													<span class="chapter-title">{{ $values->name }}</span>
+													<span class="chapter-title" data-toggle="modal" data-target=".modal-dialog">{{ $values->name }}</span>
 												</a>
 											</li>
 										</ul>
@@ -225,5 +225,37 @@
 		</div>
 	</div>
 	@endforeach
+	<div class="modal fade modal-dialog" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+		<div class="modal-content">
+			@foreach($quiz_content as $key => $value)
+			<div id="tab-quiz-{{ $value->order }}" class="tab-pane fade">
+			    <div class="modal-header">
+			        <h3><span class="label label-warning" id="qid">{{ $value->id }}</span> {{ $value->question }}</h3>
+			    </div>
+			    <div class="modal-body">
+			        <div class="col-xs-3 col-xs-offset-5">
+			            <div id="loadbar" style="display: none;">
+			                <div class="blockG" id="rotateG_01"></div>
+			                <div class="blockG" id="rotateG_02"></div>
+			                <div class="blockG" id="rotateG_03"></div>
+			                <div class="blockG" id="rotateG_04"></div>
+			                <div class="blockG" id="rotateG_05"></div>
+			                <div class="blockG" id="rotateG_06"></div>
+			                <div class="blockG" id="rotateG_07"></div>
+			                <div class="blockG" id="rotateG_08"></div>
+			            </div>
+			        </div>
+			        <div class="quiz" id="quiz" data-toggle="buttons">
+			        	@foreach($value->quiz_answer as $keys => $val)
+				            <label class="element-animation1 btn btn-lg btn-primary btn-block" onclick="quizAnswer('{{$value->order}}')"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span>
+				            	<input type="hidden" id="order-{{ $value->order }}" value="{{ $value->order }}">
+				                <input type="radio" name="answer" value="1">{{ $val->order }} {{ $val->answer }}</label>
+			            @endforeach
+			        </div>
+			    </div>
+			</div>
+			@endforeach
+		</div>
+	</div>
 
 @endsection

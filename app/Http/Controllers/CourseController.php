@@ -51,7 +51,7 @@ class CourseController extends Controller
         
         //set default video
         if($chapters->isEmpty()) {
-            $url_video="/";
+            $url_video="X7Y5QyF3b3w";
         } else {
             $url_video = $chapters[0]['url_video'];
             
@@ -74,9 +74,14 @@ class CourseController extends Controller
         })->where('course_id', $course_id)->get();
 
         //get data questions
-        foreach($quiz as $key => $value) {
-            $quiz_content = QuizQuestions::with('quiz_answer')->where('quiz_id', $value->id)->get();
+        if(!$quiz->isEmpty()) {
+            foreach($quiz as $key => $value) {
+                $quiz_content = QuizQuestions::with('quiz_answer')->where('quiz_id', $value->id)->get();
+            }
+        } else {
+            $quiz_content = array();
         }
+        
 
  
     	return view('course.index', compact('course', 'pages', 'materi', 'chapters', 'lectures', 'url_video', 'quiz', 'quiz_content'));

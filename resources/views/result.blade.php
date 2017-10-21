@@ -35,7 +35,7 @@
 					    @foreach ($teachers as $key=>$value)
 					    <!-- {{ $value }} -->
 					    <div class="col-md-5ths">
-						    <div class="col-md-12 col-xs-6 frame-pengajar">
+						    <div class="col-md-12 col-xs-6 frame-pengajar"  style="margin-top: 10px;">
 								<div class="col-xs-4 no-padding">
 									<img src="{{ URL::asset('uploads/teacher/'.$value->url_foto) }}" class="img avatar-teacher">
 								</div>
@@ -90,6 +90,27 @@
 					</div>
 				</div>
 				@endforeach	
+				<div id="topic-last"></div>
+				<div class="text-center frame-materi-more col-lg-12">
+					<div id="sk-cube-gridlast" class="sk-cube-grid" style="display:none">
+						<div class="sk-cube sk-cube1"></div>
+						<div class="sk-cube sk-cube2"></div>
+						<div class="sk-cube sk-cube3"></div>
+						<div class="sk-cube sk-cube4"></div>
+						<div class="sk-cube sk-cube5"></div>
+						<div class="sk-cube sk-cube6"></div>
+						<div class="sk-cube sk-cube7"></div>
+						<div class="sk-cube sk-cube8"></div>
+						<div class="sk-cube sk-cube9"></div>
+					</div>
+					<input type="hidden" id="topic-show-last" value="1">
+					@if(Auth::check())
+					<a href="javascript:void(0)" id="topic-more-last" onclick="showMore('search', {{ Auth::user()->id }}, '{{ Auth::user()->email }}')">Show more <i class="fa fa-chevron-down" aria-hidden="true"></i></a>
+					@else
+					<a href="javascript:void(0)" id="topic-more-last" onclick="showMore('search')">Show more <i class="fa fa-chevron-down" aria-hidden="true"></i></a>
+					@endif
+				</div>
+			</div>
 		</div>
 		@endif
 	</div>

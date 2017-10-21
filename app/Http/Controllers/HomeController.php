@@ -72,7 +72,7 @@ class HomeController extends Controller
         $keyword = $request->search;
 
         $teachers = Teachers::where('name', 'like', '%'.$keyword.'%')->get();
-        $course = Course::with('topics', 'teachers')->where('name', 'like', '%'.$keyword.'%')->get();
+        $course = Course::with('topics', 'teachers')->where('name', 'like', '%'.$keyword.'%')->limit(8)->get();
 
         return view('result', compact('teachers', 'course', 'keyword'));
     }

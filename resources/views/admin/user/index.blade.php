@@ -30,7 +30,7 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>ID</th><th>Name</th><th>Email</th><th>Profession</th><th>Role</th><th>Status</th><th width="150">Actions</th>
+                                        <th>ID</th><th>Name</th><th>Email</th><th>Profession</th><th>Role</th><th>Status</th><th width="100">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -53,11 +53,11 @@
                                                         'onclick'=>'return confirm("Confirm delete?")'
                                                 )) !!}
                                             {!! Form::close() !!}
-                                            @if($item->status == 'active')
+                                            <!-- @if($item->status == 'active')
                                                 <a href="javascript:void(0)" onClick="banUser({{ $item->id }})" title="Banned user"><button id="check-{{ $item->id }}" class="btn btn-warning btn-xs"><i id="icon-{{ $item->id }}" class="fa fa-close" aria-hidden="true"></i></button></a>
                                             @else
                                                 <a href="javascript:void(0)" onClick="unBanUser({{ $item->id }})" title="Unbanned user"><button id="check-{{ $item->id }}" class="btn btn-success btn-xs"><i id="icon-{{ $item->id }}" class="fa fa-check" aria-hidden="true"></i></button></a>
-                                            @endif
+                                            @endif -->
                                         </td>
                                     </tr>
                                 @endforeach

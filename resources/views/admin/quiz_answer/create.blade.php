@@ -7,9 +7,9 @@
 
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Create New quiz_answer</div>
+                    <div class="panel-heading">Create New Quiz Answer</div>
                     <div class="panel-body">
-                        <a href="{{ url('/admin/quiz_answers') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/admin/quiz_answer') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
                         <br />
 
@@ -21,9 +21,9 @@
                             </ul>
                         @endif
 
-                        {!! Form::open(['url' => '/admin/quiz_answers', 'class' => 'form-horizontal', 'files' => true]) !!}
+                        {!! Form::open(['url' => '/admin/quiz_answer', 'class' => 'form-horizontal', 'files' => true]) !!}
 
-                        @include ('admin.quiz_answers.form')
+                        @include ('admin.quiz_answer.form')
 
                         {!! Form::close() !!}
 

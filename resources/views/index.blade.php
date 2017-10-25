@@ -45,7 +45,7 @@
 									<img src="{{ URL::asset('uploads/teacher/'.$value->url_foto) }}" class="img avatar-teacher">
 								</div>
 								<div class="col-xs-8">
-									<h5><strong>{{ $value->name }}</strong></h5>
+									<h5><a href="/teacher/{{ $value->id }}"><strong>{{ $value->name }}</strong></a></h5>
 									<h6>{{ $value->job }}</h6>
 								</div>
 							</div>
@@ -123,7 +123,7 @@
 		@foreach ($topics as $key => $value)
 		<div class="container no-padding">
 			<div class="row content">
-				<div class="col-xs-12"><h3 class="title">{{ $value->topic }} ({{ $value->code }})</h3></div>
+				<div class="col-xs-12"><h3 class="title"><a href="/topic/{{ $value->id }}">{{ $value->topic }} ({{ $value->code }})</a></h3></div>
 				@if ($value->id == 1)
 					<?php $course = $courseIs; ?>
 				@elseif ($value->id == 2)

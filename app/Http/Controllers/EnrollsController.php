@@ -7,6 +7,7 @@ use App\Enrolls;
 use App\Course;
 use App\Topic;
 use App\User;
+use App\Chapters;
 
 
 class EnrollsController extends Controller
@@ -84,15 +85,29 @@ class EnrollsController extends Controller
 		return $result;
 	}
 
-	public function unbanned(Request $request) {
-		$request['status'] = "active";
-		$requestData = $request->all();
+    public function unbanned(Request $request) {
+        $request['status'] = "active";
+        $requestData = $request->all();
 
-		$user = User::findOrFail($request->id);
-		$user->update($requestData);
+        $user = User::findOrFail($request->id);
+        $user->update($requestData);
 
-		$result = "active";
+        $result = "active";
 
-		return $result;
+        return $result;
+    }
+
+	public function chapters($courseId) {
+		$chapter = Chapters::where('course_id', $courseId)->get();
+        $values = array();
+        $array = array();
+
+        foreach ($chapter as $key => $value) {
+            $values['id'] = $value->id;
+            $values['name'] = $value->name;
+            array_push($array, $values);
+        }
+
+		return $array;
 	}
 }

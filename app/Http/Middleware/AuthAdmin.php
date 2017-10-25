@@ -17,7 +17,7 @@ class AuthAdmin
     public function handle($request, Closure $next)
     {
         if (Auth::check()) {
-            if (Auth::user()->role == 'admin') {                
+            if (Auth::user()->role == 'admin' || Auth::user()->role == 'editor') {                
                 return $next($request);
             }
         }else{

@@ -7,7 +7,7 @@
 
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Quiz_questions</div>
+                    <div class="panel-heading">Quiz Questions</div>
                     <div class="panel-body">
                         <a href="{{ url('/admin/quiz_questions/create') }}" class="btn btn-success btn-sm" title="Add New quiz_question">
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New
@@ -30,14 +30,14 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>ID</th><th>Quiz Id</th><th>Order</th><th>Question</th><th>Actions</th>
+                                        <th>ID</th><th>Quiz</th><th>Order</th><th>Question</th><th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($quiz_questions as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
-                                        <td>{{ $item->quiz_id }}</td><td>{{ $item->order }}</td><td>{{ $item->question }}</td>
+                                        <td>{{ $item->quiz->name }}</td><td>{{ $item->order }}</td><td>{{ $item->question }}</td>
                                         <td>
                                             <a href="{{ url('/admin/quiz_questions/' . $item->id) }}" title="View quiz_question"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/admin/quiz_questions/' . $item->id . '/edit') }}" title="Edit quiz_question"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>

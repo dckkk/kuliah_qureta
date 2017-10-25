@@ -150,15 +150,15 @@ var row = $('#topic-show-'+topic).val();
 
 $.ajaxSetup({async:false});
 
-if(topic == 'last') {
+if(topic == 'last' || topic == 'search') {
     var url = "showlast"
 } else {
     var url = "showmore"
 }
-
+// console.log(url)
 
 $.get('/api/'+url+'/'+topic+'/'+row, function(data, status){
-    // console.log(data)
+    console.log(data)
     for(var i in data) {
         // console.log(data[i])
         var course_id = data[i].id
@@ -212,4 +212,19 @@ $.get('/api/'+url+'/'+topic+'/'+row, function(data, status){
     }
     $('#topic-show-'+topic).val(parseInt($('#topic-show-'+topic).val()) + 1);
 });
+}
+
+function chapterOptions(course) {
+    $.get('/api/chapters/'+course, function(data, status){
+        console.log(data)
+        var select = '<select name=chapter_id class=form-control>'
+        for (var i in data){
+            console.log(data[i])
+            var id = data[i].id
+            var name = data[i].name
+            select += '<option value='+id+'>'+name+'</option>'
+        }
+        select += '</select>'
+        $('#chapter-options').html(select);
+    });
 }

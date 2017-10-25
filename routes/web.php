@@ -28,27 +28,38 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'AuthAdmin'), function()
     Route::resource('/lecture', 'Admin\\LectureController');
     Route::resource('/pages', 'Admin\\PagesController');
     Route::resource('/quiz', 'Admin\\QuizController');
-    Route::resource('/quizQuestions', 'Admin\\QuizQuestionsController');
-    Route::resource('/quizAnswers', 'Admin\\QuizAnswersController');
+    Route::resource('/quiz_questions', 'Admin\\QuizQuestionsController');
+    Route::resource('/quiz_answer', 'Admin\\QuizAnswerController');
 });
 
-Route::get('/login', 'Auth\LoginController@showLoginForm');
-Route::post('/login', 'Auth\LoginController@authenticate');
-Route::get('/register', 'Auth\RegisterController@showRegistrationForm');
-Route::post('/register', 'Auth\RegisterController@register');
-Route::post('/logout', 'Auth\LoginController@logout');
-Route::get('/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
+// Route::get('/login', 'Auth\LoginController@showLoginForm');
+// Route::post('/login', 'Auth\LoginController@authenticate');
+// Route::get('/register', 'Auth\RegisterController@showRegistrationForm');
+// Route::post('/register', 'Auth\RegisterController@register');
+// Route::post('/logout', 'Auth\LoginController@logout');
+// Route::get('/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
+Route::get('/login', function(){
+    return Redirect::to('https:://www.qureta.com/login');
+});
+
+Route::get('/register', function(){
+    return Redirect::to('https:://www.qureta.com/register');
+});
 
 Route::get('/home', 'HomeController@index');
 Route::get('/home/{a}', 'HomeController@index');
 Route::get('/home/{a}/{b}', 'HomeController@index');
 Route::get('/profile/{a}', 'ProfileController@index');
-Route::post('/search', 'HomeController@show');
+Route::get('/search/', 'HomeController@show');
+// Route::get('/search', 'HomeController@show');
 
 
 Route::get('/course/{a}', 'CourseController@index');
 Route::get('/course/{a}/{b}', 'CourseController@index');
 Route::get('/course/{a}/{b}/{c}', 'CourseController@index');
+
+Route::get('/teacher/{a}', 'TeacherController@index');
+Route::get('/topic/{a}', 'TopicController@index');
 
 Route::get('/page/{a}', 'PageController@index');
 
@@ -61,3 +72,4 @@ Route::get('/api/countuser/{a}', 'EnrollsController@countUser');
 Route::get('/api/enrolled/{a}/{b}', 'EnrollsController@enrolled');
 Route::post('/api/banned', 'EnrollsController@banned');
 Route::post('/api/unbanned', 'EnrollsController@unbanned');
+Route::get('/api/chapters/{a}', 'EnrollsController@chapters');

@@ -7,13 +7,13 @@
 
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Quiz_answers</div>
+                    <div class="panel-heading">Quiz Answer</div>
                     <div class="panel-body">
-                        <a href="{{ url('/admin/quiz_answers/create') }}" class="btn btn-success btn-sm" title="Add New quiz_answer">
+                        <a href="{{ url('/admin/quiz_answer/create') }}" class="btn btn-success btn-sm" title="Add New quiz_answer">
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New
                         </a>
 
-                        {!! Form::open(['method' => 'GET', 'url' => '/admin/quiz_answers', 'class' => 'navbar-form navbar-right', 'role' => 'search'])  !!}
+                        {!! Form::open(['method' => 'GET', 'url' => '/admin/quiz_answer', 'class' => 'navbar-form navbar-right', 'role' => 'search'])  !!}
                         <div class="input-group">
                             <input type="text" class="form-control" name="search" placeholder="Search...">
                             <span class="input-group-btn">
@@ -30,20 +30,20 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>ID</th><th>Quiz Questions Id</th><th>Order</th><th>Answer</th><th>Actions</th>
+                                        <th>ID</th><th>Quiz Questions</th><th>Nilai</th><th>Answer</th><th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($quiz_answers as $item)
+                                @foreach($quiz_answer as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
-                                        <td>{{ $item->quiz_questions_id }}</td><td>{{ $item->order }}</td><td>{{ $item->answer }}</td>
+                                        <td>{{ $item->quiz->question }}</td><td>{{ $item->nilai }}</td><td>{{ $item->answer }}</td>
                                         <td>
-                                            <a href="{{ url('/admin/quiz_answers/' . $item->id) }}" title="View quiz_answer"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
-                                            <a href="{{ url('/admin/quiz_answers/' . $item->id . '/edit') }}" title="Edit quiz_answer"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                                            <a href="{{ url('/admin/quiz_answer/' . $item->id) }}" title="View quiz_answer"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
+                                            <a href="{{ url('/admin/quiz_answer/' . $item->id . '/edit') }}" title="Edit quiz_answer"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
                                             {!! Form::open([
                                                 'method'=>'DELETE',
-                                                'url' => ['/admin/quiz_answers', $item->id],
+                                                'url' => ['/admin/quiz_answer', $item->id],
                                                 'style' => 'display:inline'
                                             ]) !!}
                                                 {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i> Delete', array(
@@ -58,7 +58,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            <div class="pagination-wrapper"> {!! $quiz_answers->appends(['search' => Request::get('search')])->render() !!} </div>
+                            <div class="pagination-wrapper"> {!! $quiz_answer->appends(['search' => Request::get('search')])->render() !!} </div>
                         </div>
 
                     </div>

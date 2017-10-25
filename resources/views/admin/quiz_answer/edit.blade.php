@@ -7,9 +7,9 @@
 
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Edit quiz_answer #{{ $quiz_answer->id }}</div>
+                    <div class="panel-heading">Edit Quiz Answer #{{ $quiz_answer->id }}</div>
                     <div class="panel-body">
-                        <a href="{{ url('/admin/quiz_answers') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/admin/quiz_answer') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
                         <br />
 
@@ -23,12 +23,12 @@
 
                         {!! Form::model($quiz_answer, [
                             'method' => 'PATCH',
-                            'url' => ['/admin/quiz_answers', $quiz_answer->id],
+                            'url' => ['/admin/quiz_answer', $quiz_answer->id],
                             'class' => 'form-horizontal',
                             'files' => true
                         ]) !!}
 
-                        @include ('admin.quiz_answers.form', ['submitButtonText' => 'Update'])
+                        @include ('admin.quiz_answer.form', ['submitButtonText' => 'Update'])
 
                         {!! Form::close() !!}
 

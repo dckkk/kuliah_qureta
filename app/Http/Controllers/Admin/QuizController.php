@@ -19,12 +19,12 @@ class QuizController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $perPage = 25;
+        $perPage = 10;
 
         if (!empty($keyword)) {
-            $quiz = Quiz::paginate($perPage);
+            $quiz = Quiz::with('course')->where('name', 'like', '%'.$keyword.'%')->paginate($perPage);
         } else {
-            $quiz = Quiz::paginate($perPage);
+            $quiz = Quiz::with('course')->paginate($perPage);
         }
 
         return view('admin.quiz.index', compact('quiz'));

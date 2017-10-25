@@ -9,6 +9,7 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    protected $connections = 'qureta_v3';
     /**
      * The attributes that are mass assignable.
      *

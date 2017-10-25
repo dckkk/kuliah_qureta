@@ -21,13 +21,14 @@
         {!! $errors->first('topic_id', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('teacher_id') ? 'has-error' : ''}}">
-    {!! Form::label('teacher_id', 'Teacher', ['class' => 'col-md-4 control-label']) !!}
+    {!! Form::label('teacher_id1', 'Teacher 1', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         <!-- {!! Form::text('teacher_id', null, ['class' => 'form-control']) !!} -->
-        <select class="form-control" name='teacher_id'>
+        <select class="form-control" name='teacher_id1'>
+            <option></option>
             @foreach($teacher as $key => $value)
                 @if(isset($course))
-                    @if($value->id == $course['teacher_id'])
+                    @if($value->id == $course['teacher_id1'])
                     <?php $selected = "selected"; ?>
                     @else
                     <?php $selected = ""; ?>
@@ -36,7 +37,45 @@
                 <option value="{{ $value->id }}" @if(isset($course)){{ $selected }}@endif>{{ $value->name }}</option>
             @endforeach
         </select>
-        {!! $errors->first('teacher_id', '<p class="help-block">:message</p>') !!}
+        {!! $errors->first('teacher_id1', '<p class="help-block">:message</p>') !!}
+    </div>
+</div><div class="form-group {{ $errors->has('teacher_id2') ? 'has-error' : ''}}">
+    {!! Form::label('teacher_id2', 'Teacher 2', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-6">
+        <!-- {!! Form::text('teacher_id', null, ['class' => 'form-control']) !!} -->
+        <select class="form-control" name='teacher_id2'>
+            <option></option>
+            @foreach($teacher as $key => $value)
+                @if(isset($course))
+                    @if($value->id == $course['teacher_id2'])
+                    <?php $selected = "selected"; ?>
+                    @else
+                    <?php $selected = ""; ?>
+                    @endif
+                @endif
+                <option value="{{ $value->id }}" @if(isset($course)){{ $selected }}@endif>{{ $value->name }}</option>
+            @endforeach
+        </select>
+        {!! $errors->first('teacher_id2', '<p class="help-block">:message</p>') !!}
+    </div>
+</div><div class="form-group {{ $errors->has('teacher_id3') ? 'has-error' : ''}}">
+    {!! Form::label('teacher_id3', 'Teacher 2', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-6">
+        <!-- {!! Form::text('teacher_id', null, ['class' => 'form-control']) !!} -->
+        <select class="form-control" name='teacher_id3'>
+            <option></option>
+            @foreach($teacher as $key => $value)
+                @if(isset($course))
+                    @if($value->id == $course['teacher_id3'])
+                    <?php $selected = "selected"; ?>
+                    @else
+                    <?php $selected = ""; ?>
+                    @endif
+                @endif
+                <option value="{{ $value->id }}" @if(isset($course)){{ $selected }}@endif>{{ $value->name }}</option>
+            @endforeach
+        </select>
+        {!! $errors->first('teacher_id3', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
     {!! Form::label('name', 'Name', ['class' => 'col-md-4 control-label']) !!}

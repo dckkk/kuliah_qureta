@@ -42,12 +42,12 @@
                     </a>
                 </li>
                 <li role="presentation">
-                    <a href="{{ url('/admin/quizQuestions') }}">
+                    <a href="{{ url('/admin/quiz_questions') }}">
                         Quiz Questions
                     </a>
                 </li>
                 <li role="presentation">
-                    <a href="{{ url('/admin/quizAnswers') }}">
+                    <a href="{{ url('/admin/quiz_answer') }}">
                         Quiz Answers
                     </a>
                 </li>

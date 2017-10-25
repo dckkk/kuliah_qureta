@@ -45,6 +45,7 @@ $course = \App\Course::all();
     <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed" rel="stylesheet">
     <!-- load script -->
     <script src="{{ URL::asset('/js/jquery.min.js') }}"></script>
+    <script src="{{ URL::asset('/js/jquery-ias.js') }}"></script>
     <script src="{{ URL::asset('/js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('/js/bootstrap-switch.min.js') }}"></script>
 
@@ -85,7 +86,7 @@ $course = \App\Course::all();
                 <!-- <a href="#" class="menu-icon" id="toggle"><img src="{{ URL::asset('/img/menu.svg') }}"></a> -->
 
                 <div class="search">
-                    <form method="POST" action="{{ url('/search') }}">
+                    <form method="GET" action="{{ url('/search') }}">
                         {{ csrf_field() }}
                         <input name="search" class="search-input" type="text" placeholder="Cari mata kuliah atau pengajar"><button type="submit"><span class="fa fa-search"></span></button>
                     </form>

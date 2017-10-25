@@ -18,7 +18,15 @@ class Course extends Model
     }
 
     public function teachers() {
-    	return $this->belongsTo('App\Teachers', 'teacher_id');
+        return $this->belongsTo('App\Teachers', 'teacher_id1');
+    }
+
+    public function teachers2() {
+        return $this->belongsTo('App\Teachers', 'teacher_id2');
+    }
+
+    public function teachers3() {
+    	return $this->belongsTo('App\Teachers', 'teacher_id3');
     }
 
     public function chapters() {

@@ -19,12 +19,12 @@ class QuizQuestionsController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $perPage = 25;
+        $perPage = 10;
 
         if (!empty($keyword)) {
-            $quiz_questions = QuizQuestions::paginate($perPage);
+            $quiz_questions = QuizQuestions::with('quiz')->where('name', 'like', '%'.$keyword.'%')->paginate($perPage);
         } else {
-            $quiz_questions = QuizQuestions::paginate($perPage);
+            $quiz_questions = QuizQuestions::with('quiz')->paginate($perPage);
         }
 
         return view('admin.quiz_questions.index', compact('quiz_questions'));

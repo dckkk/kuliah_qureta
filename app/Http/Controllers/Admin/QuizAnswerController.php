@@ -9,7 +9,7 @@ use App\QuizAnswer;
 use Illuminate\Http\Request;
 use Session;
 
-class QuizAnswersController extends Controller
+class QuizAnswerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,15 +19,15 @@ class QuizAnswersController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $perPage = 25;
+        $perPage = 10;
 
         if (!empty($keyword)) {
-            $quiz_answers = QuizAnswer::paginate($perPage);
+            $quiz_answer = QuizAnswer::with('quiz')->where('name', 'like', '%'.$keyword.'%')->paginate($perPage);
         } else {
-            $quiz_answers = QuizAnswer::paginate($perPage);
+            $quiz_answer = QuizAnswer::with('quiz')->paginate($perPage);
         }
 
-        return view('admin.quiz_answers.index', compact('quiz_answers'));
+        return view('admin.quiz_answer.index', compact('quiz_answer'));
     }
 
     /**
@@ -37,7 +37,7 @@ class QuizAnswersController extends Controller
      */
     public function create()
     {
-        return view('admin.quiz_answers.create');
+        return view('admin.quiz_answer.create');
     }
 
     /**
@@ -56,7 +56,7 @@ class QuizAnswersController extends Controller
 
         Session::flash('flash_message', 'QuizAnswer added!');
 
-        return redirect('admin/quiz_answers');
+        return redirect('admin/quiz_answer');
     }
 
     /**
@@ -70,7 +70,7 @@ class QuizAnswersController extends Controller
     {
         $quiz_answer = QuizAnswer::findOrFail($id);
 
-        return view('admin.quiz_answers.show', compact('quiz_answer'));
+        return view('admin.quiz_answer.show', compact('quiz_answer'));
     }
 
     /**
@@ -84,7 +84,7 @@ class QuizAnswersController extends Controller
     {
         $quiz_answer = QuizAnswer::findOrFail($id);
 
-        return view('admin.quiz_answers.edit', compact('quiz_answer'));
+        return view('admin.quiz_answer.edit', compact('quiz_answer'));
     }
 
     /**
@@ -105,7 +105,7 @@ class QuizAnswersController extends Controller
 
         Session::flash('flash_message', 'QuizAnswer updated!');
 
-        return redirect('admin/quiz_answers');
+        return redirect('admin/quiz_answer');
     }
 
     /**
@@ -121,6 +121,6 @@ class QuizAnswersController extends Controller
 
         Session::flash('flash_message', 'QuizAnswer deleted!');
 
-        return redirect('admin/quiz_answers');
+        return redirect('admin/quiz_answer');
     }
 }

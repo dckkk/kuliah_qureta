@@ -42,26 +42,26 @@ class HomeController extends Controller
         $auth = Auth::user();
 
     	//show all data
-		$courseLast = Course::with('topics', 'teachers')->orderBy('id', 'desc')->inRandomOrder()->where('enrolls_start', '<=', $date)->where('enrolls_end', '>=', $date)->take(4)->get();
+		$courseLast = Course::with('topics', 'teachers', 'teachers2', 'teachers3')->orderBy('id', 'desc')->inRandomOrder()->where('enrolls_start', '<=', $date)->where('enrolls_end', '>=', $date)->take(4)->get();
 	
     
-		$courseIs = Course::with('topics', 'teachers')->whereHas('topics', function($query) {
+		$courseIs = Course::with('topics', 'teachers', 'teachers2', 'teachers3')->whereHas('topics', function($query) {
     		$query->where('id', 1);
     	})->where('topic_id', 1)->where('enrolls_start', '<=', $date)->where('enrolls_end', '>=', $date)->take(4)->get();
     	
-		$courseEb = Course::with('topics', 'teachers')->whereHas('topics', function($query) {
+		$courseEb = Course::with('topics', 'teachers', 'teachers2', 'teachers3')->whereHas('topics', function($query) {
     		$query->where('id', 2);
     	})->where('topic_id', 2)->where('enrolls_start', '<=', $date)->where('enrolls_end', '>=', $date)->take(4)->get();
     	
-	    $courseSt = Course::with('topics', 'teachers')->whereHas('topics', function($query) {
+	    $courseSt = Course::with('topics', 'teachers', 'teachers2', 'teachers3')->whereHas('topics', function($query) {
 	    		$query->where('id', 3);
 	    	})->where('enrolls_start', '<=', $date)->where('enrolls_end', '>=', $date)->where('topic_id', 3)->get(); 
     	
-	    $courseIk = Course::with('topics', 'teachers')->whereHas('topics', function($query) {
+	    $courseIk = Course::with('topics', 'teachers', 'teachers2', 'teachers3')->whereHas('topics', function($query) {
 	    		$query->where('id', 4);
 	    	})->where('topic_id', 4)->where('enrolls_start', '<=', $date)->where('enrolls_end', '>=', $date)->take(4)->get(); 
     	
-	    $courseSb = Course::with('topics', 'teachers')->whereHas('topics', function($query) {
+	    $courseSb = Course::with('topics', 'teachers', 'teachers2', 'teachers3')->whereHas('topics', function($query) {
 	    		$query->where('id', 5);
 	    	})->where('topic_id', 5)->where('enrolls_start', '<=', $date)->where('enrolls_end', '>=', $date)->take(4)->get(); 
     	
@@ -72,7 +72,7 @@ class HomeController extends Controller
         $keyword = $request->search;
 
         $teachers = Teachers::where('name', 'like', '%'.$keyword.'%')->get();
-        $course = Course::with('topics', 'teachers')->where('name', 'like', '%'.$keyword.'%')->limit(8)->get();
+        $course = Course::with('topics', 'teachers')->where('name', 'like', '%'.$keyword.'%')->paginate(4);
 
         return view('result', compact('teachers', 'course', 'keyword'));
     }

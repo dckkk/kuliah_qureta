@@ -109,7 +109,7 @@
 
 													<li>
 														<a href="/course/{{ $value->slug }}/{{ $values->slug }}/{{ $valuez->slug }}">
-															<span class="fa fa-lock" aria-hidden="true"></span>
+															<!-- <span class="fa fa-lock" aria-hidden="true"></span> -->
 															<span class="chapter-title">{{ $valuez->name }}</span>
 															<span class="chapter-duration">{{ $values->duration }}</span>
 														</a>

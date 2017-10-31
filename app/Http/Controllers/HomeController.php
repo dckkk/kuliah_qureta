@@ -64,7 +64,7 @@ class HomeController extends Controller
 	    $courseSb = Course::with('topics', 'teachers', 'teachers2', 'teachers3')->whereHas('topics', function($query) {
 	    		$query->where('id', 5);
 	    	})->where('topic_id', 5)->where('enrolls_start', '<=', $date)->where('enrolls_end', '>=', $date)->take(4)->get(); 
-    	
+
     	return view('index', compact('teachers', 'topics', 'courseLast', 'courseIs', 'courseEb', 'courseSt', 'courseIk', 'courseSb', 'show', 'slider', 'pages', 'auth'));
     }
 

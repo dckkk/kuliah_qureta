@@ -40,7 +40,7 @@
         {!! $errors->first('teacher_id1', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('teacher_id2') ? 'has-error' : ''}}">
-    {!! Form::label('teacher_id2', 'Teacher 2', ['class' => 'col-md-4 control-label']) !!}
+    {!! Form::label('teacher_id2', 'Teacher 2 (optional)', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         <!-- {!! Form::text('teacher_id', null, ['class' => 'form-control']) !!} -->
         <select class="form-control" name='teacher_id2'>
@@ -59,7 +59,7 @@
         {!! $errors->first('teacher_id2', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('teacher_id3') ? 'has-error' : ''}}">
-    {!! Form::label('teacher_id3', 'Teacher 2', ['class' => 'col-md-4 control-label']) !!}
+    {!! Form::label('teacher_id3', 'Teacher 3 (optional)', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         <!-- {!! Form::text('teacher_id', null, ['class' => 'form-control']) !!} -->
         <select class="form-control" name='teacher_id3'>

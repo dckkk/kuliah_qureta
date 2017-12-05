@@ -12,18 +12,22 @@
 */
 
 Route::get('/', 'HomeController@index');
+// Route::get('/', function(){
+// 	return '<h1>Sedang Dalam perbaikan !</h1>';
+// });
 
 Auth::routes();
 
 Route::group(array('prefix' => 'admin', 'middleware' => 'AuthAdmin'), function() {
     // main page for the admin section (app/views/admin/dashboard.blade.php)
 //    Route::get('/', function() {
-//        return View::make('admin.index');        
+//        return View::make('admin.index');
 //    });
-    Route::get('/', 'Admin\\UserController@index');
-    Route::resource('/user', 'Admin\\UserController');
+    Route::get('/', 'Admin\\TeacherController@index');
     Route::resource('/teacher', 'Admin\\TeacherController');
     Route::resource('/course', 'Admin\\CourseController');
+    Route::resource('/course/enrollees', 'Admin\\CourseController@enrollees');
+    //Route::resource('/course/enrollees/data/{a}', 'Admin\\CourseController@enrolleesData');
     Route::resource('/chapter', 'Admin\\ChapterController');
     Route::resource('/lecture', 'Admin\\LectureController');
     Route::resource('/pages', 'Admin\\PagesController');
@@ -39,11 +43,11 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'AuthAdmin'), function()
 // Route::post('/logout', 'Auth\LoginController@logout');
 // Route::get('/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
 Route::get('/login', function(){
-    return Redirect::to('https:://www.qureta.com/login');
+    return Redirect::to('https://www.qureta.com/login');
 });
 
 Route::get('/register', function(){
-    return Redirect::to('https:://www.qureta.com/register');
+    return Redirect::to('https://www.qureta.com/register');
 });
 
 Route::get('/home', 'HomeController@index');
@@ -63,7 +67,7 @@ Route::get('/topic/{a}', 'TopicController@index');
 
 Route::get('/page/{a}', 'PageController@index');
 
-//api 
+//api
 Route::post('/api/enrolls', 'EnrollsController@enrolls');
 Route::post('/api/unenrolls', 'EnrollsController@unenrolls');
 Route::get('/api/showmore/{a}/{b}', 'EnrollsController@showmore');
@@ -73,3 +77,6 @@ Route::get('/api/enrolled/{a}/{b}', 'EnrollsController@enrolled');
 Route::post('/api/banned', 'EnrollsController@banned');
 Route::post('/api/unbanned', 'EnrollsController@unbanned');
 Route::get('/api/chapters/{a}', 'EnrollsController@chapters');
+Route::get('/enrollNow/{a}', 'EnrollsController@now');
+Route::post('/api/like', 'EnrollsController@like');
+Route::post('/api/unlike', 'EnrollsController@unlike');

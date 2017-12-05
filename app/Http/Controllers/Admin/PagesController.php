@@ -49,7 +49,7 @@ class PagesController extends Controller
      */
     public function store(Request $request)
     {
-        $request['slug'] = strtolower(preg_replace("/ /", "-", $request['title']));
+        $request['slug'] = strtolower(preg_replace("/ /", "-", preg_replace("/[$-\/:-?{-~!\"^_`\[\]]/", "", $request['title'])));
         $requestData = $request->all();
         
         Pages::create($requestData);
@@ -97,7 +97,7 @@ class PagesController extends Controller
      */
     public function update($id, Request $request)
     {
-        $request['slug'] = strtolower(preg_replace("/ /", "-", $request['title']));
+        $request['slug'] = strtolower(preg_replace("/ /", "-", preg_replace("/[$-\/:-?{-~!\"^_`\[\]]/", "", $request['title'])));
         $requestData = $request->all();
         
         $page = Pages::findOrFail($id);

@@ -39,7 +39,7 @@
                                     <tr>
                                         <td>{{ $item->id }}</td>
                                         <td>{{ $item->course->name }}</td><td>{{ $item->name }}</td><td>{{ $item->parent }}</td>
-                                        <td>
+                                        <td style="white-space:nowrap;">
                                             <a href="{{ url('/admin/chapter/' . $item->id) }}" title="View chapter"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/admin/chapter/' . $item->id . '/edit') }}" title="Edit chapter"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
                                             {!! Form::open([

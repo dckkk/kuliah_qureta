@@ -30,7 +30,7 @@
                     <a href="{{ url('/admin/pages') }}">
                         Pages
                     </a>
-                </li>
+                </li><!-- 
                 <li role="presentation">
                     <a href="{{ url('/admin/quiz') }}">
                         Quiz
@@ -45,7 +45,7 @@
                     <a href="{{ url('/admin/quiz_answer') }}">
                         Quiz Answers
                     </a>
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>

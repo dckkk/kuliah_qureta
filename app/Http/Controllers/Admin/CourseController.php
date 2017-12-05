@@ -6,11 +6,13 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Course;
+use App\CourseUser;
 use App\Topics;
 use App\Teacher;
 
 use Illuminate\Http\Request;
 use Session;
+use Datatables;
 
 class CourseController extends Controller
 {
@@ -52,19 +54,26 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $request['slug'] = strtolower(preg_replace("/ /", "-", $request['name']));
-        if ($request['image']->isValid()) {
-            $destinationPath = public_path('uploads/course/');
-            $extension = $request['image']->getClientOriginalExtension();
-            $fileName = uniqid().'.'.$extension;
 
-            $request['image']->move($destinationPath, $fileName);
+        $request['slug'] = strtolower(preg_replace("/ /", "-", preg_replace("/[$-\/:-?{-~!\"^_`\[\]]/", "", $request['name'])));
+
+        if($request['image']) {
+            if ($request['image']->isValid()) {
+                $destinationPath = public_path('uploads/course/');
+                $extension = $request['image']->getClientOriginalExtension();
+                $fileName = uniqid().'.'.$extension;
+
+                $request['image']->move($destinationPath, $fileName);
+            }
+            $request['url_foto'] = $fileName;
+        } else {
+            Session::flash('flash_message', 'Error! Gambar harus diisi !');
+            return  redirect()->back();
+            die();
         }
-        $request['url_foto'] = $fileName;
 
         $requestData = $request->all();
-        
+
         Course::create($requestData);
 
         Session::flash('flash_message', 'Course added!');
@@ -110,8 +119,8 @@ class CourseController extends Controller
      */
     public function update($id, Request $request)
     {
-        $request['slug'] = strtolower(preg_replace("/ /", "-", $request['name']));
-        if($request['image'] !== NULL) {
+        $request['slug'] = strtolower(preg_replace("/ /", "-", preg_replace("/[$-\/:-?{-~!\"^_`\[\]]/", "", $request['name'])));
+        if($request['image']) {
             if ($request['image']->isValid()) {
                 $destinationPath = public_path('uploads/course/');
                 $extension = $request['image']->getClientOriginalExtension();
@@ -123,7 +132,7 @@ class CourseController extends Controller
         }
 
         $requestData = $request->all();
-        
+
         $course = Course::findOrFail($id);
         $course->update($requestData);
 
@@ -146,5 +155,16 @@ class CourseController extends Controller
         Session::flash('flash_message', 'Course deleted!');
 
         return redirect('admin/course');
+    }
+
+   public function enrollees($courseid)
+   {
+       $enrollee = CourseUser::with('users')->where('course_id',$courseid)->paginate(10);
+       return view('admin.course.enrollee', compact('enrollee'));
+       //return view('admin.course.enrollee_dt',compact('courseid'));
+   }
+   public function enrolleesData($courseid)
+    {
+        return Datatables::of(CourseUser::with('users')->where('course_id',$courseid))->make(true);
     }
 }

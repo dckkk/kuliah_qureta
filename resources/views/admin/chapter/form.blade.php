@@ -6,7 +6,7 @@
     {!! Form::label('course_id', 'Course', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         <!-- {!! Form::text('course_id', null, ['class' => 'form-control']) !!} -->
-        <select name="course_id" class="form-control">
+        <select name="course_id" class="form-control" required="required">
             @foreach($course as $key => $value)
                 @if(isset($chapter))
                     @if($value->id == $chapter['course_id'])
@@ -23,7 +23,7 @@
 </div><div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
     {!! Form::label('name', 'Name', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('name', null, ['class' => 'form-control']) !!}
+        {!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
         {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('parent') ? 'has-error' : ''}}">
@@ -32,6 +32,9 @@
         <input type="radio" name="parent" onclick="hasLectures(this.value);" value="1" @if(isset($chapter))<?= ($chapter->parent == 1)?"checked":""; ?>@endif> Ya
         <input type="radio" name="parent" value="2" onclick="hasLectures(this.value);" @if(isset($chapter))<?= ($chapter->parent == 2)?"checked":""; ?>@endif> Tidak
         {!! $errors->first('parent', '<p class="help-block">:message</p>') !!}
+        @if(Session::has('flash_message'))
+            <div class="alert alert-danger" style="padding: 7px; margin-top: 5px">{!! Session::get('flash_message') !!}</div>
+        @endif
     </div>
 </div><!-- <div class="form-group {{ $errors->has('slug') ? 'has-error' : ''}}">
     {!! Form::label('slug', 'Slug', ['class' => 'col-md-4 control-label']) !!}
@@ -42,7 +45,7 @@
 </div> --><div id="duration_blok" class="form-group {{ $errors->has('duration') ? 'has-error' : ''}}">
     {!! Form::label('duration', 'Duration', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::number('duration', null, ['class' => 'form-control']) !!}
+        {!! Form::text('duration', null, ['class' => 'form-control']) !!}
         {!! $errors->first('duration', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div id="url_video_blok" class="form-group {{ $errors->has('url_video') ? 'has-error' : ''}}">
@@ -51,6 +54,12 @@
         {!! Form::text('url_video', null, ['class' => 'form-control']) !!}
         {!! $errors->first('url_video', '<p class="help-block">:message</p>') !!}
         <small>(https://www.youtube.com/watch?v=)</small>
+    </div>
+</div><div class="form-group {{ $errors->has('order') ? 'has-error' : ''}}">
+    {!! Form::label('order', 'Order', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-6">
+        {!! Form::number('order', null, ['class' => 'form-control', 'required']) !!}
+        {!! $errors->first('order', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 

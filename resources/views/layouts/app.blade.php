@@ -1,7 +1,6 @@
-<?php 
+<?php
 $pages = \App\Pages::all();
 $topics = \App\Topics::all();
-$course = \App\Course::all();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,6 +40,7 @@ $course = \App\Course::all();
     <link rel="stylesheet" href="{{ URL::asset('froala/css/plugins/quick_insert.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('froala/css/plugins/table.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('froala/css/plugins/video.css') }}">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
     <!-- load cdn google font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed" rel="stylesheet">
     <!-- load script -->
@@ -56,17 +56,34 @@ $course = \App\Course::all();
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
+    <!--google analytics-->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-110230502-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    @yield('og')
 </head>
 <body>
     <!-- navigation -->
     <div class="menu" id="menu-wrapper" style="visibility: hidden;">
         <div class="container">
+            <?php $i = 0; ?>
             @foreach($topics as $key => $value)
                 <ul class="menu-list col-sm-4 col-xs-12">
                     <li class="menu-header">{{ $value->topic }}</li>
+                    <?php $course = \App\Course::where('topic_id', $value->id)->take(3)->get(); ?>
                     @foreach($course as $keys=> $val)
                         @if($value->id == $val->topic_id)
-                        <li class="menu-item"><a href="/course/{{ $val->slug }}">{{ $val->name }}</a></li>
+                            @if(Auth::check())
+                            <li class="menu-item"><a href="/course/{{ $val->slug }}">{{ $val->name }}</a></li>
+                            @else
+                            <li class="menu-item"><a href="https://qureta.com/login">{{ $val->name }}</a></li>
+                            @endif
                         @endif
                     @endforeach
                 </ul>
@@ -77,26 +94,14 @@ $course = \App\Course::all();
         <div class="row row-margin">
             <div class="col-lg-2 col-md-3 col-sm-12 col-xs-4 logo">
                 <a href="/">
-                    <img class="logo" src="{{ URL::asset('/img/logo.png') }}" style="width:80%">
+                    <img class="logo" src="{{ URL::asset('/img/logo.png') }}" style="width:100%">
                 </a>
-                    <!-- ul.menu-list*3>li.menu-header{header $}r+li.menu-item*7>a[href=#]{menu $} -->
-                
-            </div>
-            <div class="col-lg-8 col-md-7 col-sm-10 col-xs-6 search-bar">
-                <!-- <a href="#" class="menu-icon" id="toggle"><img src="{{ URL::asset('/img/menu.svg') }}"></a> -->
-
-                <div class="search">
-                    <form method="GET" action="{{ url('/search') }}">
-                        {{ csrf_field() }}
-                        <input name="search" class="search-input" type="text" placeholder="Cari mata kuliah atau pengajar"><button type="submit"><span class="fa fa-search"></span></button>
-                    </form>
-                </div>
             </div>
             @if(Auth::check())
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 user text-center">
                 <a data-toggle="popover" data-container="body" data-placement="bottom" type="button" data-html="true" href="javascript:void(0)" id="login">
-                    @if(Auth::user()->image_url !== null)
-                    <span class="user-icon-profile"><img src="{{ URL::asset('uploads/profile/'.Auth::user()->image_url) }}" width="42px" height="42px" class="img-circle" style="border: 2px solid #635b5b;"></span>
+                    @if(Auth::user()->user_image !== null)
+                    <span class="user-icon-profile"><img src="https://www.qureta.com/uploads/avatar/{{Auth::user()->user_image}}" width="42px" height="42px" class="img-circle" style="border: 2px solid #635b5b;"></span>
                     @else
                     <span class="user-icon fa fa-user-o"></span>
                     @endif
@@ -110,7 +115,7 @@ $course = \App\Course::all();
             <div id="popover-content-login" class="hide">
                 <ul class="list-group">
                     <a href="{{ url('/profile/'.Auth::user()->id) }}" class="list-group-item">User Profile</a>
-                    @if(Auth::user()->role == 'admin')
+                    @if(Auth::user()->role == 'admin' || Auth::user()->role == 'editor')
                     <a href="/admin" class="list-group-item">Administrator</a>
                     @endif
                     <a href="{{ url('/logout') }}" onclick="event.preventDefault();
@@ -128,11 +133,20 @@ $course = \App\Course::all();
                 </a>
             </div>
             @endif
+            <div class="col-lg-8 col-md-7 col-sm-10 col-xs-6 search-bar">
+                <a href="#" class="menu-icon" id="toggle"><img src="{{ URL::asset('/img/menu.svg') }}"></a>
+                <div class="search">
+                    <form method="GET" action="{{ url('/search') }}">
+                        {{ csrf_field() }}
+                        <input name="search" class="search-input" type="text" placeholder="Cari mata kuliah atau pengajar"><button type="submit"><span class="fa fa-search"></span></button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 
     @yield('content')
-    
+
     <!-- footer -->
     <div class="footer-bottom container-fluid">
             <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
@@ -141,6 +155,8 @@ $course = \App\Course::all();
                     <a href="/page/{{ $value->slug }}">{{ $value->title }}</a>
                 @endforeach
                 </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-7 col-xs-6">
                 <div class="footer-logo">
                     <img src="{{ URL::asset('img/logo.png') }}" width="120">
                 </div>
@@ -148,7 +164,7 @@ $course = \App\Course::all();
                     &copy;<a href="https://www.qureta.com">Qureta</a>  2017
                 </span>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12 playstore-logo">
+            <div class="col-lg-4 col-md-4 col-sm-5 col-xs-6 playstore-logo">
                     <a href="#" class="footer-icon-store">
                         <img src="{{ URL::asset('img/appstore.png') }}">
                     </a>
@@ -189,6 +205,8 @@ $course = \App\Course::all();
     <!-- end -->
     <script type="text/javascript" src="{{ URL::asset('/js/mjs.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('/js/owl.carousel.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('/js/jquery.mask.min.js') }}"></script>
+    <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
     <script>
         function parent(val) {
             console.log(val)
@@ -197,6 +215,7 @@ $course = \App\Course::all();
     <script type="text/javascript">
         $(document).ready(function(){
           $(".owl-carousel").owlCarousel();
+          $('#duration').mask('00:00');
         });
         var owl = $('.owl-carousel');
         owl.owlCarousel({
@@ -217,6 +236,14 @@ $course = \App\Course::all();
               }
             });
         });
+
+        // $(document).ready(function (e) {
+        //     /** force crop thumbnails **/
+        //     var materidiv = $('.materi-img');
+        //     var materiimg = $('.materi-img img');
+        //     var height = materidiv .height();
+        //     materiimg .css('max-width', height * 262 / 180);
+        // });
     </script>
 </body>
 </html>

@@ -49,7 +49,7 @@ class LectureController extends Controller
      */
     public function store(Request $request)
     {
-        $request['slug'] = strtolower(preg_replace("/ /", "-", $request['name']));
+        $request['slug'] = strtolower(preg_replace("/ /", "-", preg_replace("/[$-\/:-?{-~!\"^_`\[\]]/", "", $request['name'])));
         
         $requestData = $request->all();
         
@@ -98,7 +98,7 @@ class LectureController extends Controller
      */
     public function update($id, Request $request)
     {
-        $request['slug'] = strtolower(preg_replace("/ /", "-", $request['name']));
+        $request['slug'] = strtolower(preg_replace("/ /", "-", preg_replace("/[$-\/:-?{-~!\"^_`\[\]]/", "", $request['name'])));
         
         $requestData = $request->all();
         

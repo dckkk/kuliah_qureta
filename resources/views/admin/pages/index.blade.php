@@ -30,14 +30,14 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>ID</th><th>Title</th><th width="500">Content</th><th>Actions</th>
+                                        <th>ID</th><th>Title</th><th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($pages as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
-                                        <td>{{ $item->title }}</td><td>{{ $item->content }}</td>
+                                        <td>{{ $item->title }}</td>
                                         <td>
                                             <a href="{{ url('/admin/pages/' . $item->id) }}" title="View page"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/admin/pages/' . $item->id . '/edit') }}" title="Edit page"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>

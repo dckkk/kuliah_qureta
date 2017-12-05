@@ -8,36 +8,63 @@ use App\Course;
 use App\Topic;
 use App\User;
 use App\Chapters;
+use App\Likes;
+use Auth;
 
 
 class EnrollsController extends Controller
 {
     public function enrolls(Request $request) {
 
-    	$requestData = $request->all();
-    	Enrolls::create($requestData);
+        $requestData = $request->all();
+        Enrolls::create($requestData);
+        $count = Enrolls::where('course_id', $request->course_id)->count();
 
-    	$result = json_encode(["status" => 200, "response" => "ok"]);
+        $result = $count;
 
-    	return $result;
+        return $result;
     }
 
     public function unenrolls(Request $request) {
 
-    	// $requestData = $request->all();
-    	Enrolls::where('course_id', $request->course_id)->where('email', $request->email)->delete();
+        // $requestData = $request->all();
+        Enrolls::where('course_id', $request->course_id)->where('email', $request->email)->delete();
+        $count = Enrolls::where('course_id', $request->course_id)->count();
 
-    	$result = json_encode(["status" => 200, "response" => "ok"]);
+        $result = $count;
+
+        return $result;
+    }
+
+    public function like(Request $request) {
+
+        $requestData = $request->all();
+        Likes::create($requestData);
+        $count = Likes::where('course_id', $request->course_id)->count();
+
+        $result = $count;
+
+        return $result;
+    }
+
+    public function unlike(Request $request) {
+
+    	// $requestData = $request->all();
+    	Likes::where('course_id', $request->course_id)->where('user_id', $request->user_id)->delete();
+        $count = Likes::where('course_id', $request->course_id)->count();
+
+    	$result = $count;
 
     	return $result;
     }
 
     public function showmore($topic, $row) {
+        $date = date("Y-m-d");
     	$size = 4;
     	$limit = $row * $size;
-    	$course = Course::with('topics', 'teachers')->whereHas('topics', function($query) use ($topic) {
+    	$course = Course::with('topics', 'teachers', 'teachers2', 'teachers3')->whereHas('topics', function($query) use ($topic) {
     		$query->where('id', $topic);
-    	})->where('topic_id', $topic)->skip($limit)->take($size)->get();
+    	})->where('topic_id', $topic)->where('enrolls_start', '<=', $date)->where('enrolls_end', '>=', $date)->orderBy('id', 'desc')->skip($limit)->take($size)->get();
     	
     	$arr = array();
     	foreach ($course as $key => $value) {
@@ -49,9 +76,10 @@ class EnrollsController extends Controller
     	return $arr;
     } 
     public function showlast($topic, $row) {
+        $date = date("Y-m-d");
     	$size = 4;
     	$limit = $row * $size;
-    	$course = Course::with('topics', 'teachers')->skip($limit)->take($size)->get();
+    	$course = Course::with('topics', 'teachers', 'teachers2', 'teachers3')->where('enrolls_start', '<=', $date)->where('enrolls_end', '>=', $date)->orderBy('id', 'desc')->skip($limit)->take($size)->get();
     	
     	$arr = array();
     	foreach ($course as $key => $value) {
@@ -110,4 +138,15 @@ class EnrollsController extends Controller
 
 		return $array;
 	}
+
+    public function now($slug) {
+        $course = Course::select('id')->where('slug', $slug)->get();
+        $course_id = $course[0]['id'];
+        $request = array("course_id" => $course_id, "email" => Auth::user()->email);
+        Enrolls::create($request);
+        $url = "course/".$slug;
+
+        return redirect($url);
+
+    }
 }

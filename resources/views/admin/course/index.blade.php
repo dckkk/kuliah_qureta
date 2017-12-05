@@ -39,8 +39,8 @@
                                     <tr>
                                         <td>{{ $item->id }}</td>
                                         <td>{{ $item->topics->topic }} ({{ $item->topics->code }})</td><td>{{ $item->teachers->name }}</td><td>{{ $item->name }}</td>
-                                        <td>
-                                            <a href="{{ url('/admin/course/' . $item->id) }}" title="View course"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
+                                        <td style="white-space:nowrap;">
+                                            <a href="{{ url('/admin/course/enrollees/' . $item->id) }}" title="Enrollees"><button class="btn btn-info btn-xs"><i class="fa fa-users" aria-hidden="true"></i> Enrollees</button></a>
                                             <a href="{{ url('/admin/course/' . $item->id . '/edit') }}" title="Edit course"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
                                             {!! Form::open([
                                                 'method'=>'DELETE',

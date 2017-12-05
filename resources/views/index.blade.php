@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content') 
-	<!-- modal enroll -->
-	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	<!-- modal course fail -->
+	<div class="modal fade bs-examples-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-body">
 					<H2>Oops Sorry!</H2>
-					<h4>Maaf anda harus login terlebih dahulu sebelum enroll course</h4>
+					<h4>Maaf anda harus mendaftar mata kuliah ini terlebih dahulu untuk melihat mata kuliah ini</h4>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="button-modal" data-dismiss="modal">Close</button>
@@ -45,8 +45,8 @@
 									<img src="{{ URL::asset('uploads/teacher/'.$value->url_foto) }}" class="img avatar-teacher">
 								</div>
 								<div class="col-xs-8">
-									<h5><a href="/teacher/{{ $value->id }}"><strong>{{ $value->name }}</strong></a></h5>
-									<h6>{{ $value->job }}</h6>
+									<h5 class="nama-pengajar"><a href="/teacher/{{ $value->id }}"><strong>{{ $value->name }}</strong></a></h5>
+									<h6 class="job-pengajar">{{ $value->job }}</h6>
 								</div>
 							</div>
 						</div>
@@ -55,26 +55,41 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="container no-padding">
 			<div class="row content">
 				<div class="col-xs-12"><h3 class="title">Mata Kuliah Terbaru</h3></div>
-				<?php
-					$shows = empty($show)?2:$show;
-				?>
 				@foreach($courseLast as $key => $value)
 				<!-- {{ $value }} -->
-				<div class="col-md-3 col-xs-6">
+				<?php 
+					$teachers = array("<a href='/teacher/".$value->teachers->id."'>".$value->teachers->name."</a>");
+
+					if($value->teachers2 !== null){	
+						$teachers = array("<a href='/teacher/".$value->teachers->id."'>".$value->teachers->name."</a>","<a href='/teacher/".$value->teachers2->id."'>".$value->teachers2->name."</a>");
+					}
+					if($value->teachers3 !== null){	
+						$teachers = array("<a href='/teacher/".$value->teachers->id."'>".$value->teachers->name."</a>","<a href='/teacher/".$value->teachers2->id."'>".$value->teachers2->name."</a>","<a href='/teacher/".$value->teachers3->id."'>".$value->teachers3->name."</a>");
+					}
+
+					$teacher = implode(', ', $teachers);
+				?>
+				<div class="col-md-3 col-xs-12">
 					<div class="frame-materi" data-target="button-frame-1-1">
-						<img src="{{ URL::asset('/uploads/course/'.$value->url_foto) }}" class="img">
+						<div class="materi-img">
+							<img src="//static.adira.one/l/400x300/{{ URL::asset('/uploads/course/'.$value->url_foto) }}" class="img img-course">
+                      	</div>
 						<div class="text-pengajar">
 							<h4>{{ $value->topics->code }}</h4>
-							<h4><a href="/course/{{ $value->slug }}">{{ $value->name }}</a></h4>
-							<span>Pengajar: {{ $value->teachers->name }}</span>
+							@if(Auth::check())
+								<h4><a href="/course/{{ $value->slug }}">{{ $value->name }}</a></h4>
+							@else
+							<h4><a href="https://qureta.com/login">{{ $value->name }}</a></h4>
+							@endif
+							<span>Pengajar: {!! $teacher !!}</span>
 						</div>
 						<div class="row footer-pengajar">
 							<div class="col-sm-10 col-xs-10">
-								<span class="text">{{ courseUser($value->id) }} Peserta</span>
+								<span class="text" id="usercount-{{$value->id}}">{{ courseUser($value->id) }} Peserta</span>
 							</div>
 							<div class="col-sm-2 col-xs-2">
 								@if(!empty(Auth::user()->id))
@@ -88,8 +103,8 @@
 									</a>
 									@endif
 								@else
-								<a href="javascript:void(0)">
-									<span class="fa fa-bookmark-o" aria-hidden="true" data-toggle="modal" data-target=".bs-example-modal-lg"></span>
+								<a href="https://qureta.com/login">
+									<span class="fa fa-bookmark-o" aria-hidden="true"></span>
 								</a>
 								@endif
 							</div>
@@ -98,7 +113,7 @@
 				</div>
 				@endforeach
 				<div id="topic-last"></div>
-				<div class="text-center frame-materi-more col-lg-12">
+				<div class="text-center frame-materi-more col-lg-12 col-md-12 col-xs-12">
 					<div id="sk-cube-gridlast" class="sk-cube-grid" style="display:none">
 						<div class="sk-cube sk-cube1"></div>
 						<div class="sk-cube sk-cube2"></div>
@@ -138,17 +153,35 @@
 
 				@foreach($course as $keys => $values)
 				<!-- {{$values}} -->
-				<div class="col-md-3 col-xs-6">
-					<div class="frame-materi" data-target="button-frame-2-1">
-						<img src="{{ URL::asset('/uploads/course/'.$values->url_foto) }}" class="img">
+				<?php 
+					$teachers = array("<a href='/teacher/".$values->teachers->id."'>".$values->teachers->name."</a>");
+
+					if($values->teachers2 !== null){	
+						$teachers = array("<a href='/teacher/".$values->teachers->id."'>".$values->teachers->name."</a>","<a href='/teacher/".$values->teachers2->id."'>".$values->teachers2->name."</a>");
+					}
+					if($values->teachers3 !== null){	
+						$teachers = array("<a href='/teacher/".$values->teachers->id."'>".$values->teachers->name."</a>","<a href='/teacher/".$values->teachers2->id."'>".$values->teachers2->name."</a>","<a href='/teacher/".$values->teachers3->id."'>".$values->teachers3->name."</a>");
+					}
+
+					$teacher = implode(', ', $teachers);
+				?>
+				<div class="col-md-3 col-xs-12">
+					<div class="frame-materi" data-target="button-frame-1-1">
+						<div class="materi-img">
+						<img src="//static.adira.one/l/400x300/{{ URL::asset('/uploads/course/'.$values->url_foto) }}" class="img img-course">
+                                                </div>
 						<div class="text-pengajar">
 							<h4>{{ $values->topics->code }}</h4>
-							<h4><a href="/course/{{ $values->slug }}">{{ $values->name }}</a></h4>
-							<span>Pengajar: {{ $values->teachers->name }}</span>
+							@if(Auth::check())
+								<h4><a href="/course/{{ $values->slug }}">{{ $values->name }}</a></h4>
+							@else
+							<h4><a href="https://qureta.com/login">{{ $values->name }}</a></h4>
+							@endif
+							<span>Pengajar: {!! $teacher !!}</span>
 						</div>
 						<div class="row footer-pengajar">
 							<div class="col-sm-10 col-xs-10">
-								<span class="text">{{ courseUser($values->id) }} Peserta</span>
+								<span class="text" id="usercount-{{$values->id}}">{{ courseUser($values->id) }} Peserta</span>
 							</div>
 							<div class="col-sm-2 col-xs-2">
 								@if(!empty(Auth::user()->id))
@@ -162,8 +195,8 @@
 									</a>
 									@endif
 								@else
-								<a href="javascript:void(0)">
-									<span class="fa fa-bookmark-o" aria-hidden="true" data-toggle="modal" data-target=".bs-example-modal-lg"></span>
+								<a href="https://qureta.com/login">
+									<span class="fa fa-bookmark-o" aria-hidden="true"></span>
 								</a>
 								@endif
 							</div>
@@ -172,7 +205,7 @@
 				</div>
 				@endforeach
 				<div id="topic-{{ $value->id }}"></div>
-				<div class="text-center frame-materi-more col-lg-12">
+				<div class="text-center frame-materi-more col-lg-12 col-md-12 col-xs-12">
 					<div id="sk-cube-grid{{ $value->id }}" class="sk-cube-grid" style="display:none">
 						<div class="sk-cube sk-cube1"></div>
 						<div class="sk-cube sk-cube2"></div>

@@ -2,20 +2,6 @@
 
 @section('content')
 	<div id="infinite-scroll">	
-		<!-- modal enroll -->
-		<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-body">
-						<H2>Oops Sorry!</H2>
-						<h4>Maaf anda harus login terlebih dahulu sebelum enroll course</h4>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="button-modal" data-dismiss="modal">Close</button>
-					</div>
-				</div>
-			</div>
-		</div>
 		<!-- start content -->
 		<div class="wrapper" style="margin-top: 100px; margin-bottom: 150px;">
 			<div class="col-xs-12"><h3 class="title">Result for "{{ $keyword }}"</h3></div>
@@ -56,16 +42,33 @@
 			<div class="container no-padding">
 				<div class="row content">
 					<div class="col-xs-12"><h3 class="title">Mata Kuliah</h3></div>
-					<div class="infinite-scroll">
 						@foreach($course as $key => $value)
 						<!-- {{ $value }} -->
-						<div class="col-md-3 col-xs-6">
+						<?php 
+							$teachers = array($value->teachers->name);
+
+							if($value->teachers2 !== null){	
+								$teachers = array($value->teachers->name,$value->teachers2->name);
+							}
+							if($value->teachers3 !== null){	
+								$teachers = array($value->teachers->name,$value->teachers2->name,$value->teachers3->name);
+							}
+
+							$teacher = implode(', ', $teachers);
+						?>
+						<div class="col-md-3 col-xs-12">
 							<div class="frame-materi" data-target="button-frame-1-1">
-								<img src="{{ URL::asset('/uploads/course/'.$value->url_foto) }}" class="img">
+								<div class="materi-img">
+									<img src="//static.adira.one/l/400x300/{{ URL::asset('/uploads/course/'.$value->url_foto) }}" class="img img-course">
+								</div>
 								<div class="text-pengajar">
 									<h4>{{ $value->topics->code }}</h4>
-									<h4><a href="/course/{{ $value->slug }}">{{ $value->name }}</a></h4>
-									<span>Pengajar: {{ $value->teachers->name }}</span>
+									@if(Auth::check())
+										<h4><a href="/course/{{ $value->slug }}">{{ $value->name }}</a></h4>
+									@else
+										<h4><a href="https://qureta.com/login">{{ $value->name }}</a></h4>
+									@endif
+									<span>Pengajar: {{ $teacher }}</span>
 								</div>
 								<div class="row footer-pengajar">
 									<div class="col-sm-10 col-xs-10">
@@ -83,8 +86,8 @@
 											</a>
 											@endif
 										@else
-										<a href="javascript:void(0)">
-											<span class="fa fa-bookmark-o" aria-hidden="true" data-toggle="modal" data-target=".bs-example-modal-lg"></span>
+										<a href="https://qureta.com/login">
+											<span class="fa fa-bookmark-o" aria-hidden="true"></span>
 										</a>
 										@endif
 									</div>
@@ -92,8 +95,26 @@
 							</div>
 						</div>
 						@endforeach
-					</div>
-					{{ $course->links() }}
+						<div id="topic-last"></div>
+							<div class="text-center frame-materi-more col-lg-12 col-md-12 col-xs-12">
+								<div id="sk-cube-gridlast" class="sk-cube-grid" style="display:none">
+									<div class="sk-cube sk-cube1"></div>
+									<div class="sk-cube sk-cube2"></div>
+									<div class="sk-cube sk-cube3"></div>
+									<div class="sk-cube sk-cube4"></div>
+									<div class="sk-cube sk-cube5"></div>
+									<div class="sk-cube sk-cube6"></div>
+									<div class="sk-cube sk-cube7"></div>
+									<div class="sk-cube sk-cube8"></div>
+									<div class="sk-cube sk-cube9"></div>
+								</div>
+								<input type="hidden" id="topic-show-last" value="1">
+								@if(Auth::check())
+								<a href="javascript:void(0)" id="topic-more-last" onclick="showMore('last', {{ Auth::user()->id }}, '{{ Auth::user()->email }}')">Show more <i class="fa fa-chevron-down" aria-hidden="true"></i></a>
+								@else
+								<a href="javascript:void(0)" id="topic-more-last" onclick="showMore('last')">Show more <i class="fa fa-chevron-down" aria-hidden="true"></i></a>
+								@endif
+							</div>
 				</div>
 			</div>
 			@endif

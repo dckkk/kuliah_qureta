@@ -9,7 +9,7 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    protected $connections = 'qureta_v3';
+    protected $connection = 'qureta_v3';
     /**
      * The attributes that are mass assignable.
      *
@@ -27,4 +27,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function user_meta() {
+        return $this->hasMany('App\User_metum');
+    }
+
 }

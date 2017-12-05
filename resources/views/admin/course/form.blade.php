@@ -24,7 +24,7 @@
     {!! Form::label('teacher_id1', 'Teacher 1', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         <!-- {!! Form::text('teacher_id', null, ['class' => 'form-control']) !!} -->
-        <select class="form-control" name='teacher_id1'>
+        <select class="form-control" name='teacher_id1' required="required">
             <option></option>
             @foreach($teacher as $key => $value)
                 @if(isset($course))
@@ -59,7 +59,7 @@
         {!! $errors->first('teacher_id2', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('teacher_id3') ? 'has-error' : ''}}">
-    {!! Form::label('teacher_id3', 'Teacher 3 (optional)', ['class' => 'col-md-4 control-label']) !!}
+    {!! Form::label('teacher_id3', 'Teacher 3  (optional)', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         <!-- {!! Form::text('teacher_id', null, ['class' => 'form-control']) !!} -->
         <select class="form-control" name='teacher_id3'>
@@ -80,17 +80,17 @@
 </div><div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
     {!! Form::label('name', 'Name', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('name', null, ['class' => 'form-control']) !!}
+        {!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
         {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('description') ? 'has-error' : ''}}">
-    {!! Form::label('description', 'Description', ['class' => 'col-md-4 control-label']) !!}
+    {!! Form::label('description', 'Silabus', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
+        {!! Form::textarea('description', null, ['class' => 'form-control wysiwygeditor', 'required']) !!}
         {!! $errors->first('description', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('announcement') ? 'has-error' : ''}}">
-    {!! Form::label('announcement', 'Announcement', ['class' => 'col-md-4 control-label']) !!}
+    {!! Form::label('announcement', 'Pengumuman', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         {!! Form::textarea('announcement', null, ['class' => 'form-control']) !!}
         {!! $errors->first('announcement', '<p class="help-block">:message</p>') !!}
@@ -106,17 +106,21 @@
     <div class="col-md-6">
         {!! Form::file('image', null, ['class' => 'form-control']) !!}
         {!! $errors->first('image', '<p class="help-block">:message</p>') !!}
+        @if(Session::has('flash_message'))
+        <div class="alert alert-danger" style="margin-top: 5px; padding: 7px">{!! Session::get('flash_message') !!}</div>
+        @endif
     </div>
-</div><div class="form-group {{ $errors->has('url_foto') ? 'has-error' : ''}}">
+</div>
+<div class="form-group {{ $errors->has('url_foto') ? 'has-error' : ''}}">
     {!! Form::label('enrolls_start', 'Start Enroll Date', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::date('enrolls_start', null, ['class' => 'form-control']) !!}
+        {!! Form::date('enrolls_start', null, ['class' => 'form-control', 'required']) !!}
         {!! $errors->first('enrolls_start', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('url_foto') ? 'has-error' : ''}}">
     {!! Form::label('enrolls_end', 'End Enroll Date', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::date('enrolls_end', null, ['class' => 'form-control']) !!}
+        {!! Form::date('enrolls_end', null, ['class' => 'form-control', 'required']) !!}
         {!! $errors->first('enrolls_end', '<p class="help-block">:message</p>') !!}
     </div>
 </div>

@@ -22,20 +22,33 @@
 						<td><p style="margin-top: -11px; margin-left: 10px">{{ $users->job }}</p></td>
 					</tr>
 				</table>
-				@endforeach
 			</div>
 
 			<div class="container no-padding">
 				<div class="row content">
-					<div class="col-xs-12"><h3 class="title">Your Course</h3></div>
+					<div class="col-xs-12"><h3 class="title">Tentang Pengajar</h3></div>
+					<div class="col-xs-12"><p> {!! $users->introduction !!} </p></div>
+					@endforeach
 					@foreach($course as $key => $value)
+					<?php 
+						$teachers = array("<a href='/teacher/".$value->teachers->id."'>".$value->teachers->name."</a>");
+
+						if($value->teachers2 !== null){	
+							$teachers = array("<a href='/teacher/".$value->teachers->id."'>".$value->teachers->name."</a>","<a href='/teacher/".$value->teachers2->id."'>".$value->teachers2->name."</a>");
+						}
+						if($value->teachers3 !== null){	
+							$teachers = array("<a href='/teacher/".$value->teachers->id."'>".$value->teachers->name."</a>","<a href='/teacher/".$value->teachers2->id."'>".$value->teachers2->name."</a>","<a href='/teacher/".$value->teachers3->id."'>".$value->teachers3->name."</a>");
+						}
+
+						$teacher = implode(', ', $teachers);
+					?>
 					<div class="col-md-3 col-xs-6">
 						<div class="frame-materi" data-target="button-frame-1-1">
-							<img src="{{ URL::asset('/uploads/course/'.$value->url_foto) }}" class="img">
+							<img src="//static.adira.one/l/400x260/{{ URL::asset('/uploads/course/'.$value->url_foto) }}" class="img">
 							<div class="text-pengajar">
 								<h4>{{ $value->topics->code }}</h4>
 								<h4><a href="/course/{{ $value->slug }}">{{ $value->name }}</a></h4>
-								<span>Pengajar: {{ $value->teachers->name }}</span>
+								<span>Pengajar: {!! $teacher !!}</span>
 							</div>
 							<div class="row footer-pengajar">
 								<div class="col-sm-10 col-xs-10">

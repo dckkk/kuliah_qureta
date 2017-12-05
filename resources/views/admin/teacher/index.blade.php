@@ -36,8 +36,8 @@
                                 @foreach($teacher as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
-                                        <td>{{ $item->qureta_id }}</td><td>{{ $item->name }}</td><td>{{ $item->introduction }}</td>
-                                        <td>
+                                        <td>{{ $item->qureta_id }}</td><td>{{ $item->name }}</td><td>{!! substr($item->introduction, 0, 100).'...' !!}</td>
+                                        <td style="white-space:nowrap;">
                                             <a href="{{ url('/admin/teacher/' . $item->id) }}" title="View teacher"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/admin/teacher/' . $item->id . '/edit') }}" title="Edit teacher"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
                                             {!! Form::open([

@@ -30,8 +30,10 @@ function enrolling(course, user) {
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(textStatus, errorThrown);
             },
-            complete: function () {
+            complete: function (res) {
                 // Handle the complete event
+                console.log(res)
+                $('#usercount-'+course).html(res.responseText+' Peserta');
                 $("#enrolls-"+course).removeClass("fa fa-bookmark-o").addClass("fa fa-bookmark");
                 // console.log('aaaaaaaaaaaaaaaaaaaaaaa');
             }
@@ -60,8 +62,9 @@ function unenroll(course, user) {
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(textStatus, errorThrown);
             },
-            complete: function () {
+            complete: function (res) {
                 // Handle the complete event
+                $('#usercount-'+course).html(res.responseText+' Peserta');
                 $("#enrolls-"+course).removeClass("fa fa-bookmark").addClass("fa fa-bookmark-o");
                 // console.log('aaaaaaaaaaaaaaaaaaaaaaa');
             }
@@ -172,13 +175,28 @@ $.get('/api/'+url+'/'+topic+'/'+row, function(data, status){
         var count = data[i].count
         var code = data[i]['topics'].code
         var teacher = data[i]['teachers'].name
+        var idTeacher = data[i]['teachers'].id
+        var teachers = '<a href=/teacher/'+idTeacher+'>'+teacher+'</a>';
+
+        if(data[i]['teachers3'] !== null) {
+            var idTeacher2 = data[i]['teachers2'].id
+            var idTeacher3 = data[i]['teachers3'].id
+            var teacher2 = data[i]['teachers2'].name
+            var teacher3 = data[i]['teachers3'].name
+            teachers = '<a href=/teacher/'+idTeacher+'>'+teacher+'</a>, <a href=/teacher/'+idTeacher2+'>'+teacher2+'</a>', '<a href=/teacher/'+idTeacher3+'>'+teacher3+'</a>';
+        } else if(data[i]['teachers2'] !== null) {
+            var idTeacher2 = data[i]['teachers2'].id
+            var teacher2 = data[i]['teachers2'].name
+            teachers = '<a href=/teacher/'+idTeacher+'>'+teacher+'</a>, <a href=/teacher/'+idTeacher2+'>'+teacher2+'</a>';
+        }
+
         var html = '<div class="col-md-3 col-xs-6">'
             html += '<div class="frame-materi" data-target="button-frame-2-1">'
             html += '<img src="/uploads/course/'+url_foto+'" class="img">'
             html += '<div class="text-pengajar">'
             html += '<h4>'+code+'</h4>'
             html += '<h4><a href="/course/"'+slug+'>'+name+'</a></h4>'
-            html += '<span>Pengajar: '+teacher+'</span>'
+            html += '<span>Pengajar: '+teachers+'</span>'
             html += '</div>'
             html += '<div class="row footer-pengajar">'
             html += '<div class="col-sm-10 col-xs-10">'
@@ -227,4 +245,67 @@ function chapterOptions(course) {
         select += '</select>'
         $('#chapter-options').html(select);
     });
+}
+
+function like(course, user) {
+    if($("#likes-"+course).hasClass("fa fa-thumbs-up")) {
+        unlike(course, user)
+    } else {                
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            url: "/api/like",
+            type: "POST",
+            data: {course_id: course, user_id: user},
+            dateType: 'json',
+            // contentType: "application/json",
+            sucess: function (res) {
+                console.log(res)
+            }, 
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            },
+            complete: function (res) {
+                // Handle the complete event
+                $('#userlike-'+course).html(res.responseText+' Likes');
+                $("#likes-"+course).removeClass("fa fa-thumbs-o-up").addClass("fa fa-thumbs-up");
+                // console.log('aaaaaaaaaaaaaaaaaaaaaaa');
+            }
+        })
+    }
+}
+function unlike(course, user) {
+    if($("#likes-"+course).hasClass("fa fa-thumbs-o-up")) {
+        like(course, user)
+    } else { 
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            url: "/api/unlike",
+            type: "POST",
+            data: {course_id: course, user_id: user},
+            dateType: 'json',
+            // contentType: "application/json",
+            sucess: function (res) {
+                console.log(res)
+            }, 
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            },
+            complete: function (res) {
+                // Handle the complete event
+                $('#userlike-'+course).html(res.responseText+' Likes');
+                $("#likes-"+course).removeClass("fa fa-thumbs-up").addClass("fa fa-thumbs-o-up");
+                // console.log('aaaaaaaaaaaaaaaaaaaaaaa');
+            }
+        })
+    }
 }

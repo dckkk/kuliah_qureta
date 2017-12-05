@@ -48,15 +48,17 @@ class TeacherController extends Controller
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
-    {
-        if ($request['image']->isValid()) {
-            $destinationPath = public_path('uploads/teacher/');
-            $extension = $request['image']->getClientOriginalExtension();
-            $fileName = uniqid().'.'.$extension;
+    {   
+        if ($request['image']) {
+            if ($request['image']->isValid()) {
+                $destinationPath = public_path('uploads/teacher/');
+                $extension = $request['image']->getClientOriginalExtension();
+                $fileName = uniqid().'.'.$extension;
 
-            $request['image']->move($destinationPath, $fileName);
+                $request['image']->move($destinationPath, $fileName);
+            }
+            $request['url_foto'] = $fileName;
         }
-        $request['url_foto'] = $fileName;
 
         $requestData = $request->all();
         

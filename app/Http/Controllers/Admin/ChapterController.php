@@ -49,9 +49,15 @@ class ChapterController extends Controller
      */
     public function store(Request $request)
     {
-        $request['slug'] = strtolower(preg_replace("/ /", "-", $request['name']));
+        $request['slug'] = strtolower(preg_replace("/ /", "-", preg_replace("/[$-\/:-?{-~!\"^_`\[\]]/", "", $request['name'])));
         $request['duration'] = (empty($request['duration']))?0:$request['duration'];
         $request['url_video'] = (empty($request['url_video']))?"null":$request['url_video'];
+
+        if(empty($request['parent'])) {
+            Session::flash('flash_message', 'Error! Mohon pilih field ini terlebih dahulu !');
+            return redirect()->back();
+            die();
+        }
 
         $requestData = $request->all();
         
@@ -100,7 +106,7 @@ class ChapterController extends Controller
      */
     public function update($id, Request $request)
     {
-        $request['slug'] = strtolower(preg_replace("/ /", "-", $request['name']));
+        $request['slug'] = strtolower(preg_replace("/ /", "-", preg_replace("/[$-\/:-?{-~!\"^_`\[\]]/", "", $request['name'])));
         $request['duration'] = (empty($request['duration']))?0:$request['duration'];
         $request['url_video'] = (empty($request['url_video']))?"null":$request['url_video'];
         

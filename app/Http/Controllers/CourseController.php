@@ -24,19 +24,23 @@ use App\QuizQuestions;
 
 use App\QuizAnswer;
 
+use App\CourseUser;
+use App\User;
+use App\User_metum;
+
 class CourseController extends Controller
 {
+
     public function index($slug,$slug_chapter="",$slug_lecture="") {
         //get data course
-    	$course = Course::with('topics', 'teachers')->where('slug', $slug)->get();
+    	$course = Course::with('topics', 'teachers')->where('slug', $slug)->first();
 
         //set topic id
-        $topic_id = $course[0]['topic_id'];
+        $topic_id = $course->topic_id;
 
     	//set course id
-        $course_id = $course[0]['id'];
+        $course_id = $course->id;
 
-        
         //get data pages
         $pages = Pages::all();
 
@@ -44,28 +48,32 @@ class CourseController extends Controller
         $materi = Course::with('topics', 'teachers')->whereHas('topics', function($query) use ($topic_id) {
             // $topic_id = '1';
                 $query->where('id', $topic_id);
-            })->where('topic_id', $topic_id)->get();
+            })->where('topic_id', $topic_id)->where('id', "!=", $course_id)->take(5)->get();
 
         //get data chapters
-        $chapters = Chapters::where('course_id', $course_id)->get();
-        
+        $chapters = Chapters::where('course_id', $course_id)->orderBy('order', 'asc')->get();
+		// $chapter_id = $chapters[0]['id'];
+
         //set default video
         if($chapters->isEmpty()) {
             $url_video="X7Y5QyF3b3w";
         } else {
             $url_video = $chapters[0]['url_video'];
-            
         }
 
         //get data lecture
-        $lectures = Lectures::all();
+        $lectures = Lectures::orderBy('order', 'asc')->get();
 
         if($slug_chapter !== "" && $slug_lecture == "") {
-            $url_videos = Chapters::select('url_video')->where('slug', $slug_chapter)->get();
-            $url_video = $url_videos[0]['url_video'];
+            $url_videos = Chapters::select('url_video')->where('course_id', $course_id)->where('slug', $slug_chapter)->get();
+            if(!$url_videos->isEmpty()) {
+            	$url_video = $url_videos[0]['url_video'];
+            }
         } elseif($slug_lecture !== "") {
-            $url_videos = Lectures::select('url_video')->where('slug', $slug_lecture)->get();
-            $url_video = $url_videos[0]['url_video'];
+            $url_videos = Lectures::select('url_video')->where('course_id', $course_id)->where('slug', $slug_lecture)->get();
+            if(!$url_videos->isEmpty()) {
+            	$url_video = $url_videos[0]['url_video'];
+            }
         }
 
         //get data quiz
@@ -81,10 +89,13 @@ class CourseController extends Controller
         } else {
             $quiz_content = array();
         }
-        
 
- 
-    	return view('course.index', compact('course', 'pages', 'materi', 'chapters', 'lectures', 'url_video', 'quiz', 'quiz_content'));
+	//get enrollee profession
+	$course_user = CourseUser::select('email')->where('course_id',$course_id)->get();
+	$user = User::select('id')->whereIn('email',$course_user)->get();
+	$enroll_profession = User_metum::selectRaw('meta_value, COUNT(meta_value) as jumlah')->where('meta_name','profesi')->whereIn('user_id',$user)->groupBy('meta_value')->orderBy('jumlah','DESC')->orderBy('meta_value')->take(5)->get();
+
+    	return view('course.index', compact('course', 'pages', 'materi', 'chapters', 'lectures', 'url_video', 'quiz', 'quiz_content', 'enroll_profession', 'course_id', 'slug'));
     }
 
 }

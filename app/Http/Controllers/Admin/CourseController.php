@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\User;
 use App\Course;
 use App\CourseUser;
 use App\Topics;
@@ -159,12 +160,18 @@ class CourseController extends Controller
 
    public function enrollees($courseid)
    {
-       $enrollee = CourseUser::with('users')->where('course_id',$courseid)->paginate(10);
-       return view('admin.course.enrollee', compact('enrollee'));
-       //return view('admin.course.enrollee_dt',compact('courseid'));
+       $course = Course::where('id',$courseid)->first();
+       return view('admin.course.enrollee_dt',compact('course'));
    }
    public function enrolleesData($courseid)
     {
-        return Datatables::of(CourseUser::with('users')->where('course_id',$courseid))->make(true);
+        //return Datatables::of(User::query())->make(true);
+        $courseuser = CourseUser::select('email')->where('course_id',$courseid)->get();
+        return Datatables::of(User::select('users.id', 'name', 'meta_value')->join('user_meta', function ($join) {
+            $join->on('users.id', '=', 'user_id');
+            $join->where('meta_name','=','profesi');
+        })->whereIn('email',$courseuser))->addColumn('action', function ($user) {
+                return '<a href="https://www.qureta.com/profile/edit/'.$user->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit Profile</a>';
+            })->make(true);
     }
 }

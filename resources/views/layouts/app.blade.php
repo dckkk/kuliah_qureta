@@ -206,7 +206,9 @@ $topics = \App\Topics::all();
     <script type="text/javascript" src="{{ URL::asset('/js/mjs.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('/js/owl.carousel.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('/js/jquery.mask.min.js') }}"></script>
+    <!-- Datatable App scripts -->
     <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+    @stack('scripts')
     <script>
         function parent(val) {
             console.log(val)
